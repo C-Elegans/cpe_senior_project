@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name 2020-11-14_19-37-58)(type Legacy)(uri /home/mnolan/Documents/stm32/rtos_test2/pcb/stm32wb55ccu/KiCAD/2020-11-14_19-37-58/2020-11-14_19-37-58.lib)(options "")(descr ""))
+  (lib (name stm32wb55cc)(type Legacy)(uri /home/mnolan/Documents/stm32/rtos_test2/pcb/stm32wb55ccu/stm32wb55cc.lib)(options "")(descr ""))
+)
