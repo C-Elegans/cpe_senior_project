@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <gtkmm/application.h>
-#include "hello.hpp"
+#include "connection_settings.hpp"
 
 
 int main(int argc, char** argv){
     auto app = Gtk::Application::create("org.gtkmm.examples.base");
-    Hello window;
+    ConnectionSettings window;
     return app->run(window, argc, argv);
 }

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 set(PROJECT_NAME desktop-app)
 project(${PROJECT_NAME})
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++17")
 
 find_package(PkgConfig)
 pkg_check_modules(GTKMM gtkmm-3.0)
