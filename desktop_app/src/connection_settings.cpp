@@ -53,8 +53,11 @@ ConnectionSettings ConnectionSettingsDialog::get_settings(){
 
 void ConnectionSettingsDialog::set_serial_ports(){
     #ifndef _WIN32
-    for(auto &p: fs::directory_iterator("/dev/serial/by-id/")) {
-	m_combo.append(p.path().string());
+    auto path = "/dev/serial/by-id/";
+    if(fs::is_directory(path)){
+	for(auto &p: fs::directory_iterator(path)) {
+	    m_combo.append(p.path().string());
+	}
     }
     #endif
 }
