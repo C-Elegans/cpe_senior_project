@@ -4,7 +4,8 @@
 
 namespace fs = std::filesystem;
 
-ConnectionSettings::ConnectionSettings() :
+ConnectionSettingsDialog::ConnectionSettingsDialog() :
+    settings(),
     m_label_serial_port("Select Serial Port:"),
     m_combo(true /*has_entry*/),
     m_save_button("Save")
@@ -25,27 +26,32 @@ ConnectionSettings::ConnectionSettings() :
     box->add(m_save_button);
 
     m_combo.signal_changed().connect(sigc::mem_fun(*this,
-						   &ConnectionSettings::on_combo_changed));
+						   &ConnectionSettingsDialog::on_combo_changed));
     m_save_button.signal_clicked().connect(sigc::mem_fun(*this,
-							 &ConnectionSettings::on_save));
+							 &ConnectionSettingsDialog::on_save));
 
     show_all_children();
 }
 
-ConnectionSettings::~ConnectionSettings() {}
+ConnectionSettingsDialog::~ConnectionSettingsDialog() {}
 
-void ConnectionSettings::on_combo_changed(){
+void ConnectionSettingsDialog::on_combo_changed(){
     std::cout << "Combo change, row: " << m_combo.get_active_row_number() <<
 	", text: " << m_combo.get_active_text() << "\n";
 }
 
-void ConnectionSettings::on_save(){
+void ConnectionSettingsDialog::on_save(){
     std::cout << "Save, serial port: " << m_combo.get_active_text() << "\n";
+    settings.path = m_combo.get_active_text();
+    response(0);
+}
+
+ConnectionSettings ConnectionSettingsDialog::get_settings(){
+    return settings;
 }
 
 
-
-void ConnectionSettings::set_serial_ports(){
+void ConnectionSettingsDialog::set_serial_ports(){
     #ifndef _WIN32
     for(auto &p: fs::directory_iterator("/dev/serial/by-id/")) {
 	m_combo.append(p.path().string());
