@@ -8,6 +8,7 @@ find_package(PkgConfig)
 pkg_check_modules(GTKMM gtkmm-3.0)
 include_directories(${GTKMM_INCLUDE_DIRS})
 link_directories(${GTMMM_LIBRARY_DIRS})
+link_directories(/usr/local/lib)
 
 include_directories(src)
 
