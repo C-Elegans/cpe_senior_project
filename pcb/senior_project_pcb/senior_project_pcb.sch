@@ -32,6 +32,10 @@ S 2450 5150 1350 900
 U 5FC31852
 F0 "io" 50
 F1 "io.sch" 50
+F2 "SCL" I R 3800 5250 50 
+F3 "SDA" I R 3800 5350 50 
+F4 "USB_D+" I R 3800 5750 50 
+F5 "USB_D-" I R 3800 5850 50 
 $EndSheet
 $Sheet
 S 4950 2200 1050 800 
@@ -42,6 +46,20 @@ F2 "SDA" I R 6000 2400 50
 F3 "SCL" I R 6000 2500 50 
 F4 "INT" I R 6000 2600 50 
 $EndSheet
-NoConn ~ 3550 2400
-NoConn ~ 3550 2500
+Text Label 6000 2400 0    50   ~ 0
+SDA
+Text Label 3800 5250 0    50   ~ 0
+SCL
+Text Label 3800 5350 0    50   ~ 0
+SDA
+Text Label 6000 2500 0    50   ~ 0
+SCL
+Text Label 3800 5750 0    50   ~ 0
+USB_D+
+Text Label 3550 2400 0    50   ~ 0
+USB_D+
+Text Label 3800 5850 0    50   ~ 0
+USB_D-
+Text Label 3550 2500 0    50   ~ 0
+USB_D-
 $EndSCHEMATC
