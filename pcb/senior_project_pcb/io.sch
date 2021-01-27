@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 4 4
+Sheet 4 5
 Title ""
 Date ""
 Rev ""
@@ -69,4 +69,32 @@ Text Label 6550 4500 2    50   ~ 0
 JTAG_TMS
 Text Label 6550 4600 2    50   ~ 0
 JTAG_NTRST
+NoConn ~ 4850 3900
+NoConn ~ 4850 3800
+NoConn ~ 4850 3700
+NoConn ~ 4850 3600
+NoConn ~ 4850 3500
+NoConn ~ 4850 3200
+NoConn ~ 4850 3100
+NoConn ~ 4850 3000
+NoConn ~ 4850 2850
+NoConn ~ 4850 2350
+NoConn ~ 4850 2250
+NoConn ~ 4850 2150
+NoConn ~ 4850 2050
+NoConn ~ 3400 2050
+NoConn ~ 3400 2150
+NoConn ~ 3400 2400
+NoConn ~ 3400 2500
+NoConn ~ 3400 2600
+NoConn ~ 3400 2700
+NoConn ~ 3400 2800
+NoConn ~ 3400 2900
+NoConn ~ 3400 3000
+NoConn ~ 3400 3100
+NoConn ~ 3400 3200
+NoConn ~ 3400 3300
+NoConn ~ 3400 3400
+NoConn ~ 3400 3500
+NoConn ~ 3400 3600
 $EndSCHEMATC
