@@ -46,38 +46,13 @@ F2 "SDA" I R 6000 2400 50
 F3 "SCL" I R 6000 2500 50 
 F4 "INT" I R 6000 2600 50 
 $EndSheet
-Wire Bus Line
-	6350 5450 6250 5450
-Entry Wire Line
-	6150 2400 6250 2500
-Entry Wire Line
-	6150 2500 6250 2600
-Wire Wire Line
-	6150 2400 6000 2400
-Wire Wire Line
-	6000 2500 6150 2500
-Text Label 6150 2400 2    50   ~ 0
+Text Label 6000 2400 0    50   ~ 0
 SDA
-Text Label 4000 5250 2    50   ~ 0
+Text Label 3800 5250 0    50   ~ 0
 SCL
-Entry Wire Line
-	4000 5350 4100 5450
-Entry Wire Line
-	4000 5250 4100 5350
-Connection ~ 6250 5450
-Wire Bus Line
-	6250 5450 4100 5450
-Wire Wire Line
-	3800 5250 4000 5250
-Wire Wire Line
-	3800 5350 4000 5350
-Wire Bus Line
-	4100 5200 4100 5450
-Wire Bus Line
-	6250 2400 6250 5450
-Text Label 4000 5350 2    50   ~ 0
+Text Label 3800 5350 0    50   ~ 0
 SDA
-Text Label 6150 2500 2    50   ~ 0
+Text Label 6000 2500 0    50   ~ 0
 SCL
 Text Label 3800 5750 0    50   ~ 0
 USB_D+
