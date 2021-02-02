@@ -1,6 +1,7 @@
 #include "connection_settings.hpp"
 #include <iostream>
 #include <filesystem>
+#include <>
 
 namespace fs = std::filesystem;
 
@@ -52,12 +53,19 @@ ConnectionSettings ConnectionSettingsDialog::get_settings(){
 
 
 void ConnectionSettingsDialog::set_serial_ports(){
-    #ifndef _WIN32
+    #ifdef _linux
     auto path = "/dev/serial/by-id/";
     if(fs::is_directory(path)){
 	for(auto &p: fs::directory_iterator(path)) {
 	    m_combo.append(p.path().string());
 	}
+    }
+#else
+    auto path = "/dev/{tty,cu}.*";
+    if(fs::is_directory(path)){
+    	for(auto &p: fs::directory_iterator(path)){
+    		m_combo.append(p.path().string());
+    	}
     }
     #endif
 }
