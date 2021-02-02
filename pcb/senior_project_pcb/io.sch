@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 4 5
+Sheet 6 6
 Title ""
 Date ""
 Rev ""
@@ -70,8 +70,6 @@ JTAG_TMS
 Text Label 3000 4600 2    50   ~ 0
 JTAG_NTRST
 NoConn ~ 3450 3250
-NoConn ~ 3450 3150
-NoConn ~ 3450 3050
 NoConn ~ 3450 2750
 NoConn ~ 3450 2650
 NoConn ~ 3450 2550
@@ -89,17 +87,17 @@ NoConn ~ 2000 2650
 NoConn ~ 2000 2750
 NoConn ~ 2000 2850
 NoConn ~ 2000 2950
-Text HLabel 3600 3350 2    50   Input ~ 0
+Text HLabel 3600 3350 2    50   BiDi ~ 0
 SCL
 Wire Wire Line
 	3600 3350 3450 3350
-Text HLabel 3600 3450 2    50   Input ~ 0
+Text HLabel 3600 3450 2    50   BiDi ~ 0
 SDA
 Wire Wire Line
 	3600 3450 3450 3450
-Text HLabel 1750 3150 0    50   Input ~ 0
+Text HLabel 1750 3150 0    50   BiDi ~ 0
 USB_D+
-Text HLabel 1750 3050 0    50   Input ~ 0
+Text HLabel 1750 3050 0    50   BiDi ~ 0
 USB_D-
 Wire Wire Line
 	1750 3050 2000 3050
@@ -255,4 +253,8 @@ Text Label 2000 2150 2    50   ~ 0
 BTN1
 Text Label 2000 2250 2    50   ~ 0
 BTN2
+Text HLabel 3450 3050 2    50   Input ~ 0
+thermistor
+Text HLabel 3450 3150 2    50   Input ~ 0
+thermopile
 $EndSCHEMATC

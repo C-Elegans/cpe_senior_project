@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 5 5
+Sheet 5 6
 Title ""
 Date ""
 Rev ""
@@ -24,9 +24,9 @@ F 3 "" H 7050 3000 50  0001 C CNN
 	1    7050 3000
 	1    0    0    -1  
 $EndComp
-Text HLabel 3800 3500 0    50   Input ~ 0
+Text HLabel 3800 3500 0    50   BiDi ~ 0
 SDA
-Text HLabel 3800 3400 0    50   Input ~ 0
+Text HLabel 3800 3400 0    50   BiDi ~ 0
 SCL
 $Comp
 L Device:Q_DUAL_NMOS_S1G1D2S2G2D1 Q2
@@ -255,7 +255,7 @@ F 3 "https://datasheets.maximintegrated.com/en/ds/MAX30102.pdf" H 7000 3750 50  
 $EndComp
 NoConn ~ 7950 3700
 NoConn ~ 7950 3800
-Text HLabel 8700 3500 2    50   Input ~ 0
+Text HLabel 8700 3500 2    50   Output ~ 0
 INT
 Wire Wire Line
 	7950 3500 8400 3500
