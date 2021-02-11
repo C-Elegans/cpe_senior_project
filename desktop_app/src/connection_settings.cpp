@@ -1,7 +1,7 @@
 #include "connection_settings.hpp"
 #include <iostream>
 #include <filesystem>
-#include <>
+#include "glob.hpp"
 
 namespace fs = std::filesystem;
 
@@ -37,14 +37,13 @@ ConnectionSettingsDialog::ConnectionSettingsDialog() :
 ConnectionSettingsDialog::~ConnectionSettingsDialog() {}
 
 void ConnectionSettingsDialog::on_combo_changed(){
-    std::cout << "Combo change, row: " << m_combo.get_active_row_number() <<
-	", text: " << m_combo.get_active_text() << "\n";
 }
 
 void ConnectionSettingsDialog::on_save(){
-    std::cout << "Save, serial port: " << m_combo.get_active_text() << "\n";
-    settings.path = m_combo.get_active_text();
-    response(0);
+  auto text = m_combo.get_active_text();
+  std::cout << "Save, serial port: " << m_combo.get_active_text().c_str() << "\n";
+  settings.path = text.c_str();
+  response(0);
 }
 
 ConnectionSettings ConnectionSettingsDialog::get_settings(){
@@ -61,11 +60,11 @@ void ConnectionSettingsDialog::set_serial_ports(){
 	}
     }
 #else
-    auto path = "/dev/{tty,cu}.*";
-    if(fs::is_directory(path)){
-    	for(auto &p: fs::directory_iterator(path)){
-    		m_combo.append(p.path().string());
-    	}
+    auto path = "/dev/tty.*";
+    auto files = glob::glob(path);
+    for(auto &p: files){
+      std::cout << p << "\n";
+      m_combo.append(Glib::ustring(p.string().c_str()));
     }
     #endif
 }
