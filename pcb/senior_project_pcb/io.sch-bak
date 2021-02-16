@@ -59,13 +59,13 @@ F 3 "" H 3000 4100 50  0001 C CNN
 	1    3000 4100
 	0    1    1    0   
 $EndComp
-Text Label 3000 4200 2    50   ~ 0
-JTAG_TCK
 Text Label 3000 4300 2    50   ~ 0
-JTAG_TDI
+JTAG_TCK
 Text Label 3000 4400 2    50   ~ 0
-JTAG_TDO
+JTAG_TDI
 Text Label 3000 4500 2    50   ~ 0
+JTAG_TDO
+Text Label 3000 4200 2    50   ~ 0
 JTAG_TMS
 Text Label 3000 4600 2    50   ~ 0
 JTAG_NTRST
@@ -80,9 +80,6 @@ NoConn ~ 3450 1700
 NoConn ~ 3450 1600
 NoConn ~ 2000 1600
 NoConn ~ 2000 1700
-NoConn ~ 2000 2350
-NoConn ~ 2000 2450
-NoConn ~ 2000 2550
 NoConn ~ 2000 2650
 NoConn ~ 2000 2750
 NoConn ~ 2000 2850
@@ -173,9 +170,9 @@ Text Label 5400 2150 0    50   ~ 0
 LED1
 Text Label 5800 2150 0    50   ~ 0
 LED2
-Text Label 2000 1950 2    50   ~ 0
+Text Label 2000 2150 2    50   ~ 0
 LED1
-Text Label 2000 2050 2    50   ~ 0
+Text Label 2000 2250 2    50   ~ 0
 LED2
 $Comp
 L Switch:SW_Push_Dual SW1
@@ -249,12 +246,16 @@ Text Label 5350 4350 2    50   ~ 0
 BTN2
 NoConn ~ 5350 3500
 NoConn ~ 5350 4150
-Text Label 2000 2150 2    50   ~ 0
+Text Label 2000 2050 2    50   ~ 0
 BTN1
-Text Label 2000 2250 2    50   ~ 0
+Text Label 2000 1950 2    50   ~ 0
 BTN2
-Text HLabel 3450 3050 2    50   Input ~ 0
+Text HLabel 2000 2550 0    50   Input ~ 0
 thermistor
-Text HLabel 3450 3150 2    50   Input ~ 0
+Text HLabel 2000 2450 0    50   Input ~ 0
 thermopile
+Text HLabel 2000 2350 0    50   Input ~ 0
+INT
+NoConn ~ 3450 3150
+NoConn ~ 3450 3050
 $EndSCHEMATC

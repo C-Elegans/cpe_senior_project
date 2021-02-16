@@ -71,6 +71,7 @@ F4 "USB_D+" B R 3800 5750 50
 F5 "USB_D-" B R 3800 5850 50 
 F6 "thermistor" I R 3800 6000 50 
 F7 "thermopile" I R 3800 6100 50 
+F8 "INT" I R 3800 5450 50 
 $EndSheet
 Text Label 6050 3800 0    50   ~ 0
 thermistor
@@ -80,4 +81,8 @@ Text Label 3800 6100 0    50   ~ 0
 thermopile
 Text Label 6050 3900 0    50   ~ 0
 thermopile
+Text Label 3800 5450 0    50   ~ 0
+INT
+Text Label 6000 2600 0    50   ~ 0
+INT
 $EndSCHEMATC

@@ -164,28 +164,6 @@ F 3 "~" H 8400 3800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C6
-U 1 1 5FB0DB92
-P 8600 3800
-F 0 "C6" H 8550 3500 50  0000 L CNN
-F 1 "100n" H 8500 3600 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric" H 8600 3800 50  0001 C CNN
-F 3 "~" H 8600 3800 50  0001 C CNN
-	1    8600 3800
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C_Small C7
-U 1 1 5FB0E09D
-P 8800 3800
-F 0 "C7" H 8750 3500 50  0000 L CNN
-F 1 "100n" H 8700 3600 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric" H 8800 3800 50  0001 C CNN
-F 3 "~" H 8800 3800 50  0001 C CNN
-	1    8800 3800
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:C_Small C8
 U 1 1 5FB0E556
 P 9000 3800
@@ -206,16 +184,6 @@ Connection ~ 8200 3700
 Wire Wire Line
 	8200 3700 8400 3700
 Connection ~ 8400 3700
-Wire Wire Line
-	8400 3700 8600 3700
-Connection ~ 8600 3700
-Wire Wire Line
-	8600 3700 8800 3700
-Connection ~ 8800 3700
-Wire Wire Line
-	8800 3700 9000 3700
-Wire Wire Line
-	9000 3900 8800 3900
 Connection ~ 7800 3900
 Connection ~ 8000 3900
 Wire Wire Line
@@ -226,12 +194,6 @@ Wire Wire Line
 Connection ~ 8400 3900
 Wire Wire Line
 	8400 3900 8200 3900
-Connection ~ 8600 3900
-Wire Wire Line
-	8600 3900 8400 3900
-Connection ~ 8800 3900
-Wire Wire Line
-	8800 3900 8600 3900
 $Comp
 L Device:C_Small C9
 U 1 1 5FB0F2CB
@@ -721,17 +683,6 @@ $EndComp
 Connection ~ 2550 6000
 Text Notes 600  5500 0    50   ~ 0
 3.3V rail regulation\n
-$Comp
-L Regulator_Linear:MIC5504-1.8YM5 U2
-U 1 1 6017A0E8
-P 4400 6100
-F 0 "U2" H 4400 6467 50  0000 C CNN
-F 1 "MIC5504-1.8YM5" H 4400 6376 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-23-5" H 4400 5700 50  0001 C CNN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/MIC550X.pdf" H 4150 6350 50  0001 C CNN
-	1    4400 6100
-	1    0    0    -1  
-$EndComp
 Wire Notes Line
 	2900 5650 2900 6750
 Wire Notes Line
@@ -744,92 +695,6 @@ Wire Wire Line
 	800  6000 1200 6000
 Wire Notes Line
 	650  5650 2900 5650
-$Comp
-L Device:C_Small C14
-U 1 1 6019ED6A
-P 3550 6100
-F 0 "C14" H 3642 6146 50  0000 L CNN
-F 1 "1u" H 3642 6055 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric" H 3550 6100 50  0001 C CNN
-F 3 "~" H 3550 6100 50  0001 C CNN
-	1    3550 6100
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C_Small C15
-U 1 1 6019F7FB
-P 5150 6100
-F 0 "C15" H 5242 6146 50  0000 L CNN
-F 1 "1u" H 5242 6055 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric" H 5150 6100 50  0001 C CNN
-F 3 "~" H 5150 6100 50  0001 C CNN
-	1    5150 6100
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR029
-U 1 1 601A0BBF
-P 3550 6200
-F 0 "#PWR029" H 3550 5950 50  0001 C CNN
-F 1 "GND" H 3555 6027 50  0000 C CNN
-F 2 "" H 3550 6200 50  0001 C CNN
-F 3 "" H 3550 6200 50  0001 C CNN
-	1    3550 6200
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3550 6000 3900 6000
-Wire Wire Line
-	4000 6200 3900 6200
-Wire Wire Line
-	3900 6200 3900 6000
-Connection ~ 3900 6000
-Wire Wire Line
-	3900 6000 4000 6000
-$Comp
-L power:GND #PWR030
-U 1 1 601A654F
-P 4400 6400
-F 0 "#PWR030" H 4400 6150 50  0001 C CNN
-F 1 "GND" H 4405 6227 50  0000 C CNN
-F 2 "" H 4400 6400 50  0001 C CNN
-F 3 "" H 4400 6400 50  0001 C CNN
-	1    4400 6400
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR032
-U 1 1 601A6E8A
-P 5150 6200
-F 0 "#PWR032" H 5150 5950 50  0001 C CNN
-F 1 "GND" H 5155 6027 50  0000 C CNN
-F 2 "" H 5150 6200 50  0001 C CNN
-F 3 "" H 5150 6200 50  0001 C CNN
-	1    5150 6200
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+1V8 #PWR031
-U 1 1 601B8895
-P 5150 6000
-F 0 "#PWR031" H 5150 5850 50  0001 C CNN
-F 1 "+1V8" H 5165 6173 50  0000 C CNN
-F 2 "" H 5150 6000 50  0001 C CNN
-F 3 "" H 5150 6000 50  0001 C CNN
-	1    5150 6000
-	1    0    0    -1  
-$EndComp
-Connection ~ 5150 6000
-Text Notes 3400 5550 0    50   ~ 0
-1.8V rail regulation\n
-Wire Notes Line
-	5550 5650 5550 6750
-Wire Notes Line
-	5550 6750 3300 6750
-Wire Notes Line
-	3300 6750 3300 5650
-Wire Notes Line
-	3300 5650 5550 5650
 $Comp
 L power:+BATT #PWR0104
 U 1 1 601F8FD4
@@ -897,8 +762,6 @@ NoConn ~ 5550 1950
 Wire Wire Line
 	2000 6000 2550 6000
 Wire Wire Line
-	4800 6000 5150 6000
-Wire Wire Line
 	5550 1550 5800 1550
 $Comp
 L power:PWR_FLAG #FLG0101
@@ -954,7 +817,7 @@ F 3 "~" H 5200 4300 50  0001 C CNN
 $EndComp
 Connection ~ 5200 4300
 Wire Wire Line
-	5200 4300 5650 4300
+	5200 4300 5400 4300
 $Comp
 L power:+3.3VA #PWR0117
 U 1 1 6016B0B3
@@ -1001,15 +864,32 @@ F 3 "~" H 2350 2250 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L power:+3.3V #PWR?
-U 1 1 60199BB8
-P 3550 6000
-F 0 "#PWR?" H 3550 5850 50  0001 C CNN
-F 1 "+3.3V" H 3565 6173 50  0000 C CNN
-F 2 "" H 3550 6000 50  0001 C CNN
-F 3 "" H 3550 6000 50  0001 C CNN
-	1    3550 6000
+L Device:C_Small C14
+U 1 1 60318B80
+P 5400 4400
+F 0 "C14" H 5492 4446 50  0000 L CNN
+F 1 "100n" H 5492 4355 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 5400 4400 50  0001 C CNN
+F 3 "~" H 5400 4400 50  0001 C CNN
+	1    5400 4400
 	1    0    0    -1  
 $EndComp
-Connection ~ 3550 6000
+Connection ~ 5400 4300
+Wire Wire Line
+	5400 4300 5650 4300
+$Comp
+L power:GND #PWR030
+U 1 1 60319179
+P 5400 4500
+F 0 "#PWR030" H 5400 4250 50  0001 C CNN
+F 1 "GND" H 5405 4327 50  0000 C CNN
+F 2 "" H 5400 4500 50  0001 C CNN
+F 3 "" H 5400 4500 50  0001 C CNN
+	1    5400 4500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8400 3700 9000 3700
+Wire Wire Line
+	8400 3900 9000 3900
 $EndSCHEMATC
