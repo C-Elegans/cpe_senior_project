@@ -3,4 +3,5 @@
   (lib (name 2020-11-14_19-37-58)(type Legacy)(uri /home/mnolan/Documents/stm32/senior_project/pcb/stm32wb55ccu/KiCAD/2020-11-14_19-37-58/2020-11-14_19-37-58.lib)(options "")(descr ""))
   (lib (name stm32wb55cc)(type Legacy)(uri /home/mnolan/Documents/stm32/senior_project/pcb/stm32wb55ccu/stm32wb55cc.lib)(options "")(descr ""))
   (lib (name ZTP-148SRC1)(type Legacy)(uri /home/mnolan/Documents/stm32/senior_project/pcb/ZTP-148SRC1.lib)(options "")(descr ""))
+  (lib (name AD8232)(type Legacy)(uri /Users/mnolan/git/cpe_senior_project/pcb/2021-02-16_22-10-11.lib)(options "")(descr ""))
 )

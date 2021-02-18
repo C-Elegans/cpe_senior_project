@@ -1,9 +1,10 @@
 EESchema Schematic File Version 4
-EELAYER 30 0
+LIBS:senior_project_pcb-cache
+EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 6
+Sheet 2 7
 Title ""
 Date ""
 Rev ""
@@ -265,7 +266,7 @@ F 3 "~" H 9900 5550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L stm32wb55cc:stm32wb55ccu6 U1
+L senior_project_pcb-rescue:stm32wb55ccu6-stm32wb55cc U1
 U 2 1 5FB3EDF5
 P 9050 5400
 AR Path="/5FB3EDF5" Ref="U1"  Part="2" 
@@ -300,9 +301,11 @@ F 3 "~" V 1000 2260 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Battery_Management:AP9101CK6 U4
+L senior_project_pcb-rescue:AP9101CK6-Battery_Management U4
 U 1 1 5FB508BD
 P 3150 2050
+AR Path="/5FB508BD" Ref="U4"  Part="1" 
+AR Path="/5FB304C8/5FB508BD" Ref="U4"  Part="1" 
 F 0 "U4" H 2600 2350 50  0000 C CNN
 F 1 "AP9101CK6" H 2500 2250 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23-6" H 3150 2050 50  0001 C CNN
@@ -483,7 +486,7 @@ Wire Notes Line
 Text Notes 6900 3100 0    50   ~ 0
 Microcontroller power connection\n
 $Comp
-L Battery_Management:MCP73831-2-OT U3
+L senior_project_pcb-rescue:MCP73831-2-OT-Battery_Management U3
 U 1 1 5FBBEA33
 P 2300 4550
 F 0 "U3" H 2550 4800 50  0000 C CNN
@@ -707,7 +710,7 @@ F 3 "" H 2700 4450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:USB_B_Micro J2
+L senior_project_pcb-rescue:USB_B_Micro-Connector J2
 U 1 1 60209B69
 P 5250 1750
 F 0 "J2" H 5307 2217 50  0000 C CNN

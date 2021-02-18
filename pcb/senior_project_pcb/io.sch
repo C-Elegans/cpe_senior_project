@@ -1,9 +1,10 @@
 EESchema Schematic File Version 4
-EELAYER 30 0
+LIBS:senior_project_pcb-cache
+EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 6 6
+Sheet 6 7
 Title ""
 Date ""
 Rev ""
@@ -14,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L stm32wb55cc:stm32wb55ccu6 U?
+L senior_project_pcb-rescue:stm32wb55ccu6-stm32wb55cc U?
 U 1 1 5FC33073
 P 2700 2150
 AR Path="/5FB304C8/5FC33073" Ref="U?"  Part="1" 
@@ -38,7 +39,7 @@ JTAG_TDO
 Text Label 3450 2950 0    50   ~ 0
 JTAG_NTRST
 $Comp
-L Connector_Generic:Conn_01x06 J1
+L senior_project_pcb-rescue:Conn_01x06-Connector_Generic J1
 U 1 1 5FC38CA8
 P 3200 4300
 F 0 "J1" H 3280 4292 50  0000 L CNN

@@ -1,9 +1,10 @@
 EESchema Schematic File Version 4
-EELAYER 30 0
+LIBS:senior_project_pcb-cache
+EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 3 6
+Sheet 3 7
 Title ""
 Date ""
 Rev ""
@@ -14,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L stm32wb55cc:stm32wb55ccu6 U?
+L senior_project_pcb-rescue:stm32wb55ccu6-stm32wb55cc U?
 U 3 1 5FC34008
 P 5000 3100
 AR Path="/5FB304C8/5FC34008" Ref="U?"  Part="3" 

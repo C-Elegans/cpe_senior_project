@@ -1,9 +1,10 @@
 EESchema Schematic File Version 4
-EELAYER 30 0
+LIBS:senior_project_pcb-cache
+EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 6
+Sheet 1 7
 Title ""
 Date ""
 Rev ""
@@ -85,4 +86,10 @@ Text Label 3800 5450 0    50   ~ 0
 INT
 Text Label 6000 2600 0    50   ~ 0
 INT
+$Sheet
+S 4950 5000 1150 900 
+U 602C4640
+F0 "ecg" 50
+F1 "ecg.sch" 50
+$EndSheet
 $EndSCHEMATC
