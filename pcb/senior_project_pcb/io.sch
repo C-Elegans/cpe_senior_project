@@ -1,6 +1,5 @@
 EESchema Schematic File Version 4
-LIBS:senior_project_pcb-cache
-EELAYER 29 0
+EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -14,20 +13,6 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Comp
-L senior_project_pcb-rescue:stm32wb55ccu6-stm32wb55cc U?
-U 1 1 5FC33073
-P 2700 2150
-AR Path="/5FB304C8/5FC33073" Ref="U?"  Part="1" 
-AR Path="/5FC33073" Ref="U?"  Part="1" 
-AR Path="/5FC31852/5FC33073" Ref="U1"  Part="1" 
-F 0 "U1" H 2725 2965 50  0000 C CNN
-F 1 "stm32wb55ccu6" H 2725 2874 50  0000 C CNN
-F 2 "Package_DFN_QFN:QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm" H 2750 2850 50  0001 C CNN
-F 3 "" H 2750 2850 50  0001 C CNN
-	1    2700 2150
-	1    0    0    -1  
-$EndComp
 Text Label 2000 3250 2    50   ~ 0
 JTAG_TMS
 Text Label 2000 3350 2    50   ~ 0
@@ -39,50 +24,35 @@ JTAG_TDO
 Text Label 3450 2950 0    50   ~ 0
 JTAG_NTRST
 $Comp
-L senior_project_pcb-rescue:Conn_01x06-Connector_Generic J1
-U 1 1 5FC38CA8
-P 3200 4300
-F 0 "J1" H 3280 4292 50  0000 L CNN
-F 1 "Conn_01x06" H 3280 4201 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 3200 4300 50  0001 C CNN
-F 3 "~" H 3200 4300 50  0001 C CNN
-	1    3200 4300
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:GND #PWR0103
 U 1 1 5FC39CDB
-P 3000 4100
-F 0 "#PWR0103" H 3000 3850 50  0001 C CNN
-F 1 "GND" V 3005 3972 50  0000 R CNN
-F 2 "" H 3000 4100 50  0001 C CNN
-F 3 "" H 3000 4100 50  0001 C CNN
-	1    3000 4100
-	0    1    1    0   
+P 3100 5150
+F 0 "#PWR0103" H 3100 4900 50  0001 C CNN
+F 1 "GND" V 3105 5022 50  0000 R CNN
+F 2 "" H 3100 5150 50  0001 C CNN
+F 3 "" H 3100 5150 50  0001 C CNN
+	1    3100 5150
+	1    0    0    -1  
 $EndComp
-Text Label 3000 4300 2    50   ~ 0
+Text Label 3100 4950 0    50   ~ 0
 JTAG_TCK
-Text Label 3000 4400 2    50   ~ 0
+Text Label 2600 5050 2    50   ~ 0
 JTAG_TDI
-Text Label 3000 4500 2    50   ~ 0
+Text Label 3100 5050 0    50   ~ 0
 JTAG_TDO
-Text Label 3000 4200 2    50   ~ 0
+Text Label 2600 4950 2    50   ~ 0
 JTAG_TMS
-Text Label 3000 4600 2    50   ~ 0
+Text Label 2600 5150 2    50   ~ 0
 JTAG_NTRST
 NoConn ~ 3450 3250
 NoConn ~ 3450 2750
 NoConn ~ 3450 2650
 NoConn ~ 3450 2550
 NoConn ~ 3450 2400
-NoConn ~ 3450 1900
-NoConn ~ 3450 1800
 NoConn ~ 3450 1700
 NoConn ~ 3450 1600
 NoConn ~ 2000 1600
 NoConn ~ 2000 1700
-NoConn ~ 2000 2650
-NoConn ~ 2000 2750
 NoConn ~ 2000 2850
 NoConn ~ 2000 2950
 Text HLabel 3600 3350 2    50   BiDi ~ 0
@@ -251,12 +221,82 @@ Text Label 2000 2050 2    50   ~ 0
 BTN1
 Text Label 2000 1950 2    50   ~ 0
 BTN2
-Text HLabel 2000 2550 0    50   Input ~ 0
+Text HLabel 2000 2750 0    50   Input ~ 0
 thermistor
-Text HLabel 2000 2450 0    50   Input ~ 0
+Text HLabel 2000 2650 0    50   Input ~ 0
 thermopile
 Text HLabel 2000 2350 0    50   Input ~ 0
 INT
 NoConn ~ 3450 3150
 NoConn ~ 3450 3050
+Text HLabel 2000 2550 0    50   Input ~ 0
+ECG_OUT
+Text HLabel 2000 2450 0    50   Input ~ 0
+ECG_SDN
+$Comp
+L Device:Crystal_GND24 Y1
+U 1 1 6031DDBE
+P 3950 1800
+F 0 "Y1" H 4144 1846 50  0000 L CNN
+F 1 "Crystal_GND24" H 4144 1755 50  0000 L CNN
+F 2 "Crystal:Crystal_SMD_2016-4Pin_2.0x1.6mm" H 3950 1800 50  0001 C CNN
+F 3 "~" H 3950 1800 50  0001 C CNN
+	1    3950 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L senior_project_pcb-rescue:stm32wb55ccu6-stm32wb55cc-senior_project_pcb-rescue U?
+U 1 1 5FC33073
+P 2700 2150
+AR Path="/5FB304C8/5FC33073" Ref="U?"  Part="1" 
+AR Path="/5FC33073" Ref="U?"  Part="1" 
+AR Path="/5FC31852/5FC33073" Ref="U1"  Part="1" 
+F 0 "U1" H 2725 2965 50  0000 C CNN
+F 1 "stm32wb55ccu6" H 2725 2874 50  0000 C CNN
+F 2 "Package_DFN_QFN:QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm" H 2750 2850 50  0001 C CNN
+F 3 "" H 2750 2850 50  0001 C CNN
+	1    2700 2150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3450 1800 3800 1800
+Wire Wire Line
+	3450 1900 3450 2100
+Wire Wire Line
+	3450 2100 4100 2100
+Wire Wire Line
+	4100 2100 4100 1800
+$Comp
+L power:GND #PWR0109
+U 1 1 60320491
+P 3950 2000
+F 0 "#PWR0109" H 3950 1750 50  0001 C CNN
+F 1 "GND" H 3955 1827 50  0000 C CNN
+F 2 "" H 3950 2000 50  0001 C CNN
+F 3 "" H 3950 2000 50  0001 C CNN
+	1    3950 2000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0118
+U 1 1 6032099A
+P 3950 1600
+F 0 "#PWR0118" H 3950 1350 50  0001 C CNN
+F 1 "GND" H 3955 1427 50  0000 C CNN
+F 2 "" H 3950 1600 50  0001 C CNN
+F 3 "" H 3950 1600 50  0001 C CNN
+	1    3950 1600
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x03_Odd_Even J1
+U 1 1 60340AB4
+P 2800 5050
+F 0 "J1" H 2850 5367 50  0000 C CNN
+F 1 "Conn_02x03_Odd_Even" H 2850 5276 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical" H 2800 5050 50  0001 C CNN
+F 3 "~" H 2800 5050 50  0001 C CNN
+	1    2800 5050
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

@@ -1,6 +1,5 @@
 EESchema Schematic File Version 4
-LIBS:senior_project_pcb-cache
-EELAYER 29 0
+EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -266,7 +265,7 @@ F 3 "~" H 9900 5550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L senior_project_pcb-rescue:stm32wb55ccu6-stm32wb55cc U1
+L senior_project_pcb-rescue:stm32wb55ccu6-stm32wb55cc-senior_project_pcb-rescue U1
 U 2 1 5FB3EDF5
 P 9050 5400
 AR Path="/5FB3EDF5" Ref="U1"  Part="2" 

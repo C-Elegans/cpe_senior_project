@@ -1,6 +1,5 @@
 EESchema Schematic File Version 4
-LIBS:senior_project_pcb-cache
-EELAYER 29 0
+EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -73,6 +72,8 @@ F5 "USB_D-" B R 3800 5850 50
 F6 "thermistor" I R 3800 6000 50 
 F7 "thermopile" I R 3800 6100 50 
 F8 "INT" I R 3800 5450 50 
+F9 "ECG_OUT" I R 3800 6300 50 
+F10 "ECG_SDN" I R 3800 6400 50 
 $EndSheet
 Text Label 6050 3800 0    50   ~ 0
 thermistor
@@ -91,5 +92,15 @@ S 4950 5000 1150 900
 U 602C4640
 F0 "ecg" 50
 F1 "ecg.sch" 50
+F2 "ECG_OUT" O R 6100 5150 50 
+F3 "ECG_SDN" I R 6100 5250 50 
 $EndSheet
+Text Label 3800 6300 0    50   ~ 0
+ECG_OUT
+Text Label 6100 5150 0    50   ~ 0
+ECG_OUT
+Text Label 6100 5250 0    50   ~ 0
+ECG_SDN
+Text Label 3800 6400 0    50   ~ 0
+ECG_SDN
 $EndSCHEMATC

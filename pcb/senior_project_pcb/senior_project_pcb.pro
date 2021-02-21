@@ -1,4 +1,4 @@
-update=Fri 29 Jan 2021 04:17:07 PM EST
+update=Sat 20 Feb 2021 08:12:00 PM EST
 version=1
 last_client=kicad
 [general]
@@ -254,6 +254,17 @@ dPairViaGap=0.25
 Name=Power
 Clearance=0.2
 TrackWidth=0.5
+ViaDiameter=0.8
+ViaDrill=0.4
+uViaDiameter=0.3
+uViaDrill=0.1
+dPairWidth=0.2
+dPairGap=0.25
+dPairViaGap=0.25
+[pcbnew/Netclasses/2]
+Name=Tline
+Clearance=0.127
+TrackWidth=0.29337
 ViaDiameter=0.8
 ViaDrill=0.4
 uViaDiameter=0.3

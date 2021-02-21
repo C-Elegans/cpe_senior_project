@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 3 6
+Sheet 3 7
 Title ""
 Date ""
 Rev ""
@@ -14,7 +14,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L stm32wb55cc:stm32wb55ccu6 U?
+L senior_project_pcb-rescue:stm32wb55ccu6-stm32wb55cc-senior_project_pcb-rescue U?
 U 3 1 5FC34008
 P 5000 3100
 AR Path="/5FB304C8/5FC34008" Ref="U?"  Part="3" 
@@ -51,5 +51,62 @@ F 3 "" H 4600 2600 50  0001 C CNN
 $EndComp
 NoConn ~ 5350 2600
 NoConn ~ 5350 2700
-NoConn ~ 5350 2850
+$Comp
+L MLPFWB55:MLPF-WB55-01E3 FL1
+U 1 1 6032CFCE
+P 5850 2850
+F 0 "FL1" H 6400 3115 50  0000 C CNN
+F 1 "MLPF-WB55-01E3" H 6400 3024 50  0000 C CNN
+F 2 "kicad_pretty:MLPFWB5501E3" H 6800 2950 50  0001 L CNN
+F 3 "https://www.st.com/resource/en/datasheet/mlpf-wb55-01e3.pdf" H 6800 2850 50  0001 L CNN
+F 4 "RF Wireless Misc 2.4 GHz Low Pass Filter matched to STM32WB55" H 6800 2750 50  0001 L CNN "Description"
+F 5 "0.7" H 6800 2650 50  0001 L CNN "Height"
+F 6 "STMicroelectronics" H 6800 2550 50  0001 L CNN "Manufacturer_Name"
+F 7 "MLPF-WB55-01E3" H 6800 2450 50  0001 L CNN "Manufacturer_Part_Number"
+F 8 "511-MLPF-WB55-01E3" H 6800 2350 50  0001 L CNN "Mouser Part Number"
+F 9 "https://www.mouser.co.uk/ProductDetail/STMicroelectronics/MLPF-WB55-01E3?qs=vLWxofP3U2xV%2FkxL9PmCDA%3D%3D" H 6800 2250 50  0001 L CNN "Mouser Price/Stock"
+F 10 "MLPF-WB55-01E3" H 6800 2150 50  0001 L CNN "Arrow Part Number"
+F 11 "https://www.arrow.com/en/products/mlpf-wb55-01e3/stmicroelectronics" H 6800 2050 50  0001 L CNN "Arrow Price/Stock"
+	1    5850 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5350 2850 5850 2850
+$Comp
+L power:GND #PWR0120
+U 1 1 6032FB19
+P 6200 3350
+F 0 "#PWR0120" H 6200 3100 50  0001 C CNN
+F 1 "GND" H 6205 3177 50  0000 C CNN
+F 2 "" H 6200 3350 50  0001 C CNN
+F 3 "" H 6200 3350 50  0001 C CNN
+	1    6200 3350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6200 3350 6300 3350
+Connection ~ 6200 3350
+Connection ~ 6300 3350
+Wire Wire Line
+	6300 3350 6400 3350
+Connection ~ 6400 3350
+Wire Wire Line
+	6400 3350 6500 3350
+Wire Wire Line
+	6950 2850 7350 2850
+Text Label 7100 2850 0    50   ~ 0
+TlineANT
+Text Label 5550 2850 0    50   ~ 0
+Tline
+$Comp
+L Device:Antenna_Chip AE1
+U 1 1 6035CD24
+P 7450 2750
+F 0 "AE1" H 7630 2877 50  0000 L CNN
+F 1 "Antenna_Chip" H 7630 2786 50  0000 L CNN
+F 2 "RF_Antenna:Texas_SWRA117D_2.4GHz_Left" H 7350 2925 50  0001 C CNN
+F 3 "~" H 7350 2925 50  0001 C CNN
+	1    7450 2750
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
