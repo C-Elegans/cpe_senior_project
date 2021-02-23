@@ -44,8 +44,6 @@ Text Label 2600 4950 2    50   ~ 0
 JTAG_TMS
 Text Label 2600 5150 2    50   ~ 0
 JTAG_NTRST
-NoConn ~ 3450 3250
-NoConn ~ 3450 2750
 NoConn ~ 3450 2650
 NoConn ~ 3450 2550
 NoConn ~ 3450 2400
@@ -53,8 +51,6 @@ NoConn ~ 3450 1700
 NoConn ~ 3450 1600
 NoConn ~ 2000 1600
 NoConn ~ 2000 1700
-NoConn ~ 2000 2850
-NoConn ~ 2000 2950
 Text HLabel 3600 3350 2    50   BiDi ~ 0
 SCL
 Wire Wire Line
@@ -79,6 +75,9 @@ F 0 "D2" V 5439 2382 50  0000 R CNN
 F 1 "LED" V 5348 2382 50  0000 R CNN
 F 2 "LED_SMD:LED_0603_1608Metric" H 5400 2500 50  0001 C CNN
 F 3 "~" H 5400 2500 50  0001 C CNN
+F 4 "Wurth Elektronik" H 5400 2500 50  0001 C CNN "Manufacturer_Name"
+F 5 "150060RS75000" H 5400 2500 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "710-150060RS75000" H 5400 2500 50  0001 C CNN "Mouser Part Number"
 	1    5400 2500
 	0    -1   -1   0   
 $EndComp
@@ -90,6 +89,9 @@ F 0 "D3" V 5839 2382 50  0000 R CNN
 F 1 "LED" V 5748 2382 50  0000 R CNN
 F 2 "LED_SMD:LED_0603_1608Metric" H 5800 2500 50  0001 C CNN
 F 3 "~" H 5800 2500 50  0001 C CNN
+F 4 "Wurth Elektronik" H 5800 2500 50  0001 C CNN "Manufacturer_Name"
+F 5 "150060RS75000" H 5800 2500 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "710-150060RS75000" H 5800 2500 50  0001 C CNN "Mouser Part Number"
 	1    5800 2500
 	0    -1   -1   0   
 $EndComp
@@ -101,6 +103,9 @@ F 0 "R11" H 5859 2296 50  0000 L CNN
 F 1 "330" H 5859 2205 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 5800 2250 50  0001 C CNN
 F 3 "~" H 5800 2250 50  0001 C CNN
+F 4 "Yageo" H 5800 2250 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603JR-07330RL" H 5800 2250 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 603-RC0603JR-07330RL " H 5800 2250 50  0001 C CNN "Mouser Part Number"
 	1    5800 2250
 	1    0    0    -1  
 $EndComp
@@ -112,6 +117,9 @@ F 0 "R10" H 5459 2296 50  0000 L CNN
 F 1 "330" H 5459 2205 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 5400 2250 50  0001 C CNN
 F 3 "~" H 5400 2250 50  0001 C CNN
+F 4 "Yageo" H 5400 2250 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603JR-07330RL" H 5400 2250 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 603-RC0603JR-07330RL " H 5400 2250 50  0001 C CNN "Mouser Part Number"
 	1    5400 2250
 	1    0    0    -1  
 $EndComp
@@ -153,6 +161,9 @@ F 0 "SW1" H 5550 3785 50  0000 C CNN
 F 1 "SW_Push_Dual" H 5550 3694 50  0000 C CNN
 F 2 "LL3301NF065QG:LL3301NF065QG" H 5550 3700 50  0001 C CNN
 F 3 "~" H 5550 3700 50  0001 C CNN
+F 4 "E-Switch" H 5550 3500 50  0001 C CNN "Manufacturer_Name"
+F 5 "LL3301NF065QG " H 5550 3500 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 612-LL3301NF065QG " H 5550 3500 50  0001 C CNN "Mouser Part Number"
 	1    5550 3500
 	1    0    0    -1  
 $EndComp
@@ -164,6 +175,9 @@ F 0 "SW2" H 5550 4435 50  0000 C CNN
 F 1 "SW_Push_Dual" H 5550 4344 50  0000 C CNN
 F 2 "LL3301NF065QG:LL3301NF065QG" H 5550 4350 50  0001 C CNN
 F 3 "~" H 5550 4350 50  0001 C CNN
+F 4 "E-Switch" H 5550 4150 50  0001 C CNN "Manufacturer_Name"
+F 5 "LL3301NF065QG " H 5550 4150 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 612-LL3301NF065QG " H 5550 4150 50  0001 C CNN "Mouser Part Number"
 	1    5550 4150
 	1    0    0    -1  
 $EndComp
@@ -217,22 +231,13 @@ Text Label 5350 4350 2    50   ~ 0
 BTN2
 NoConn ~ 5350 3500
 NoConn ~ 5350 4150
-Text Label 2000 2050 2    50   ~ 0
+Text Label 3450 3150 0    50   ~ 0
 BTN1
-Text Label 2000 1950 2    50   ~ 0
+Text Label 3450 3250 0    50   ~ 0
 BTN2
-Text HLabel 2000 2750 0    50   Input ~ 0
-thermistor
-Text HLabel 2000 2650 0    50   Input ~ 0
-thermopile
 Text HLabel 2000 2350 0    50   Input ~ 0
 INT
-NoConn ~ 3450 3150
 NoConn ~ 3450 3050
-Text HLabel 2000 2550 0    50   Input ~ 0
-ECG_OUT
-Text HLabel 2000 2450 0    50   Input ~ 0
-ECG_SDN
 $Comp
 L Device:Crystal_GND24 Y1
 U 1 1 6031DDBE
@@ -241,21 +246,10 @@ F 0 "Y1" H 4144 1846 50  0000 L CNN
 F 1 "Crystal_GND24" H 4144 1755 50  0000 L CNN
 F 2 "Crystal:Crystal_SMD_2016-4Pin_2.0x1.6mm" H 3950 1800 50  0001 C CNN
 F 3 "~" H 3950 1800 50  0001 C CNN
+F 4 "Murata" H 3950 1800 50  0001 C CNN "Manufacturer_Name"
+F 5 "XRCGB32M000F2P02R0" H 3950 1800 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 81-XRCGB32M000F2P02R " H 3950 1800 50  0001 C CNN "Mouser Part Number"
 	1    3950 1800
-	1    0    0    -1  
-$EndComp
-$Comp
-L senior_project_pcb-rescue:stm32wb55ccu6-stm32wb55cc-senior_project_pcb-rescue U?
-U 1 1 5FC33073
-P 2700 2150
-AR Path="/5FB304C8/5FC33073" Ref="U?"  Part="1" 
-AR Path="/5FC33073" Ref="U?"  Part="1" 
-AR Path="/5FC31852/5FC33073" Ref="U1"  Part="1" 
-F 0 "U1" H 2725 2965 50  0000 C CNN
-F 1 "stm32wb55ccu6" H 2725 2874 50  0000 C CNN
-F 2 "Package_DFN_QFN:QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm" H 2750 2850 50  0001 C CNN
-F 3 "" H 2750 2850 50  0001 C CNN
-	1    2700 2150
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -299,4 +293,36 @@ F 3 "~" H 2800 5050 50  0001 C CNN
 	1    2800 5050
 	1    0    0    -1  
 $EndComp
+$Comp
+L senior_project_pcb-rescue:stm32wb55ccu6-stm32wb55cc-senior_project_pcb-rescue U?
+U 1 1 5FC33073
+P 2700 2150
+AR Path="/5FB304C8/5FC33073" Ref="U?"  Part="1" 
+AR Path="/5FC33073" Ref="U?"  Part="1" 
+AR Path="/5FC31852/5FC33073" Ref="U1"  Part="1" 
+F 0 "U1" H 2725 2965 50  0000 C CNN
+F 1 "stm32wb55ccu6" H 2725 2874 50  0000 C CNN
+F 2 "Package_DFN_QFN:QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm" H 2750 2850 50  0001 C CNN
+F 3 "" H 2750 2850 50  0001 C CNN
+F 4 "STMicro" H 2700 2150 50  0001 C CNN "Manufacturer_Name"
+F 5 "STM32WB55CEU6" H 2700 2150 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "511-STM32WB55CEU6" H 2700 2150 50  0001 C CNN "Mouser Part Number"
+	1    2700 2150
+	1    0    0    -1  
+$EndComp
+Text HLabel 2000 2450 0    50   Input ~ 0
+ECG_SDN
+Text HLabel 2000 2550 0    50   Input ~ 0
+ECG_OUT
+Text HLabel 2000 2650 0    50   Input ~ 0
+thermopile
+Text HLabel 2000 2750 0    50   Input ~ 0
+thermistor
+Text HLabel 2000 2850 0    50   Input ~ 0
+LO+
+Text HLabel 3450 2750 2    50   Input ~ 0
+LO-
+NoConn ~ 2000 2950
+NoConn ~ 2000 1950
+NoConn ~ 2000 2050
 $EndSCHEMATC

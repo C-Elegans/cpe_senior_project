@@ -1,4 +1,4 @@
 (fp_lib_table
-  (lib (name LL3301NF065QG)(type Legacy)(uri /home/mnolan/Documents/stm32/senior_project/pcb/LL3301NF065QG.mod)(options "")(descr ""))
-  (lib (name kicad_pretty)(type KiCad)(uri /home/mnolan/Documents/stm32/senior_project/pcb/kicad_pretty)(options "")(descr ""))
+  (lib (name LL3301NF065QG)(type Legacy)(uri ${KIPRJMOD}/../LL3301NF065QG.mod)(options "")(descr ""))
+  (lib (name kicad_pretty)(type KiCad)(uri ${KIPRJMOD}/../kicad_pretty)(options "")(descr ""))
 )

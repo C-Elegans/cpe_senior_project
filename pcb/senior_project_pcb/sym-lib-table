@@ -1,8 +1,9 @@
 (sym_lib_table
   (lib (name senior_project_pcb-rescue)(type Legacy)(uri ${KIPRJMOD}/senior_project_pcb-rescue.lib)(options "")(descr ""))
-  (lib (name 2020-11-14_19-37-58)(type Legacy)(uri /home/mnolan/Documents/stm32/senior_project/pcb/stm32wb55ccu/KiCAD/2020-11-14_19-37-58/2020-11-14_19-37-58.lib)(options "")(descr ""))
-  (lib (name stm32wb55cc)(type Legacy)(uri /home/mnolan/Documents/stm32/senior_project/pcb/stm32wb55ccu/stm32wb55cc.lib)(options "")(descr ""))
-  (lib (name ZTP-148SRC1)(type Legacy)(uri /home/mnolan/Documents/stm32/senior_project/pcb/ZTP-148SRC1.lib)(options "")(descr ""))
+  (lib (name 2020-11-14_19-37-58)(type Legacy)(uri ${KIPRJMOD}/../stm32wb55ccu/KiCAD/2020-11-14_19-37-58/2020-11-14_19-37-58.lib)(options "")(descr ""))
+  (lib (name stm32wb55cc)(type Legacy)(uri ${KIPRJMOD}/../stm32wb55ccu/stm32wb55cc.lib)(options "")(descr ""))
+  (lib (name ZTP-148SRC1)(type Legacy)(uri ${KIPRJMOD}/../ZTP-148SRC1.lib)(options "")(descr ""))
   (lib (name AD8232)(type Legacy)(uri ${KIPRJMOD}/../2021-02-16_22-10-11.lib)(options "")(descr ""))
   (lib (name MLPFWB55)(type Legacy)(uri ${KIPRJMOD}/../MLPF-WB55-01E3.lib)(options "")(descr ""))
+  (lib (name UJ2-MIBH2-4-SMT-TR)(type Legacy)(uri ${KIPRJMOD}/../UJ2-MIBH2-4-SMT-TR.lib)(options "")(descr ""))
 )

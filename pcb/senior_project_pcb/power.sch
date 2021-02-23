@@ -54,6 +54,9 @@ F 0 "L1" V 4569 4300 50  0000 C CNN
 F 1 "L_Small" V 4660 4300 50  0000 C CNN
 F 2 "Inductor_SMD:L_0805_2012Metric" H 4750 4300 50  0001 C CNN
 F 3 "~" H 4750 4300 50  0001 C CNN
+F 4 "Murata Electronics" H 4750 4300 50  0001 C CNN "Manufacturer_Name"
+F 5 "LQM21FN100M70L " H 4750 4300 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "81-LQM21FN100M70L" H 4750 4300 50  0001 C CNN "Mouser Part Number"
 	1    4750 4300
 	0    1    1    0   
 $EndComp
@@ -202,6 +205,9 @@ F 0 "C9" H 9150 3500 50  0000 L CNN
 F 1 "4.7u" H 9100 3600 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 9200 3800 50  0001 C CNN
 F 3 "~" H 9200 3800 50  0001 C CNN
+F 4 "Samsung" H 9200 3800 50  0001 C CNN "Manufacturer_Name"
+F 5 "CL10A475KP8NNNC" H 9200 3800 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "187-CL10A475KP8NNNC" H 9200 3800 50  0001 C CNN "Mouser Part Number"
 	1    9200 3800
 	1    0    0    -1  
 $EndComp
@@ -230,11 +236,12 @@ F 0 "L2" H 9856 5154 50  0000 R CNN
 F 1 "10uH" H 9856 5245 50  0000 R CNN
 F 2 "Inductor_SMD:L_0805_2012Metric" H 9900 5200 50  0001 C CNN
 F 3 "~" H 9900 5200 50  0001 C CNN
+F 4 "Murata Electronics" H 9900 5200 50  0001 C CNN "Manufacturer_Name"
+F 5 "LQM21FN100M70L " H 9900 5200 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "81-LQM21FN100M70L" H 9900 5200 50  0001 C CNN "Mouser Part Number"
 	1    9900 5200
 	-1   0    0    1   
 $EndComp
-Wire Wire Line
-	9600 5100 9900 5100
 Wire Wire Line
 	9600 5300 9900 5300
 Wire Wire Line
@@ -261,6 +268,9 @@ F 0 "C10" H 10000 5650 50  0000 L CNN
 F 1 "4.7u" H 10000 5550 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 9900 5550 50  0001 C CNN
 F 3 "~" H 9900 5550 50  0001 C CNN
+F 4 "Samsung" H 9900 5550 50  0001 C CNN "Manufacturer_Name"
+F 5 "CL10A475KP8NNNC" H 9900 5550 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "187-CL10A475KP8NNNC" H 9900 5550 50  0001 C CNN "Mouser Part Number"
 	1    9900 5550
 	1    0    0    -1  
 $EndComp
@@ -274,6 +284,9 @@ F 0 "U1" H 9075 6165 50  0000 C CNN
 F 1 "stm32wb55ccu6" H 9075 6074 50  0000 C CNN
 F 2 "Package_DFN_QFN:QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm" H 9100 6100 50  0001 C CNN
 F 3 "" H 9100 6100 50  0001 C CNN
+F 4 "STMicro" H 9050 5400 50  0001 C CNN "Manufacturer_Name"
+F 5 "STM32WB55CEU6" H 9050 5400 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "511-STM32WB55CEU6" H 9050 5400 50  0001 C CNN "Mouser Part Number"
 	2    9050 5400
 	1    0    0    -1  
 $EndComp
@@ -294,7 +307,7 @@ U 1 1 5FB4F823
 P 1000 2200
 F 0 "BT1" H 750 2250 50  0000 L CNN
 F 1 "Battery_Cell" H 700 2150 50  0000 L CNN
-F 2 "Connector_JST:JST_EH_S2B-EH_1x02_P2.50mm_Horizontal" V 1000 2260 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" V 1000 2260 50  0001 C CNN
 F 3 "~" V 1000 2260 50  0001 C CNN
 	1    1000 2200
 	1    0    0    -1  
@@ -309,6 +322,9 @@ F 0 "U4" H 2600 2350 50  0000 C CNN
 F 1 "AP9101CK6" H 2500 2250 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23-6" H 3150 2050 50  0001 C CNN
 F 3 "https://www.diodes.com/assets/Datasheets/AP9101C.pdf" H 3150 2100 50  0001 C CNN
+F 4 "Diodes Inc." H 3150 2050 50  0001 C CNN "Manufacturer_Name"
+F 5 "AP9101CAK6-BVTRG1" H 3150 2050 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 621-AP9101CAK6BVTRG1 " H 3150 2050 50  0001 C CNN "Mouser Part Number"
 	1    3150 2050
 	-1   0    0    -1  
 $EndComp
@@ -357,6 +373,9 @@ F 0 "R3" V 3443 1150 50  0000 C CNN
 F 1 "300" V 3534 1150 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 3580 1150 50  0001 C CNN
 F 3 "~" H 3650 1150 50  0001 C CNN
+F 4 "Vishay" H 3650 1150 50  0001 C CNN "Manufacturer_Name"
+F 5 "RCA0603300RFKEA" H 3650 1150 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 71-RCA0603300RFKEA " H 3650 1150 50  0001 C CNN "Mouser Part Number"
 	1    3650 1150
 	0    1    1    0   
 $EndComp
@@ -368,6 +387,9 @@ F 0 "R4" H 3770 2246 50  0000 L CNN
 F 1 "2.7k" H 3770 2155 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 3630 2200 50  0001 C CNN
 F 3 "~" H 3700 2200 50  0001 C CNN
+F 4 "Vishay" H 3700 2200 50  0001 C CNN "Manufacturer_Name"
+F 5 "CRCW06032K70JNEAC" H 3700 2200 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 71-CRCW06032K70JNEAC " H 3700 2200 50  0001 C CNN "Mouser Part Number"
 	1    3700 2200
 	1    0    0    -1  
 $EndComp
@@ -492,6 +514,9 @@ F 0 "U3" H 2550 4800 50  0000 C CNN
 F 1 "MCP73831-2-OT" H 2750 4900 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23-5" H 2350 4300 50  0001 L CIN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20001984g.pdf" H 2150 4500 50  0001 C CNN
+F 4 "Microchip" H 2300 4550 50  0001 C CNN "Manufacturer_Name"
+F 5 "MCP73831T-2DCI/OT" H 2300 4550 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 579-MCP73831T-2DCIOT " H 2300 4550 50  0001 C CNN "Mouser Part Number"
 	1    2300 4550
 	1    0    0    -1  
 $EndComp
@@ -525,6 +550,9 @@ F 0 "R2" H 3359 4846 50  0000 L CNN
 F 1 "470" H 3359 4755 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 3300 4800 50  0001 C CNN
 F 3 "~" H 3300 4800 50  0001 C CNN
+F 4 "Vishay" H 3300 4800 50  0001 C CNN "Manufacturer_Name"
+F 5 "CRCW0603470RFKEAC" H 3300 4800 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 71-CRCW0603470RFKEAC " H 3300 4800 50  0001 C CNN "Mouser Part Number"
 	1    3300 4800
 	1    0    0    -1  
 $EndComp
@@ -545,8 +573,11 @@ U 1 1 5FBDBFA0
 P 3300 4550
 F 0 "D1" V 3339 4432 50  0000 R CNN
 F 1 "LED" V 3248 4432 50  0000 R CNN
-F 2 "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 3300 4550 50  0001 C CNN
+F 2 "LED_SMD:LED_0603_1608Metric" H 3300 4550 50  0001 C CNN
 F 3 "~" H 3300 4550 50  0001 C CNN
+F 4 "Wurth Elektronik" H 3300 4550 50  0001 C CNN "Manufacturer_Name"
+F 5 "150060RS75000" H 3300 4550 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "710-150060RS75000" H 3300 4550 50  0001 C CNN "Mouser Part Number"
 	1    3300 4550
 	0    -1   -1   0   
 $EndComp
@@ -562,6 +593,9 @@ F 0 "R1" H 1759 4796 50  0000 L CNN
 F 1 "10k" H 1759 4705 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 1700 4750 50  0001 C CNN
 F 3 "~" H 1700 4750 50  0001 C CNN
+F 4 "Yageo" H 1700 4750 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-0710KL" H 1700 4750 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "603-RC0603FR-0710KL" H 1700 4750 50  0001 C CNN "Mouser Part Number"
 	1    1700 4750
 	1    0    0    -1  
 $EndComp
@@ -598,6 +632,9 @@ F 0 "U5" H 1600 6467 50  0000 C CNN
 F 1 "MIC5504-3.3YM5" H 1600 6376 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23-5" H 1600 5700 50  0001 C CNN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/MIC550X.pdf" H 1350 6350 50  0001 C CNN
+F 4 "Microchip" H 1600 6100 50  0001 C CNN "Manufacturer_Name"
+F 5 "MIC5504-3.3YM5-TR" H 1600 6100 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "998-MIC5504-3.3YM5TR " H 1600 6100 50  0001 C CNN "Mouser Part Number"
 	1    1600 6100
 	1    0    0    -1  
 $EndComp
@@ -609,6 +646,9 @@ F 0 "C13" H 2642 6146 50  0000 L CNN
 F 1 "1u" H 2642 6055 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 2550 6100 50  0001 C CNN
 F 3 "~" H 2550 6100 50  0001 C CNN
+F 4 "KEMET" H 2550 6100 50  0001 C CNN "Manufacturer_Name"
+F 5 "C0603C105K8PACTU" H 2550 6100 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "80-C0603C105K8P" H 2550 6100 50  0001 C CNN "Mouser Part Number"
 	1    2550 6100
 	1    0    0    -1  
 $EndComp
@@ -620,6 +660,9 @@ F 0 "C12" H 892 6146 50  0000 L CNN
 F 1 "1u" H 892 6055 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 800 6100 50  0001 C CNN
 F 3 "~" H 800 6100 50  0001 C CNN
+F 4 "KEMET" H 800 6100 50  0001 C CNN "Manufacturer_Name"
+F 5 "C0603C105K8PACTU" H 800 6100 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "80-C0603C105K8P" H 800 6100 50  0001 C CNN "Mouser Part Number"
 	1    800  6100
 	1    0    0    -1  
 $EndComp
@@ -709,46 +752,31 @@ F 3 "" H 2700 4450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L senior_project_pcb-rescue:USB_B_Micro-Connector J2
-U 1 1 60209B69
-P 5250 1750
-F 0 "J2" H 5307 2217 50  0000 C CNN
-F 1 "USB_B_Micro" H 5307 2126 50  0000 C CNN
-F 2 "Connector_USB:USB_Micro-AB_Molex_47590-0001" H 5400 1700 50  0001 C CNN
-F 3 "~" H 5400 1700 50  0001 C CNN
-	1    5250 1750
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:GND #PWR0105
 U 1 1 6020C637
-P 5150 2150
-F 0 "#PWR0105" H 5150 1900 50  0001 C CNN
-F 1 "GND" H 5155 1977 50  0000 C CNN
-F 2 "" H 5150 2150 50  0001 C CNN
-F 3 "" H 5150 2150 50  0001 C CNN
-	1    5150 2150
+P 4650 1850
+F 0 "#PWR0105" H 4650 1600 50  0001 C CNN
+F 1 "GND" H 4655 1677 50  0000 C CNN
+F 2 "" H 4650 1850 50  0001 C CNN
+F 3 "" H 4650 1850 50  0001 C CNN
+	1    4650 1850
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR0106
 U 1 1 6021169A
-P 5250 2150
-F 0 "#PWR0106" H 5250 1900 50  0001 C CNN
-F 1 "GND" H 5255 1977 50  0000 C CNN
-F 2 "" H 5250 2150 50  0001 C CNN
-F 3 "" H 5250 2150 50  0001 C CNN
-	1    5250 2150
+P 5550 1950
+F 0 "#PWR0106" H 5550 1700 50  0001 C CNN
+F 1 "GND" H 5555 1777 50  0000 C CNN
+F 2 "" H 5550 1950 50  0001 C CNN
+F 3 "" H 5550 1950 50  0001 C CNN
+	1    5550 1950
 	1    0    0    -1  
 $EndComp
-Text HLabel 5750 1750 2    50   BiDi ~ 0
+Text HLabel 6350 1750 2    50   BiDi ~ 0
 USB_D+
-Text HLabel 5750 1850 2    50   BiDi ~ 0
+Text HLabel 6350 1650 2    50   BiDi ~ 0
 USB_D-
-Wire Wire Line
-	5550 1750 5750 1750
-Wire Wire Line
-	5550 1850 5750 1850
 $Comp
 L power:VBUS #PWR0107
 U 1 1 602224B7
@@ -760,7 +788,7 @@ F 3 "" H 5800 1550 50  0001 C CNN
 	1    5800 1550
 	1    0    0    -1  
 $EndComp
-NoConn ~ 5550 1950
+NoConn ~ 5550 1850
 Wire Wire Line
 	2000 6000 2550 6000
 Wire Wire Line
@@ -851,6 +879,9 @@ F 0 "Q1" H 2355 2896 50  0000 L CNN
 F 1 "Q_DUAL_NMOS" H 2355 2805 50  0000 L CNN
 F 2 "Package_TO_SOT_SMD:SOT-363_SC-70-6" H 2350 2850 50  0001 C CNN
 F 3 "~" H 2350 2850 50  0001 C CNN
+F 4 "Nexperia" H 2150 2850 50  0001 C CNN "Manufacturer_Name"
+F 5 "BSS138BKS\\,115" H 2150 2850 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 771-BSS138BKS115 " H 2150 2850 50  0001 C CNN "Mouser Part Number"
 	1    2150 2850
 	-1   0    0    -1  
 $EndComp
@@ -862,6 +893,9 @@ F 0 "Q1" H 2355 2204 50  0000 L CNN
 F 1 "Q_DUAL_NMOS" H 2355 2295 50  0000 L CNN
 F 2 "Package_TO_SOT_SMD:SOT-363_SC-70-6" H 2350 2250 50  0001 C CNN
 F 3 "~" H 2350 2250 50  0001 C CNN
+F 4 "Nexperia" H 2150 2250 50  0001 C CNN "Manufacturer_Name"
+F 5 "BSS138BKS\\,115" H 2150 2250 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 771-BSS138BKS115 " H 2150 2250 50  0001 C CNN "Mouser Part Number"
 	2    2150 2250
 	-1   0    0    1   
 $EndComp
@@ -894,4 +928,84 @@ Wire Wire Line
 	8400 3700 9000 3700
 Wire Wire Line
 	8400 3900 9000 3900
+$Comp
+L Device:R_Small R29
+U 1 1 6036A349
+P 6000 1750
+F 0 "R29" V 5804 1750 50  0000 C CNN
+F 1 "22" V 5895 1750 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 6000 1750 50  0001 C CNN
+F 3 "~" H 6000 1750 50  0001 C CNN
+F 4 "Yageo" H 6000 1750 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-0722RL" H 6000 1750 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 603-RC0603FR-0722RL " H 6000 1750 50  0001 C CNN "Mouser Part Number"
+	1    6000 1750
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_Small R30
+U 1 1 6036AA49
+P 6000 1650
+F 0 "R30" V 6200 1650 50  0000 C CNN
+F 1 "22" V 6100 1650 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 6000 1650 50  0001 C CNN
+F 3 "~" H 6000 1650 50  0001 C CNN
+F 4 "Yageo" H 6000 1650 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-0722RL" H 6000 1650 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 603-RC0603FR-0722RL " H 6000 1650 50  0001 C CNN "Mouser Part Number"
+	1    6000 1650
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	5550 1750 5900 1750
+Wire Wire Line
+	6100 1750 6350 1750
+$Comp
+L Device:L_Small L3
+U 1 1 603914E5
+P 9800 5100
+F 0 "L3" H 9756 5054 50  0000 R CNN
+F 1 "10n" H 9756 5145 50  0000 R CNN
+F 2 "Inductor_SMD:L_0402_1005Metric" H 9800 5100 50  0001 C CNN
+F 3 "~" H 9800 5100 50  0001 C CNN
+F 4 "Murata Electronics" H 9800 5100 50  0001 C CNN "Manufacturer_Name"
+F 5 "LQG15WZ10NJ02D " H 9800 5100 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 81-LQG15WZ10NJ02D " H 9800 5100 50  0001 C CNN "Mouser Part Number"
+	1    9800 5100
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	9600 5100 9700 5100
+$Comp
+L UJ2-MIBH2-4-SMT-TR:UJ2-MIBH2-4-SMT-TR J2
+U 1 1 6036E3EB
+P 5550 1550
+F 0 "J2" H 6000 1815 50  0000 C CNN
+F 1 "UJ2-MIBH2-4-SMT-TR" H 6000 1724 50  0000 C CNN
+F 2 "kicad_pretty:UJ2MIBH24SMTTR" H 6300 1650 50  0001 L CNN
+F 3 "https://www.cui.com/product/resource/digikeypdf/uj2-mibh2-4-smt.pdf" H 6300 1550 50  0001 L CNN
+F 4 "CONN RCPT USB2.0 MICRO B SMD R/A" H 6300 1450 50  0001 L CNN "Description"
+F 5 "2.5" H 6300 1350 50  0001 L CNN "Height"
+F 6 "CUI Inc." H 6300 1250 50  0001 L CNN "Manufacturer_Name"
+F 7 "UJ2-MIBH2-4-SMT-TR" H 6300 1150 50  0001 L CNN "Manufacturer_Part_Number"
+F 8 "490-UJ2-MIBH2-4-SMT" H 6300 1050 50  0001 L CNN "Mouser Part Number"
+F 9 "https://www.mouser.co.uk/ProductDetail/CUI-Devices/UJ2-MIBH2-4-SMT-TR/?qs=5mqXD9RfOg1yxHIpPvPxvQ%3D%3D" H 6300 950 50  0001 L CNN "Mouser Price/Stock"
+F 10 "UJ2-MIBH2-4-SMT-TR" H 6300 850 50  0001 L CNN "Arrow Part Number"
+F 11 "https://www.arrow.com/en/products/uj2-mibh2-4-smt-tr/cui-devices" H 6300 750 50  0001 L CNN "Arrow Price/Stock"
+	1    5550 1550
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	4650 1850 4650 1750
+Connection ~ 4650 1850
+Connection ~ 4650 1650
+Wire Wire Line
+	4650 1650 4650 1550
+Connection ~ 4650 1750
+Wire Wire Line
+	4650 1750 4650 1650
+Wire Wire Line
+	5550 1650 5900 1650
+Wire Wire Line
+	6100 1650 6350 1650
 $EndSCHEMATC

@@ -1,4 +1,4 @@
-19102533149542083
+19105761185032083
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -83048,9 +83048,23 @@ Filter
 6
 6
 kicad_pretty
+UJ2MIBH24SMTTR
+UJ2-MIBH2-4-SMT-TR_1
+Connector
+0
+9
+9
+kicad_pretty
 ZTP148SRC1
 ZTP-148SRC1-5
 Integrated Circuit
 0
 4
 4
+kicad_pretty
+luci
+
+
+0
+0
+0

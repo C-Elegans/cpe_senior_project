@@ -74,6 +74,8 @@ F7 "thermopile" I R 3800 6100 50
 F8 "INT" I R 3800 5450 50 
 F9 "ECG_OUT" I R 3800 6300 50 
 F10 "ECG_SDN" I R 3800 6400 50 
+F11 "LO+" I R 3800 6500 50 
+F12 "LO-" I R 3800 6600 50 
 $EndSheet
 Text Label 6050 3800 0    50   ~ 0
 thermistor
@@ -94,6 +96,8 @@ F0 "ecg" 50
 F1 "ecg.sch" 50
 F2 "ECG_OUT" O R 6100 5150 50 
 F3 "ECG_SDN" I R 6100 5250 50 
+F4 "LO+" O R 6100 5450 50 
+F5 "LO-" O R 6100 5550 50 
 $EndSheet
 Text Label 3800 6300 0    50   ~ 0
 ECG_OUT
@@ -103,4 +107,12 @@ Text Label 6100 5250 0    50   ~ 0
 ECG_SDN
 Text Label 3800 6400 0    50   ~ 0
 ECG_SDN
+Text Label 3800 6500 0    50   ~ 0
+LO+
+Text Label 6100 5450 0    50   ~ 0
+LO+
+Text Label 6100 5550 0    50   ~ 0
+LO-
+Text Label 3800 6600 0    50   ~ 0
+LO-
 $EndSCHEMATC
