@@ -37,9 +37,9 @@ F 0 "C16" V 4648 3300 50  0000 C CNN
 F 1 ".33u" V 4739 3300 50  0000 C CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 4938 3150 50  0001 C CNN
 F 3 "~" H 4900 3300 50  0001 C CNN
-F 4 "Kamaya" H 4900 3300 50  0001 C CNN "Manufacturer_Name"
-F 5 "0603X334J160CT" H 4900 3300 50  0001 C CNN "Manufacturer_Part_Number"
-F 6 "791-0603X334J160CT" H 4900 3300 50  0001 C CNN "Mouser Part Number"
+F 4 "Samsung" H 4900 3300 50  0001 C CNN "Manufacturer_Name"
+F 5 "CL10B334KO8NNNC" H 4900 3300 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "187-CL10B334KO8NNNC" H 4900 3300 50  0001 C CNN "Mouser Part Number"
 	1    4900 3300
 	0    1    1    0   
 $EndComp
@@ -81,9 +81,9 @@ F 0 "R9" H 2841 3604 50  0000 R CNN
 F 1 "10M" H 2841 3695 50  0000 R CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 2900 3650 50  0001 C CNN
 F 3 "~" H 2900 3650 50  0001 C CNN
-F 4 "Vishay" H 2900 3650 50  0001 C CNN "Manufacturer_Name"
-F 5 "CRCW060310M0FKEAC" H 2900 3650 50  0001 C CNN "Manufacturer_Part_Number"
-F 6 " 71-CRCW060310M0FKEAC " H 2900 3650 50  0001 C CNN "Mouser Part Number"
+F 4 "Yageo" H 2900 3650 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-1010ML" H 2900 3650 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 603-RC0603FR-1010ML " H 2900 3650 50  0001 C CNN "Mouser Part Number"
 	1    2900 3650
 	-1   0    0    1   
 $EndComp
@@ -95,9 +95,9 @@ F 0 "R8" H 2641 3704 50  0000 R CNN
 F 1 "10M" H 2641 3795 50  0000 R CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 2700 3750 50  0001 C CNN
 F 3 "~" H 2700 3750 50  0001 C CNN
-F 4 "Vishay" H 2700 3750 50  0001 C CNN "Manufacturer_Name"
-F 5 "CRCW060310M0FKEAC" H 2700 3750 50  0001 C CNN "Manufacturer_Part_Number"
-F 6 " 71-CRCW060310M0FKEAC " H 2700 3750 50  0001 C CNN "Mouser Part Number"
+F 4 "Yageo" H 2700 3750 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-1010ML" H 2700 3750 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 603-RC0603FR-1010ML " H 2700 3750 50  0001 C CNN "Mouser Part Number"
 	1    2700 3750
 	-1   0    0    1   
 $EndComp
@@ -177,9 +177,9 @@ F 0 "R25" V 5804 3800 50  0000 C CNN
 F 1 "10M" V 5895 3800 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 6000 3800 50  0001 C CNN
 F 3 "~" H 6000 3800 50  0001 C CNN
-F 4 "Vishay" H 6000 3800 50  0001 C CNN "Manufacturer_Name"
-F 5 "CRCW060310M0FKEAC" H 6000 3800 50  0001 C CNN "Manufacturer_Part_Number"
-F 6 " 71-CRCW060310M0FKEAC " H 6000 3800 50  0001 C CNN "Mouser Part Number"
+F 4 "Yageo" H 6000 3800 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-1010ML" H 6000 3800 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 603-RC0603FR-1010ML " H 6000 3800 50  0001 C CNN "Mouser Part Number"
 	1    6000 3800
 	0    1    1    0   
 $EndComp
@@ -205,9 +205,9 @@ F 0 "R27" H 6191 3854 50  0000 R CNN
 F 1 "10M" H 6191 3945 50  0000 R CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 6250 3900 50  0001 C CNN
 F 3 "~" H 6250 3900 50  0001 C CNN
-F 4 "Vishay" H 6250 3900 50  0001 C CNN "Manufacturer_Name"
-F 5 "CRCW060310M0FKEAC" H 6250 3900 50  0001 C CNN "Manufacturer_Part_Number"
-F 6 " 71-CRCW060310M0FKEAC " H 6250 3900 50  0001 C CNN "Mouser Part Number"
+F 4 "Yageo" H 6250 3900 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-1010ML" H 6250 3900 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 603-RC0603FR-1010ML " H 6250 3900 50  0001 C CNN "Mouser Part Number"
 	1    6250 3900
 	-1   0    0    1   
 $EndComp
@@ -219,9 +219,9 @@ F 0 "C17" V 6679 3600 50  0000 C CNN
 F 1 ".33u" V 6588 3600 50  0000 C CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 6450 3600 50  0001 C CNN
 F 3 "~" H 6450 3600 50  0001 C CNN
-F 4 "Kamaya" H 6450 3600 50  0001 C CNN "Manufacturer_Name"
-F 5 "0603X334J160CT" H 6450 3600 50  0001 C CNN "Manufacturer_Part_Number"
-F 6 "791-0603X334J160CT" H 6450 3600 50  0001 C CNN "Mouser Part Number"
+F 4 "Samsung" H 6450 3600 50  0001 C CNN "Manufacturer_Name"
+F 5 "CL10B334KO8NNNC" H 6450 3600 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "187-CL10B334KO8NNNC" H 6450 3600 50  0001 C CNN "Mouser Part Number"
 	1    6450 3600
 	0    -1   -1   0   
 $EndComp
@@ -315,6 +315,9 @@ F 0 "R21" H 3809 5246 50  0000 L CNN
 F 1 "100k" H 3809 5155 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 3750 5200 50  0001 C CNN
 F 3 "~" H 3750 5200 50  0001 C CNN
+F 4 "Yageo" H 3750 5200 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-13100KL" H 3750 5200 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 603-RC0603FR-13100KL " H 3750 5200 50  0001 C CNN "Mouser Part Number"
 	1    3750 5200
 	1    0    0    -1  
 $EndComp
@@ -415,6 +418,9 @@ F 0 "C21" H 7442 4696 50  0000 L CNN
 F 1 "100n" H 7442 4605 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 7350 4650 50  0001 C CNN
 F 3 "~" H 7350 4650 50  0001 C CNN
+F 4 "AVX" H 7350 4650 50  0001 C CNN "Manufacturer_Name"
+F 5 "0603YC104MAT4A" H 7350 4650 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "581-0603YC104MAT4A" H 7350 4650 50  0001 C CNN "Mouser Part Number"
 	1    7350 4650
 	1    0    0    -1  
 $EndComp
@@ -437,9 +443,9 @@ F 0 "R24" H 5841 4354 50  0000 R CNN
 F 1 "10M" H 5841 4445 50  0000 R CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 5900 4400 50  0001 C CNN
 F 3 "~" H 5900 4400 50  0001 C CNN
-F 4 "Vishay" H 5900 4400 50  0001 C CNN "Manufacturer_Name"
-F 5 "CRCW060310M0FKEAC" H 5900 4400 50  0001 C CNN "Manufacturer_Part_Number"
-F 6 " 71-CRCW060310M0FKEAC " H 5900 4400 50  0001 C CNN "Mouser Part Number"
+F 4 "Yageo" H 5900 4400 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-1010ML" H 5900 4400 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 603-RC0603FR-1010ML " H 5900 4400 50  0001 C CNN "Mouser Part Number"
 	1    5900 4400
 	-1   0    0    1   
 $EndComp
@@ -471,9 +477,9 @@ F 0 "R28" H 6341 4354 50  0000 R CNN
 F 1 "10M" H 6341 4445 50  0000 R CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 6400 4400 50  0001 C CNN
 F 3 "~" H 6400 4400 50  0001 C CNN
-F 4 "Vishay" H 6400 4400 50  0001 C CNN "Manufacturer_Name"
-F 5 "CRCW060310M0FKEAC" H 6400 4400 50  0001 C CNN "Manufacturer_Part_Number"
-F 6 " 71-CRCW060310M0FKEAC " H 6400 4400 50  0001 C CNN "Mouser Part Number"
+F 4 "Yageo" H 6400 4400 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-1010ML" H 6400 4400 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 603-RC0603FR-1010ML " H 6400 4400 50  0001 C CNN "Mouser Part Number"
 	1    6400 4400
 	-1   0    0    1   
 $EndComp
@@ -499,6 +505,9 @@ F 0 "C20" H 6792 4446 50  0000 L CNN
 F 1 "100n" H 6792 4355 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 6700 4400 50  0001 C CNN
 F 3 "~" H 6700 4400 50  0001 C CNN
+F 4 "AVX" H 6700 4400 50  0001 C CNN "Manufacturer_Name"
+F 5 "0603YC104MAT4A" H 6700 4400 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "581-0603YC104MAT4A" H 6700 4400 50  0001 C CNN "Mouser Part Number"
 	1    6700 4400
 	1    0    0    -1  
 $EndComp

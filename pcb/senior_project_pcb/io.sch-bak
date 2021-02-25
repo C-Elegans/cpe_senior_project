@@ -290,6 +290,9 @@ F 0 "J1" H 2850 5367 50  0000 C CNN
 F 1 "Conn_02x03_Odd_Even" H 2850 5276 50  0000 C CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical" H 2800 5050 50  0001 C CNN
 F 3 "~" H 2800 5050 50  0001 C CNN
+F 4 "Molex" H 2800 5050 50  0001 C CNN "Manufacturer_Name"
+F 5 "10-89-7061" H 2800 5050 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "538-10-89-7061" H 2800 5050 50  0001 C CNN "Mouser Part Number"
 	1    2800 5050
 	1    0    0    -1  
 $EndComp

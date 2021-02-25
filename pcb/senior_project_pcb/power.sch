@@ -54,9 +54,9 @@ F 0 "L1" V 4569 4300 50  0000 C CNN
 F 1 "L_Small" V 4660 4300 50  0000 C CNN
 F 2 "Inductor_SMD:L_0805_2012Metric" H 4750 4300 50  0001 C CNN
 F 3 "~" H 4750 4300 50  0001 C CNN
-F 4 "Murata Electronics" H 4750 4300 50  0001 C CNN "Manufacturer_Name"
-F 5 "LQM21FN100M70L " H 4750 4300 50  0001 C CNN "Manufacturer_Part_Number"
-F 6 "81-LQM21FN100M70L" H 4750 4300 50  0001 C CNN "Mouser Part Number"
+F 4 "Taiyo" H 4750 4300 50  0001 C CNN "Manufacturer_Name"
+F 5 "LBR2012T100K " H 4750 4300 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "963-LBR2012T100K" H 4750 4300 50  0001 C CNN "Mouser Part Number"
 	1    4750 4300
 	0    1    1    0   
 $EndComp
@@ -68,6 +68,9 @@ F 0 "C3" H 5042 4446 50  0000 L CNN
 F 1 "100n" H 5042 4355 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 4950 4400 50  0001 C CNN
 F 3 "~" H 4950 4400 50  0001 C CNN
+F 4 "AVX" H 4950 4400 50  0001 C CNN "Manufacturer_Name"
+F 5 "0603YC104MAT4A" H 4950 4400 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "581-0603YC104MAT4A" H 4950 4400 50  0001 C CNN "Mouser Part Number"
 	1    4950 4400
 	1    0    0    -1  
 $EndComp
@@ -119,6 +122,9 @@ F 0 "C1" H 7750 3500 50  0000 L CNN
 F 1 "100n" H 7700 3600 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 7800 3800 50  0001 C CNN
 F 3 "~" H 7800 3800 50  0001 C CNN
+F 4 "AVX" H 7800 3800 50  0001 C CNN "Manufacturer_Name"
+F 5 "0603YC104MAT4A" H 7800 3800 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "581-0603YC104MAT4A" H 7800 3800 50  0001 C CNN "Mouser Part Number"
 	1    7800 3800
 	1    0    0    -1  
 $EndComp
@@ -141,6 +147,9 @@ F 0 "C2" H 7950 3500 50  0000 L CNN
 F 1 "100n" H 7900 3600 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 8000 3800 50  0001 C CNN
 F 3 "~" H 8000 3800 50  0001 C CNN
+F 4 "AVX" H 8000 3800 50  0001 C CNN "Manufacturer_Name"
+F 5 "0603YC104MAT4A" H 8000 3800 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "581-0603YC104MAT4A" H 8000 3800 50  0001 C CNN "Mouser Part Number"
 	1    8000 3800
 	1    0    0    -1  
 $EndComp
@@ -152,6 +161,9 @@ F 0 "C4" H 8150 3500 50  0000 L CNN
 F 1 "100n" H 8100 3600 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 8200 3800 50  0001 C CNN
 F 3 "~" H 8200 3800 50  0001 C CNN
+F 4 "AVX" H 8200 3800 50  0001 C CNN "Manufacturer_Name"
+F 5 "0603YC104MAT4A" H 8200 3800 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "581-0603YC104MAT4A" H 8200 3800 50  0001 C CNN "Mouser Part Number"
 	1    8200 3800
 	1    0    0    -1  
 $EndComp
@@ -163,6 +175,9 @@ F 0 "C5" H 8350 3500 50  0000 L CNN
 F 1 "100n" H 8300 3600 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 8400 3800 50  0001 C CNN
 F 3 "~" H 8400 3800 50  0001 C CNN
+F 4 "AVX" H 8400 3800 50  0001 C CNN "Manufacturer_Name"
+F 5 "0603YC104MAT4A" H 8400 3800 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "581-0603YC104MAT4A" H 8400 3800 50  0001 C CNN "Mouser Part Number"
 	1    8400 3800
 	1    0    0    -1  
 $EndComp
@@ -174,6 +189,9 @@ F 0 "C8" H 8950 3500 50  0000 L CNN
 F 1 "100n" H 8900 3600 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 9000 3800 50  0001 C CNN
 F 3 "~" H 9000 3800 50  0001 C CNN
+F 4 "AVX" H 9000 3800 50  0001 C CNN "Manufacturer_Name"
+F 5 "0603YC104MAT4A" H 9000 3800 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "581-0603YC104MAT4A" H 9000 3800 50  0001 C CNN "Mouser Part Number"
 	1    9000 3800
 	1    0    0    -1  
 $EndComp
@@ -236,9 +254,9 @@ F 0 "L2" H 9856 5154 50  0000 R CNN
 F 1 "10uH" H 9856 5245 50  0000 R CNN
 F 2 "Inductor_SMD:L_0805_2012Metric" H 9900 5200 50  0001 C CNN
 F 3 "~" H 9900 5200 50  0001 C CNN
-F 4 "Murata Electronics" H 9900 5200 50  0001 C CNN "Manufacturer_Name"
-F 5 "LQM21FN100M70L " H 9900 5200 50  0001 C CNN "Manufacturer_Part_Number"
-F 6 "81-LQM21FN100M70L" H 9900 5200 50  0001 C CNN "Mouser Part Number"
+F 4 "Taiyo" H 9900 5200 50  0001 C CNN "Manufacturer_Name"
+F 5 "LBR2012T100K" H 9900 5200 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "963-LBR2012T100K" H 9900 5200 50  0001 C CNN "Mouser Part Number"
 	1    9900 5200
 	-1   0    0    1   
 $EndComp
@@ -323,8 +341,8 @@ F 1 "AP9101CK6" H 2500 2250 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23-6" H 3150 2050 50  0001 C CNN
 F 3 "https://www.diodes.com/assets/Datasheets/AP9101C.pdf" H 3150 2100 50  0001 C CNN
 F 4 "Diodes Inc." H 3150 2050 50  0001 C CNN "Manufacturer_Name"
-F 5 "AP9101CAK6-BVTRG1" H 3150 2050 50  0001 C CNN "Manufacturer_Part_Number"
-F 6 " 621-AP9101CAK6BVTRG1 " H 3150 2050 50  0001 C CNN "Mouser Part Number"
+F 5 "AP9101CAK6-AYTRG1" H 3150 2050 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 " 621-AP9101CAK6AYTRG1 " H 3150 2050 50  0001 C CNN "Mouser Part Number"
 	1    3150 2050
 	-1   0    0    -1  
 $EndComp
@@ -340,6 +358,9 @@ F 0 "C11" H 3385 1254 50  0000 R CNN
 F 1 "100n" H 3385 1345 50  0000 R CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 3538 1150 50  0001 C CNN
 F 3 "~" H 3500 1300 50  0001 C CNN
+F 4 "AVX" H 3500 1300 50  0001 C CNN "Manufacturer_Name"
+F 5 "0603YC104MAT4A" H 3500 1300 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "581-0603YC104MAT4A" H 3500 1300 50  0001 C CNN "Mouser Part Number"
 	1    3500 1300
 	1    0    0    1   
 $EndComp
@@ -373,9 +394,9 @@ F 0 "R3" V 3443 1150 50  0000 C CNN
 F 1 "300" V 3534 1150 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 3580 1150 50  0001 C CNN
 F 3 "~" H 3650 1150 50  0001 C CNN
-F 4 "Vishay" H 3650 1150 50  0001 C CNN "Manufacturer_Name"
-F 5 "RCA0603300RFKEA" H 3650 1150 50  0001 C CNN "Manufacturer_Part_Number"
-F 6 " 71-RCA0603300RFKEA " H 3650 1150 50  0001 C CNN "Mouser Part Number"
+F 4 "Yageo" H 3650 1150 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-10300RL" H 3650 1150 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "603-RC0603FR-10300RL" H 3650 1150 50  0001 C CNN "Mouser Part Number"
 	1    3650 1150
 	0    1    1    0   
 $EndComp
@@ -387,9 +408,9 @@ F 0 "R4" H 3770 2246 50  0000 L CNN
 F 1 "2.7k" H 3770 2155 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 3630 2200 50  0001 C CNN
 F 3 "~" H 3700 2200 50  0001 C CNN
-F 4 "Vishay" H 3700 2200 50  0001 C CNN "Manufacturer_Name"
-F 5 "CRCW06032K70JNEAC" H 3700 2200 50  0001 C CNN "Manufacturer_Part_Number"
-F 6 " 71-CRCW06032K70JNEAC " H 3700 2200 50  0001 C CNN "Mouser Part Number"
+F 4 "Yageo" H 3700 2200 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-072K7L" H 3700 2200 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "603-RC0603FR-072K7L" H 3700 2200 50  0001 C CNN "Mouser Part Number"
 	1    3700 2200
 	1    0    0    -1  
 $EndComp
@@ -550,9 +571,9 @@ F 0 "R2" H 3359 4846 50  0000 L CNN
 F 1 "470" H 3359 4755 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 3300 4800 50  0001 C CNN
 F 3 "~" H 3300 4800 50  0001 C CNN
-F 4 "Vishay" H 3300 4800 50  0001 C CNN "Manufacturer_Name"
-F 5 "CRCW0603470RFKEAC" H 3300 4800 50  0001 C CNN "Manufacturer_Part_Number"
-F 6 " 71-CRCW0603470RFKEAC " H 3300 4800 50  0001 C CNN "Mouser Part Number"
+F 4 "Yageo" H 3300 4800 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-10470RL" H 3300 4800 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "603-RC0603FR-10470RL" H 3300 4800 50  0001 C CNN "Mouser Part Number"
 	1    3300 4800
 	1    0    0    -1  
 $EndComp
@@ -907,6 +928,9 @@ F 0 "C14" H 5492 4446 50  0000 L CNN
 F 1 "100n" H 5492 4355 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 5400 4400 50  0001 C CNN
 F 3 "~" H 5400 4400 50  0001 C CNN
+F 4 "AVX" H 5400 4400 50  0001 C CNN "Manufacturer_Name"
+F 5 "0603YC104MAT4A" H 5400 4400 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "581-0603YC104MAT4A" H 5400 4400 50  0001 C CNN "Mouser Part Number"
 	1    5400 4400
 	1    0    0    -1  
 $EndComp
@@ -969,8 +993,8 @@ F 1 "10n" H 9756 5145 50  0000 R CNN
 F 2 "Inductor_SMD:L_0402_1005Metric" H 9800 5100 50  0001 C CNN
 F 3 "~" H 9800 5100 50  0001 C CNN
 F 4 "Murata Electronics" H 9800 5100 50  0001 C CNN "Manufacturer_Name"
-F 5 "LQG15WZ10NJ02D " H 9800 5100 50  0001 C CNN "Manufacturer_Part_Number"
-F 6 " 81-LQG15WZ10NJ02D " H 9800 5100 50  0001 C CNN "Mouser Part Number"
+F 5 "LQG15WH10NJ02D" H 9800 5100 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "81-LQG15WH10NJ02D" H 9800 5100 50  0001 C CNN "Mouser Part Number"
 	1    9800 5100
 	0    -1   -1   0   
 $EndComp

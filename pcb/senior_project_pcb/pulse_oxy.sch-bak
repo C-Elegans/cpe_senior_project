@@ -27,6 +27,9 @@ F 0 "R5" H 4159 3346 50  0000 L CNN
 F 1 "2k" H 4159 3255 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 4100 3300 50  0001 C CNN
 F 3 "~" H 4100 3300 50  0001 C CNN
+F 4 "Yageo" H 4100 3300 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-072KL" H 4100 3300 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "603-RC0603FR-072KL" H 4100 3300 50  0001 C CNN "Mouser Part Number"
 	1    4100 3300
 	1    0    0    -1  
 $EndComp
@@ -39,6 +42,9 @@ F 0 "R6" H 4409 3446 50  0000 L CNN
 F 1 "2k" H 4409 3355 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 4350 3400 50  0001 C CNN
 F 3 "~" H 4350 3400 50  0001 C CNN
+F 4 "Yageo" H 4350 3400 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-072KL" H 4350 3400 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "603-RC0603FR-072KL" H 4350 3400 50  0001 C CNN "Mouser Part Number"
 	1    4350 3400
 	1    0    0    -1  
 $EndComp
@@ -92,6 +98,9 @@ F 0 "R7" H 4759 3246 50  0000 L CNN
 F 1 "2k" H 4759 3155 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 4700 3200 50  0001 C CNN
 F 3 "~" H 4700 3200 50  0001 C CNN
+F 4 "Yageo" H 4700 3200 50  0001 C CNN "Manufacturer_Name"
+F 5 "RC0603FR-072KL" H 4700 3200 50  0001 C CNN "Manufacturer_Part_Number"
+F 6 "603-RC0603FR-072KL" H 4700 3200 50  0001 C CNN "Mouser Part Number"
 	1    4700 3200
 	1    0    0    -1  
 $EndComp
