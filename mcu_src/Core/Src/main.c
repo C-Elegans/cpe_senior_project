@@ -569,6 +569,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 volatile uint8_t adcflag = 0;
 volatile uint32_t adcval = 0;
 
+// So this function gets called by HAL_ADC_IRQHandler upon an ADC IRQ with the EOC and EOS flags set (I think)
+// This function needs to set a flag in order for the main program to know that the data from the adc
+// has been retreived (or something else, just PollForConversion will no longer work)
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc){
 	adcval = HAL_ADC_GetValue(&hadc1);
 	adcflag = 1;
@@ -594,7 +597,9 @@ void StartDefaultTask(void *argument)
 	  // wait for the conversion to complete, then read the ADC value
 	  HAL_ADC_Start_IT(&hadc1);
 
+	  // Wait until an ADC_ConvCpltCallback
 	  while(!adcflag) {}
+	  // ADC data available in adcval
 	  adcflag = 0;
 
 	  // Send a message over the USB port
