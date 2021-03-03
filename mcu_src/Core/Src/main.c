@@ -579,6 +579,7 @@ void StartDefaultTask(void *argument)
 	  // To read from the ADC, you apparently need to start a conversion,
 	  // wait for the conversion to complete, then read the ADC value
 	  HAL_ADC_Start(&hadc1);
+
 	  HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
 	  uint32_t val = HAL_ADC_GetValue(&hadc1);
 	  // Send a message over the USB port
