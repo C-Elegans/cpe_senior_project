@@ -1,6 +1,7 @@
 #MicroXplorer Configuration settings - do not modify
 ADC1.Channel-0\#ChannelRegularConversion=ADC_CHANNEL_7
-ADC1.IPParameters=Rank-0\#ChannelRegularConversion,master,Channel-0\#ChannelRegularConversion,SamplingTime-0\#ChannelRegularConversion,OffsetNumber-0\#ChannelRegularConversion,NbrOfConversionFlag
+ADC1.EnableAnalogWatchDog1=false
+ADC1.IPParameters=Rank-0\#ChannelRegularConversion,master,Channel-0\#ChannelRegularConversion,SamplingTime-0\#ChannelRegularConversion,OffsetNumber-0\#ChannelRegularConversion,NbrOfConversionFlag,EnableAnalogWatchDog1
 ADC1.NbrOfConversionFlag=1
 ADC1.OffsetNumber-0\#ChannelRegularConversion=ADC_OFFSET_NONE
 ADC1.Rank-0\#ChannelRegularConversion=1
@@ -112,7 +113,7 @@ Mcu.UserConstants=
 Mcu.UserName=STM32L476VGTx
 MxCube.Version=6.0.0
 MxDb.Version=DB.6.0.0
-NVIC.ADC1_2_IRQn=true\:0\:0\:false\:false\:true\:false\:true\:true
+NVIC.ADC1_2_IRQn=true\:0\:0\:false\:true\:true\:3\:false\:true\:true
 NVIC.BusFault_IRQn=true\:0\:0\:false\:false\:true\:false\:true\:false
 NVIC.DebugMonitor_IRQn=true\:0\:0\:false\:false\:true\:false\:true\:false
 NVIC.EXTI0_IRQn=true\:15\:0\:true\:true\:true\:2\:false\:true\:true

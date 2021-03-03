@@ -243,6 +243,9 @@ static void MX_NVIC_Init(void)
   /* EXTI0_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(EXTI0_IRQn, 15, 0);
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+  /* ADC1_2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(ADC1_2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(ADC1_2_IRQn);
 }
 
 /**
@@ -561,6 +564,17 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 /* USER CODE END 4 */
 
+/* USER CODE BEGIN 4 */
+
+volatile uint8_t adcflag = 0;
+volatile uint32_t adcval = 0;
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc){
+	adcval = HAL_ADC_GetValue(&hadc1);
+	adcflag = 1;
+}
+/* USER CODE END 4 */
+
 /* USER CODE BEGIN Header_StartDefaultTask */
 /**
   * @brief  Function implementing the defaultTask thread.
@@ -578,13 +592,14 @@ void StartDefaultTask(void *argument)
   {
 	  // To read from the ADC, you apparently need to start a conversion,
 	  // wait for the conversion to complete, then read the ADC value
-	  HAL_ADC_Start(&hadc1);
+	  HAL_ADC_Start_IT(&hadc1);
 
-	  HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
-	  uint32_t val = HAL_ADC_GetValue(&hadc1);
+	  while(!adcflag) {}
+	  adcflag = 0;
+
 	  // Send a message over the USB port
 	  unsigned char buffer[50];
-	  snprintf((char*)buffer, sizeof(buffer)-1, "adc val: %ld\r\n", val);
+	  snprintf((char*)buffer, sizeof(buffer)-1, "adc val: %ld\r\n", adcval);
 	  CDC_Transmit_FS(buffer, strlen(buffer));
 	  osDelay(1000);
   }
