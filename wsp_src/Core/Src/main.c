@@ -24,6 +24,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 //#include "usbd_cdc_if.h"
+#include "stm_smps.h"
 
 /* USER CODE END Includes */
 
@@ -97,7 +98,7 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
 
-
+  enable_smps();
   /* USER CODE END 2 */
 
   /* Init scheduler */
