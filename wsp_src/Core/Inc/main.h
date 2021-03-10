@@ -64,6 +64,7 @@ void Error_Handler(void);
 #define LED2_GPIO_Port GPIOA
 #define SPO2_INT_Pin GPIO_PIN_4
 #define SPO2_INT_GPIO_Port GPIOA
+#define SPO2_INT_EXTI_IRQn EXTI4_IRQn
 #define ECG_SDN_Pin GPIO_PIN_5
 #define ECG_SDN_GPIO_Port GPIOA
 #define ECG_OUT_Pin GPIO_PIN_6
@@ -78,6 +79,7 @@ void Error_Handler(void);
 #define LO_N_GPIO_Port GPIOB
 #define BTN1_Pin GPIO_PIN_6
 #define BTN1_GPIO_Port GPIOB
+#define BTN1_EXTI_IRQn EXTI9_5_IRQn
 #define BTN2_Pin GPIO_PIN_7
 #define BTN2_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */

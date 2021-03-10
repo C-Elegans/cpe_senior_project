@@ -56,8 +56,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern PCD_HandleTypeDef hpcd_USB_FS;
-extern TIM_HandleTypeDef htim17;
+extern TIM_HandleTypeDef htim1;
 
 /* USER CODE BEGIN EV */
 
@@ -160,45 +159,45 @@ void DebugMon_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles USB low priority interrupt, USB wake-up interrupt through EXTI line 28.
+  * @brief This function handles EXTI line4 interrupt.
   */
-void USB_LP_IRQHandler(void)
+void EXTI4_IRQHandler(void)
 {
-  /* USER CODE BEGIN USB_LP_IRQn 0 */
+  /* USER CODE BEGIN EXTI4_IRQn 0 */
 
-  /* USER CODE END USB_LP_IRQn 0 */
-  HAL_PCD_IRQHandler(&hpcd_USB_FS);
-  /* USER CODE BEGIN USB_LP_IRQn 1 */
+  /* USER CODE END EXTI4_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4);
+  /* USER CODE BEGIN EXTI4_IRQn 1 */
 
-  /* USER CODE END USB_LP_IRQn 1 */
+  /* USER CODE END EXTI4_IRQn 1 */
 }
 
 /**
-  * @brief This function handles TIM1 trigger and commutation interrupts and TIM17 global interrupt.
+  * @brief This function handles EXTI line[9:5] interrupts.
   */
-void TIM1_TRG_COM_TIM17_IRQHandler(void)
+void EXTI9_5_IRQHandler(void)
 {
-  /* USER CODE BEGIN TIM1_TRG_COM_TIM17_IRQn 0 */
+  /* USER CODE BEGIN EXTI9_5_IRQn 0 */
 
-  /* USER CODE END TIM1_TRG_COM_TIM17_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim17);
-  /* USER CODE BEGIN TIM1_TRG_COM_TIM17_IRQn 1 */
+  /* USER CODE END EXTI9_5_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_6);
+  /* USER CODE BEGIN EXTI9_5_IRQn 1 */
 
-  /* USER CODE END TIM1_TRG_COM_TIM17_IRQn 1 */
+  /* USER CODE END EXTI9_5_IRQn 1 */
 }
 
 /**
-  * @brief This function handles HSEM global interrupt.
+  * @brief This function handles TIM1 update interrupt and TIM16 global interrupt.
   */
-void HSEM_IRQHandler(void)
+void TIM1_UP_TIM16_IRQHandler(void)
 {
-  /* USER CODE BEGIN HSEM_IRQn 0 */
+  /* USER CODE BEGIN TIM1_UP_TIM16_IRQn 0 */
 
-  /* USER CODE END HSEM_IRQn 0 */
-  HAL_HSEM_IRQHandler();
-  /* USER CODE BEGIN HSEM_IRQn 1 */
+  /* USER CODE END TIM1_UP_TIM16_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim1);
+  /* USER CODE BEGIN TIM1_UP_TIM16_IRQn 1 */
 
-  /* USER CODE END HSEM_IRQn 1 */
+  /* USER CODE END TIM1_UP_TIM16_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

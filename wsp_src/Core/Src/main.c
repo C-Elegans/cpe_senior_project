@@ -20,11 +20,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
-#include "usb_device.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "usbd_cdc_if.h"
+//#include "usbd_cdc_if.h"
 
 /* USER CODE END Includes */
 
@@ -43,12 +42,6 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc1;
-
-I2C_HandleTypeDef hi2c1;
-
-RTC_HandleTypeDef hrtc;
-
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
@@ -63,10 +56,6 @@ const osThreadAttr_t defaultTask_attributes = {
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_RF_Init(void);
-static void MX_ADC1_Init(void);
-static void MX_I2C1_Init(void);
-static void MX_RTC_Init(void);
 void StartDefaultTask(void *argument);
 
 /* USER CODE BEGIN PFP */
@@ -106,12 +95,8 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_USB_Device_Init();
-  MX_RF_Init();
-  MX_ADC1_Init();
-  MX_I2C1_Init();
-  MX_RTC_Init();
   /* USER CODE BEGIN 2 */
+
 
   /* USER CODE END 2 */
 
@@ -173,12 +158,10 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_LSI1
-                              |RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV2;
@@ -208,21 +191,9 @@ void SystemClock_Config(void)
   }
   /** Initializes the peripherals clocks
   */
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SMPS|RCC_PERIPHCLK_RFWAKEUP
-                              |RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_I2C1
-                              |RCC_PERIPHCLK_USB|RCC_PERIPHCLK_ADC;
-  PeriphClkInitStruct.PLLSAI1.PLLN = 6;
-  PeriphClkInitStruct.PLLSAI1.PLLP = RCC_PLLP_DIV2;
-  PeriphClkInitStruct.PLLSAI1.PLLQ = RCC_PLLQ_DIV2;
-  PeriphClkInitStruct.PLLSAI1.PLLR = RCC_PLLR_DIV2;
-  PeriphClkInitStruct.PLLSAI1.PLLSAI1ClockOut = RCC_PLLSAI1_USBCLK|RCC_PLLSAI1_ADCCLK;
-  PeriphClkInitStruct.I2c1ClockSelection = RCC_I2C1CLKSOURCE_PCLK1;
-  PeriphClkInitStruct.UsbClockSelection = RCC_USBCLKSOURCE_PLLSAI1;
-  PeriphClkInitStruct.AdcClockSelection = RCC_ADCCLKSOURCE_PLLSAI1;
-  PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
-  PeriphClkInitStruct.RFWakeUpClockSelection = RCC_RFWKPCLKSOURCE_HSE_DIV1024;
-  PeriphClkInitStruct.SmpsClockSelection = RCC_SMPSCLKSOURCE_HSI;
-  PeriphClkInitStruct.SmpsDivSelection = RCC_SMPSCLKDIV_RANGE1;
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SMPS;
+  PeriphClkInitStruct.SmpsClockSelection = RCC_SMPSCLKSOURCE_HSE;
+  PeriphClkInitStruct.SmpsDivSelection = RCC_SMPSCLKDIV_RANGE0;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -230,164 +201,6 @@ void SystemClock_Config(void)
   /* USER CODE BEGIN Smps */
 
   /* USER CODE END Smps */
-}
-
-/**
-  * @brief ADC1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_ADC1_Init(void)
-{
-
-  /* USER CODE BEGIN ADC1_Init 0 */
-
-  /* USER CODE END ADC1_Init 0 */
-
-  ADC_ChannelConfTypeDef sConfig = {0};
-
-  /* USER CODE BEGIN ADC1_Init 1 */
-
-  /* USER CODE END ADC1_Init 1 */
-  /** Common config
-  */
-  hadc1.Instance = ADC1;
-  hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
-  hadc1.Init.Resolution = ADC_RESOLUTION_12B;
-  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
-  hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
-  hadc1.Init.LowPowerAutoWait = DISABLE;
-  hadc1.Init.ContinuousConvMode = DISABLE;
-  hadc1.Init.NbrOfConversion = 1;
-  hadc1.Init.DiscontinuousConvMode = DISABLE;
-  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-  hadc1.Init.DMAContinuousRequests = DISABLE;
-  hadc1.Init.Overrun = ADC_OVR_DATA_PRESERVED;
-  hadc1.Init.OversamplingMode = DISABLE;
-  if (HAL_ADC_Init(&hadc1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /** Configure Regular Channel
-  */
-  sConfig.Channel = ADC_CHANNEL_15;
-  sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_2CYCLES_5;
-  sConfig.SingleDiff = ADC_SINGLE_ENDED;
-  sConfig.OffsetNumber = ADC_OFFSET_NONE;
-  sConfig.Offset = 0;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN ADC1_Init 2 */
-
-  /* USER CODE END ADC1_Init 2 */
-
-}
-
-/**
-  * @brief I2C1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_I2C1_Init(void)
-{
-
-  /* USER CODE BEGIN I2C1_Init 0 */
-
-  /* USER CODE END I2C1_Init 0 */
-
-  /* USER CODE BEGIN I2C1_Init 1 */
-
-  /* USER CODE END I2C1_Init 1 */
-  hi2c1.Instance = I2C1;
-  hi2c1.Init.Timing = 0x10707DBC;
-  hi2c1.Init.OwnAddress1 = 0;
-  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  hi2c1.Init.OwnAddress2 = 0;
-  hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
-  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /** Configure Analogue filter
-  */
-  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /** Configure Digital filter
-  */
-  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN I2C1_Init 2 */
-
-  /* USER CODE END I2C1_Init 2 */
-
-}
-
-/**
-  * @brief RF Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_RF_Init(void)
-{
-
-  /* USER CODE BEGIN RF_Init 0 */
-
-  /* USER CODE END RF_Init 0 */
-
-  /* USER CODE BEGIN RF_Init 1 */
-
-  /* USER CODE END RF_Init 1 */
-  /* USER CODE BEGIN RF_Init 2 */
-
-  /* USER CODE END RF_Init 2 */
-
-}
-
-/**
-  * @brief RTC Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_RTC_Init(void)
-{
-
-  /* USER CODE BEGIN RTC_Init 0 */
-
-  /* USER CODE END RTC_Init 0 */
-
-  /* USER CODE BEGIN RTC_Init 1 */
-
-  /* USER CODE END RTC_Init 1 */
-  /** Initialize RTC Only
-  */
-  hrtc.Instance = RTC;
-  hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
-  hrtc.Init.AsynchPrediv = 127;
-  hrtc.Init.SynchPrediv = 255;
-  hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
-  hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
-  hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
-  hrtc.Init.OutPutRemap = RTC_OUTPUT_REMAP_NONE;
-  if (HAL_RTC_Init(&hrtc) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN RTC_Init 2 */
-
-  /* USER CODE END RTC_Init 2 */
-
 }
 
 /**
@@ -406,6 +219,14 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, LED1_Pin|LED2_Pin|ECG_SDN_Pin, GPIO_PIN_RESET);
 
+  /*Configure GPIO pins : PB8 PB9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
   /*Configure GPIO pins : LED1_Pin LED2_Pin ECG_SDN_Pin */
   GPIO_InitStruct.Pin = LED1_Pin|LED2_Pin|ECG_SDN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -419,6 +240,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(SPO2_INT_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : ECG_OUT_Pin THERMOPILE_Pin THERMISTOR_Pin */
+  GPIO_InitStruct.Pin = ECG_OUT_Pin|THERMOPILE_Pin|THERMISTOR_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
   /*Configure GPIO pin : LO_P_Pin */
   GPIO_InitStruct.Pin = LO_P_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
@@ -431,15 +258,34 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(LO_N_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : BTN1_Pin BTN2_Pin */
-  GPIO_InitStruct.Pin = BTN1_Pin|BTN2_Pin;
+  /*Configure GPIO pin : BTN1_Pin */
+  GPIO_InitStruct.Pin = BTN1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(BTN1_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : BTN2_Pin */
+  GPIO_InitStruct.Pin = BTN2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(BTN2_GPIO_Port, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+	if(GPIO_Pin == BTN1_Pin){
+		HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+	}
+
+}
 
 /* USER CODE END 4 */
 
@@ -453,7 +299,7 @@ static void MX_GPIO_Init(void)
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
-	MX_USB_Device_Init();
+
   /* Infinite loop */
   for(;;)
   {
@@ -461,16 +307,13 @@ void StartDefaultTask(void *argument)
     osDelay(1000);
     HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
     osDelay(1000);
-
-    const char *str = "Hello World!\r\n";
-    CDC_Transmit_FS((uint8_t*)str, strlen(str));
   }
   /* USER CODE END 5 */
 }
 
 /**
   * @brief  Period elapsed callback in non blocking mode
-  * @note   This function is called  when TIM17 interrupt took place, inside
+  * @note   This function is called  when TIM1 interrupt took place, inside
   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
   * a global variable "uwTick" used as application time base.
   * @param  htim : TIM handle
@@ -481,7 +324,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
 
   /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM17) {
+  if (htim->Instance == TIM1) {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
