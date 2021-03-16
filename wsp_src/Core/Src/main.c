@@ -387,7 +387,7 @@ void StartDefaultTask(void *argument)
 
 		calculate_temperatures(&thermistor_temp, &pir_temp);
 		char buf[60];
-		int bytes = snprintf(buf, sizeof(buf), "temp: %f\r\n", thermistor_temp);
+		int bytes = snprintf(buf, sizeof(buf), "temp: %f\r\n", pir_temp);
 		while (CDC_Transmit_FS(buf, bytes) == USBD_BUSY);
 	}
   /* USER CODE END 5 */
