@@ -28,6 +28,9 @@
 #include "stm_smps.h"
 #include "adc.h"
 #include "temperature.h"
+#include "MAX30102/MAX30102.h"
+#include "string.h"
+#include "stdio.h"
 
 /* USER CODE END Includes */
 
@@ -48,7 +51,7 @@
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
 
-TIM_HandleTypeDef htim2;
+I2C_HandleTypeDef hi2c1;
 
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -65,7 +68,7 @@ const osThreadAttr_t defaultTask_attributes = {
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
-static void MX_TIM2_Init(void);
+static void MX_I2C1_Init(void);
 void StartDefaultTask(void *argument);
 
 /* USER CODE BEGIN PFP */
@@ -107,9 +110,9 @@ int main(void)
   MX_GPIO_Init();
   MX_USB_Device_Init();
   MX_ADC1_Init();
-  MX_TIM2_Init();
+  MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-
+  Max30102_Init(&hi2c1);
   //enable_smps();
   /* USER CODE END 2 */
 
@@ -151,6 +154,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  Max30102_Task();
+
   }
   /* USER CODE END 3 */
 }
@@ -204,13 +209,14 @@ void SystemClock_Config(void)
   }
   /** Initializes the peripherals clocks
   */
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SMPS|RCC_PERIPHCLK_USB
-                              |RCC_PERIPHCLK_ADC;
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SMPS|RCC_PERIPHCLK_I2C1
+                              |RCC_PERIPHCLK_USB|RCC_PERIPHCLK_ADC;
   PeriphClkInitStruct.PLLSAI1.PLLN = 6;
   PeriphClkInitStruct.PLLSAI1.PLLP = RCC_PLLP_DIV2;
   PeriphClkInitStruct.PLLSAI1.PLLQ = RCC_PLLQ_DIV2;
   PeriphClkInitStruct.PLLSAI1.PLLR = RCC_PLLR_DIV2;
   PeriphClkInitStruct.PLLSAI1.PLLSAI1ClockOut = RCC_PLLSAI1_USBCLK;
+  PeriphClkInitStruct.I2c1ClockSelection = RCC_I2C1CLKSOURCE_PCLK1;
   PeriphClkInitStruct.UsbClockSelection = RCC_USBCLKSOURCE_PLLSAI1;
   PeriphClkInitStruct.AdcClockSelection = RCC_ADCCLKSOURCE_PLL;
   PeriphClkInitStruct.SmpsClockSelection = RCC_SMPSCLKSOURCE_HSE;
@@ -281,62 +287,48 @@ static void MX_ADC1_Init(void)
 }
 
 /**
-  * @brief TIM2 Initialization Function
+  * @brief I2C1 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_TIM2_Init(void)
+static void MX_I2C1_Init(void)
 {
 
-  /* USER CODE BEGIN TIM2_Init 0 */
+  /* USER CODE BEGIN I2C1_Init 0 */
 
-  /* USER CODE END TIM2_Init 0 */
+  /* USER CODE END I2C1_Init 0 */
 
-  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
-  TIM_MasterConfigTypeDef sMasterConfig = {0};
-  TIM_OC_InitTypeDef sConfigOC = {0};
+  /* USER CODE BEGIN I2C1_Init 1 */
 
-  /* USER CODE BEGIN TIM2_Init 1 */
-
-  /* USER CODE END TIM2_Init 1 */
-  htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 0;
-  htim2.Init.CounterMode = TIM_COUNTERMODE_DOWN;
-  htim2.Init.Period = 16000000;
-  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
-  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  /* USER CODE END I2C1_Init 1 */
+  hi2c1.Instance = I2C1;
+  hi2c1.Init.Timing = 0x00602173;
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
   {
     Error_Handler();
   }
-  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  /** Configure Analogue filter
+  */
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
   {
     Error_Handler();
   }
-  if (HAL_TIM_OC_Init(&htim2) != HAL_OK)
+  /** Configure Digital filter
+  */
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
   {
     Error_Handler();
   }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sConfigOC.OCMode = TIM_OCMODE_ACTIVE;
-  sConfigOC.Pulse = 10;
-  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  if (HAL_TIM_OC_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  __HAL_TIM_ENABLE_OCxPRELOAD(&htim2, TIM_CHANNEL_2);
-  /* USER CODE BEGIN TIM2_Init 2 */
+  /* USER CODE BEGIN I2C1_Init 2 */
 
-  HAL_TIM_Base_Start_IT(&htim2);
-  /* USER CODE END TIM2_Init 2 */
+  /* USER CODE END I2C1_Init 2 */
 
 }
 
@@ -356,14 +348,6 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, LED1_Pin|LED2_Pin|ECG_SDN_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PB8 PB9 */
-  GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_9;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
   /*Configure GPIO pins : LED1_Pin LED2_Pin ECG_SDN_Pin */
   GPIO_InitStruct.Pin = LED1_Pin|LED2_Pin|ECG_SDN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -373,7 +357,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : SPO2_INT_Pin */
   GPIO_InitStruct.Pin = SPO2_INT_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(SPO2_INT_GPIO_Port, &GPIO_InitStruct);
 
@@ -402,23 +386,21 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(BTN2_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 }
 
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-	if(GPIO_Pin == BTN1_Pin){
-		HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+	if(GPIO_Pin == SPO2_INT_Pin){
+		Max30102_InterruptCallback();
 	}
 
 }
-
-
 
 void print_adc(uint32_t channel, const char *name){
 	uint32_t val = read_adc_channel(channel);
@@ -441,21 +423,11 @@ void print_adc(uint32_t channel, const char *name){
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
-	float thermistor_temp, pir_temp;
-	/* Infinite loop */
-	for (;;) {
-		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
-		osDelay(1000);
-		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
-		osDelay(1000);
-		print_adc(THERMISTOR_ADC_CHANNEL, "thermistor");
-		print_adc(THERMOPILE_ADC_CHANNEL, "thermopile");
-
-		calculate_temperatures(&thermistor_temp, &pir_temp);
-		char buf[60];
-		int bytes = snprintf(buf, sizeof(buf), "temp: %f\r\n", pir_temp);
-		while (CDC_Transmit_FS(buf, bytes) == USBD_BUSY);
-	}
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
   /* USER CODE END 5 */
 }
 
@@ -476,10 +448,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
-
-  if(htim->Instance == TIM2){
-	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-  }
 
   /* USER CODE END Callback 1 */
 }

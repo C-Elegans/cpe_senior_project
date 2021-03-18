@@ -57,7 +57,7 @@
 
 /* External variables --------------------------------------------------------*/
 extern PCD_HandleTypeDef hpcd_USB_FS;
-extern TIM_HandleTypeDef htim2;
+extern I2C_HandleTypeDef hi2c1;
 extern TIM_HandleTypeDef htim1;
 
 /* USER CODE BEGIN EV */
@@ -217,17 +217,17 @@ void TIM1_UP_TIM16_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles TIM2 global interrupt.
+  * @brief This function handles I2C1 event interrupt.
   */
-void TIM2_IRQHandler(void)
+void I2C1_EV_IRQHandler(void)
 {
-  /* USER CODE BEGIN TIM2_IRQn 0 */
+  /* USER CODE BEGIN I2C1_EV_IRQn 0 */
 
-  /* USER CODE END TIM2_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim2);
-  /* USER CODE BEGIN TIM2_IRQn 1 */
+  /* USER CODE END I2C1_EV_IRQn 0 */
+  HAL_I2C_EV_IRQHandler(&hi2c1);
+  /* USER CODE BEGIN I2C1_EV_IRQn 1 */
 
-  /* USER CODE END TIM2_IRQn 1 */
+  /* USER CODE END I2C1_EV_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */
