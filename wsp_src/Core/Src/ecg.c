@@ -10,6 +10,7 @@
 #include "stm32wbxx_hal_adc.h"
 #include "adc.h"
 #include "main.h"
+#include "arm_math.h"
 
 #define ADC_SAMPLE_COUNT 4
 
@@ -75,3 +76,4 @@ void ecg_adc_callback(uint32_t value){
 		buffer_finished = 1;
 	}
 }
+
