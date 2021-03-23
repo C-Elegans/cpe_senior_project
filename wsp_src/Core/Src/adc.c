@@ -29,5 +29,5 @@ uint32_t read_adc_channel(uint32_t channel){
 	if(HAL_ADC_PollForConversion(&hadc1, 10000) == HAL_OK){
 		return HAL_ADC_GetValue(&hadc1);
 	}
-	return -1;
+	return (uint32_t)-1;
 }

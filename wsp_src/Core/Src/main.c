@@ -28,6 +28,7 @@
 #include "stm_smps.h"
 #include "adc.h"
 #include "temperature.h"
+#include "ecg.h"
 
 /* USER CODE END Includes */
 
@@ -302,7 +303,7 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 0;
   htim2.Init.CounterMode = TIM_COUNTERMODE_DOWN;
-  htim2.Init.Period = 16000000;
+  htim2.Init.Period = 64000000;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -335,7 +336,6 @@ static void MX_TIM2_Init(void)
   __HAL_TIM_ENABLE_OCxPRELOAD(&htim2, TIM_CHANNEL_2);
   /* USER CODE BEGIN TIM2_Init 2 */
 
-  HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END TIM2_Init 2 */
 
 }
@@ -427,6 +427,9 @@ void print_adc(uint32_t channel, const char *name){
 	while (CDC_Transmit_FS(buf, bytes) == USBD_BUSY);
 }
 
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc){
+	if(ecg_enabled) ecg_adc_callback(HAL_ADC_GetValue(hadc));
+}
 
 
 /* USER CODE END 4 */
@@ -443,6 +446,7 @@ void StartDefaultTask(void *argument)
   /* USER CODE BEGIN 5 */
 	float thermistor_temp, pir_temp;
 	/* Infinite loop */
+	start_ecg_acqisition();
 	for (;;) {
 		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
 		osDelay(1000);
@@ -478,6 +482,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 1 */
 
   if(htim->Instance == TIM2){
+	  if(ecg_enabled)  ecg_tim_callback();
 	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
   }
 
