@@ -54,3 +54,11 @@ void transmit_morse(char c){
 	}
 
 }
+
+void transmit_morse_str(const char* str){
+	char c;
+	while((c = *str++) != 0){
+		transmit_morse(c);
+		osDelay(DASH_LEN);
+	}
+}
