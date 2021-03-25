@@ -29,6 +29,7 @@
 #include "adc.h"
 #include "temperature.h"
 #include "ecg.h"
+#include "morse_tx.h"
 
 /* USER CODE END Includes */
 
@@ -448,17 +449,9 @@ void StartDefaultTask(void *argument)
 	/* Infinite loop */
 	start_ecg_acqisition();
 	for (;;) {
-		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+		transmit_morse('C');
 		osDelay(1000);
-		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
-		osDelay(1000);
-		print_adc(THERMISTOR_ADC_CHANNEL, "thermistor");
-		print_adc(THERMOPILE_ADC_CHANNEL, "thermopile");
-
-		calculate_temperatures(&thermistor_temp, &pir_temp);
-		char buf[60];
-		int bytes = snprintf(buf, sizeof(buf), "temp: %f\r\n", pir_temp);
-		while (CDC_Transmit_FS(buf, bytes) == USBD_BUSY);
+		transmit_morse('Q');
 	}
   /* USER CODE END 5 */
 }
@@ -483,7 +476,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
   if(htim->Instance == TIM2){
 	  if(ecg_enabled)  ecg_tim_callback();
-	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
   }
 
   /* USER CODE END Callback 1 */
