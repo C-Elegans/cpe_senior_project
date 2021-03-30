@@ -412,17 +412,18 @@ static void MX_GPIO_Init(void)
 volatile uint8_t notify_button_value;
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-	if(GPIO_Pin == BTN1_Pin){
-		notify_button_value |= 1;
-		BaseType_t taskWoken = pdFALSE;
-		vTaskNotifyGiveFromISR(defaultTaskHandle, &taskWoken);
+	if (notify_button_value == 0) {
+		if (GPIO_Pin == BTN1_Pin) {
+			notify_button_value |= 1;
+			BaseType_t taskWoken = pdFALSE;
+			vTaskNotifyGiveFromISR(defaultTaskHandle, &taskWoken);
+		}
+		if (GPIO_Pin == BTN2_Pin) {
+			notify_button_value |= 2;
+			BaseType_t taskWoken = pdFALSE;
+			vTaskNotifyGiveFromISR(defaultTaskHandle, &taskWoken);
+		}
 	}
-	if(GPIO_Pin == BTN2_Pin){
-		notify_button_value |= 2;
-		BaseType_t taskWoken = pdFALSE;
-		vTaskNotifyGiveFromISR(defaultTaskHandle, &taskWoken);
-	}
-
 }
 
 
