@@ -389,17 +389,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(LO_N_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : BTN1_Pin */
-  GPIO_InitStruct.Pin = BTN1_Pin;
+  /*Configure GPIO pins : BTN1_Pin BTN2_Pin */
+  GPIO_InitStruct.Pin = BTN1_Pin|BTN2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(BTN1_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : BTN2_Pin */
-  GPIO_InitStruct.Pin = BTN2_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(BTN2_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
@@ -414,6 +408,17 @@ static void MX_GPIO_Init(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	if(GPIO_Pin == BTN1_Pin){
 		HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+	}
+	// Use button 2 for ECG control.
+	if(GPIO_Pin == BTN2_Pin){
+		if(ecg_enabled && (uint8_t)1 ){
+			stop_ecg_acquisition();
+			HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
+		}
+		else{
+			start_ecg_acqisition();
+			HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+		}
 	}
 
 }
@@ -446,14 +451,15 @@ void StartDefaultTask(void *argument)
   /* USER CODE BEGIN 5 */
 	float thermistor_temp, pir_temp;
 	/* Infinite loop */
-	start_ecg_acqisition();
+	//start_ecg_acqisition();
 	for (;;) {
-		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
-		osDelay(1000);
-		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
-		osDelay(1000);
+		//HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+		//osDelay(1000);
+		//HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
+		osDelay(2000);
 		print_adc(THERMISTOR_ADC_CHANNEL, "thermistor");
 		print_adc(THERMOPILE_ADC_CHANNEL, "thermopile");
+		//print_adc(ECG_OUT_ADC_CHANNEL, "ECG");
 
 		calculate_temperatures(&thermistor_temp, &pir_temp);
 		char buf[60];
@@ -483,7 +489,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
   if(htim->Instance == TIM2){
 	  if(ecg_enabled)  ecg_tim_callback();
-	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+	  //HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
   }
 
   /* USER CODE END Callback 1 */
