@@ -6,6 +6,7 @@
 #include <gtkmm/box.h>
 #include <gtkmm/scrolledwindow.h>
 #include <gtkmm/textview.h>
+#include <gtkmm/notebook.h>
 #include <glibmm/dispatcher.h>
 #include <stdio.h>
 #include <thread>
@@ -18,10 +19,10 @@ public:
 protected:
     FILE *serial;
 
-    Gtk::Box m_vbox;
-    Gtk::ScrolledWindow m_scrolled_window;
-    Gtk::TextView m_text_view;
     Glib::Dispatcher m_dispatcher;
+
+    Gtk::Notebook m_Notebook;
+    Gtk::Label m_Label1, m_Label2;
 
     std::thread *m_worker_thread;
 };
