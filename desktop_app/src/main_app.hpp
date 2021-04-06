@@ -11,6 +11,9 @@
 #include <stdio.h>
 #include <thread>
 
+#include "temperature_tab.hpp"
+#include "ecg_tab.hpp"
+
 class MainApp : public Gtk::Window {
 public:
     MainApp();
@@ -22,7 +25,8 @@ protected:
     Glib::Dispatcher m_dispatcher;
 
     Gtk::Notebook m_Notebook;
-    Gtk::Label m_Label1, m_Label2;
+    TemperatureTab tempTab;
+    ECGTab ecgTab;
 
     std::thread *m_worker_thread;
 };
