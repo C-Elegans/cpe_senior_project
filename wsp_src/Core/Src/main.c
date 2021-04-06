@@ -277,6 +277,8 @@ static void MX_ADC1_Init(void)
   }
   /* USER CODE BEGIN ADC1_Init 2 */
 
+  	//setup fir and cfg adc channel
+	//init_ecg_acqisition();
   /* USER CODE END ADC1_Init 2 */
 
 }
@@ -412,6 +414,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	// Use button 2 for ECG control.
 	if(GPIO_Pin == BTN2_Pin){
 		if(ecg_enabled && (uint8_t)1 ){
+			//Wait for the buffer to be marked as finished to be safe
+			while(!buffer_finished);
 			stop_ecg_acquisition();
 			HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
 		}

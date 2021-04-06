@@ -43,6 +43,15 @@ const sample_type_t fir_coeffs[NUM_TAPS] = {
 };
 static arm_fir_instance_f32 fir_instance;
 
+void init_ecg_acqisition(void){
+	// Init fir filter
+	arm_fir_init_f32(&fir_instance, NUM_TAPS, fir_coeffs, fir_state, BLOCK_SIZE);
+
+	// Set the ADC to read from the ECG's output pin
+	set_adc_channel(ECG_OUT_ADC_CHANNEL);
+
+}
+
 
 void start_ecg_acqisition(void){
 	ecg_enabled = 1;
@@ -51,15 +60,16 @@ void start_ecg_acqisition(void){
 	sample_ptr = sample_buffer1;
 	sample_end = sample_buffer1 + ADC_SAMPLE_COUNT;
 
-	// Init fir filter
-	arm_fir_init_f32(&fir_instance, NUM_TAPS, fir_coeffs, fir_state, BLOCK_SIZE);
+	//Init fir was here
 
 	// bring ECG Shutdown pin High
 	HAL_GPIO_WritePin(ECG_SDN_GPIO_Port, ECG_SDN_Pin, GPIO_PIN_SET);
 
+	//ADC channel set was here
 
-	// Set the ADC to read from the ECG's output pin
-	set_adc_channel(ECG_OUT_ADC_CHANNEL);
+	//something is hanging the board when breakpoints are set
+	//Looks like this needs to be called every time
+	init_ecg_acqisition();
 
 	// Start the timer
 	HAL_TIM_Base_Start_IT(&htim2);
@@ -95,10 +105,18 @@ void ecg_adc_callback(uint32_t value){
 		}
 		// May need a compiler memory barrier here.
 		buffer_finished = 1;
+		run_ecg_filter();
 	}
 }
 
 void run_ecg_filter(void){
 	arm_fir_f32(&fir_instance, buffer_ptr, filter_output, BLOCK_SIZE);
+	//Understandably does not work
+	int i;
+	for (i = 0; i < (int)(sizeof(filter_output)); i++){
+		char buf[1024];
+		int bytes = snprintf(buf, sizeof(buf), "%f", filter_output[i]);
+		while (CDC_Transmit_FS(buf, bytes) == 1); //USBD_BUSY = 1
+	}
 }
 
