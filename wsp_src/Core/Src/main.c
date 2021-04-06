@@ -415,7 +415,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	if(GPIO_Pin == BTN2_Pin){
 		if(ecg_enabled && (uint8_t)1 ){
 			//Wait for the buffer to be marked as finished to be safe
-			while(!buffer_finished);
+			//while(!buffer_finished);
 			stop_ecg_acquisition();
 			HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
 		}
@@ -453,22 +453,14 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc){
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
-	float thermistor_temp, pir_temp;
-	/* Infinite loop */
+
+	/* float thermistor_temp, pir_temp; */
+
 	//start_ecg_acqisition();
 	for (;;) {
-		//HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
-		//osDelay(1000);
-		//HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
-		osDelay(2000);
-		print_adc(THERMISTOR_ADC_CHANNEL, "thermistor");
-		print_adc(THERMOPILE_ADC_CHANNEL, "thermopile");
-		//print_adc(ECG_OUT_ADC_CHANNEL, "ECG");
-
-		calculate_temperatures(&thermistor_temp, &pir_temp);
-		char buf[60];
-		int bytes = snprintf(buf, sizeof(buf), "temp: %f\r\n", pir_temp);
-		while (CDC_Transmit_FS(buf, bytes) == USBD_BUSY);
+		if(buffer_finished){
+			run_ecg_filter();
+		}
 	}
   /* USER CODE END 5 */
 }

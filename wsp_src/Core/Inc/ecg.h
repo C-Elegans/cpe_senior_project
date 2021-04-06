@@ -8,9 +8,13 @@
 #ifndef INC_ECG_H_
 #define INC_ECG_H_
 
+#define ADC_SAMPLE_COUNT 32
+typedef float sample_type_t;
+
 extern uint8_t ecg_enabled;
 // Buffer finished flag
 extern volatile uint8_t buffer_finished;
+extern volatile sample_type_t *buffer_ptr;
 
 void init_ecg_acqisition(void);
 

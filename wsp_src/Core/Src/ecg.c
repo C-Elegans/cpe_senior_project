@@ -11,9 +11,10 @@
 #include "adc.h"
 #include "main.h"
 #include "arm_math.h"
+#include "usbd_cdc_if.h"
+#include "ecg.h"
 
-#define ADC_SAMPLE_COUNT 32
-typedef float32_t sample_type_t;
+
 
 uint8_t ecg_enabled;
 
@@ -105,18 +106,21 @@ void ecg_adc_callback(uint32_t value){
 		}
 		// May need a compiler memory barrier here.
 		buffer_finished = 1;
-		run_ecg_filter();
 	}
 }
 
 void run_ecg_filter(void){
+	buffer_finished = 0;
 	arm_fir_f32(&fir_instance, buffer_ptr, filter_output, BLOCK_SIZE);
 	//Understandably does not work
 	int i;
 	for (i = 0; i < (int)(sizeof(filter_output)); i++){
-		char buf[1024];
-		int bytes = snprintf(buf, sizeof(buf), "%f", filter_output[i]);
-		while (CDC_Transmit_FS(buf, bytes) == 1); //USBD_BUSY = 1
+		char buf[32];
+		int bytes = snprintf(buf, sizeof(buf), "%f\r\n", filter_output[i]);
+		//osDelay(5);
+		while (CDC_Transmit_FS(buf, bytes) == USBD_BUSY){
+			//osDelay(5);
+		}
 	}
 }
 
