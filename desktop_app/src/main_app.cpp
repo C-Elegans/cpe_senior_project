@@ -2,7 +2,8 @@
 #include "connection_settings.hpp"
 #include <iostream>
 
-MainApp::MainApp()
+MainApp::MainApp() :
+    serial(NULL)
 {
     // auto dialog = ConnectionSettingsDialog();
     // dialog.run();
