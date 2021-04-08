@@ -12,18 +12,21 @@
 #include <string.h>
 #include <stdbool.h>
 
+#define DAS_STORAGE_LEN 100
+float times[DAS_STORAGE_LEN], temps[DAS_STORAGE_LEN], ecg[DAS_STORAGE_LEN], pulse[DAS_STORAGE_LEN];
+
 int timeSelection();
 //void timeFrame(int times[], int t);
 int dataSelection();
 //void tempRetrieve(double temps[], double times[]);
 //void ecgRetrieve(double ecg[], double times[]);
 //void pulseRetrieve(double pulse[], double times[]);
-void aggAll(double temps[], double ecg[], double pulse[], double times[], int n);
+void aggAll(float *temps, float *ecg, float *pulse, float *times, int n);
 bool containsDigit(int number, int digit);
 
 int das_setup(){
 
-	double times[], temps[], ecg[], pulse[];
+
 	int t, n, d;
 
 	/*double times[] = {1400, 1405, 1410, 1415, 1420, 1425};
@@ -130,9 +133,9 @@ int dataSelection(){
 	return d;
 }
 
-void aggAll(double temps[], double ecg[], double pulse[], double times[], int n){
+void aggAll(float *temps, float *ecg, float *pulse, float *times, int n){
 	int i, j;
-	double *all[4] = {temps, ecg, pulse, times};
+	float *all[4] = {temps, ecg, pulse, times};
 
 	for (i = 0; i < 4; i++) {
 		switch(i){
