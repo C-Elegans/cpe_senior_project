@@ -18,6 +18,8 @@ class DasControl {
     std::vector<std::string> retrieve_data(uint8_t sel);
     std::vector<DataPoint> retrieve_temp_data(void);
 
+    void acquire_temp_data(void);
+
  protected:
     FILE* serial_file;
 

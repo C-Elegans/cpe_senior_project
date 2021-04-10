@@ -13,7 +13,7 @@ MainApp::MainApp() :
 	
 
     set_title("SPAMM WSP Desktop Companion");
-    set_default_size(400, 200);
+    set_default_size(600, 600);
 
     m_Notebook.set_border_width(5);
 

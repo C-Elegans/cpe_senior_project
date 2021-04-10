@@ -11,20 +11,26 @@
 
 #include "das.hpp"
 
-class TemperatureTab : public Gtk::Grid {
+class TemperatureTab : public Gtk::Box {
 public:
     TemperatureTab(DasControl &);
 
-    void add_row(float temp, double time);
+    void add_row(float temp, int time);
 
 protected:
 
     DasControl &das;
 
     Gtk::Label m_Label;
+
+    Gtk::Box m_button_box;
     Gtk::Button start_button;
+    Gtk::Button read_button;
 
     void on_start_button_clicked(void);
+    void on_read_button_clicked(void);
+
+    void read_data_from_device(void);
 
 
     // Stuff for temperature history

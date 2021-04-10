@@ -2,9 +2,12 @@
 
 
 TemperatureTab::TemperatureTab(DasControl &das)
-    :  das(das),
+    :  Box(Gtk::ORIENTATION_HORIZONTAL),
+       das(das),
        m_Label("TemperatureTab Label"),
-       start_button("Measure Temperature")
+       m_button_box(Gtk::ORIENTATION_VERTICAL),
+       start_button("Measure Temperature"),
+       read_button("Read Temperature Data")
 {
     m_ScrolledWindow.add(m_TreeView);
     m_ScrolledWindow.set_min_content_width(150);
@@ -20,18 +23,22 @@ TemperatureTab::TemperatureTab(DasControl &das)
     m_TreeView.append_column("Temp (F)", m_Columns.col_temperature);
 
     start_button.signal_clicked().connect(sigc::mem_fun(*this, &TemperatureTab::on_start_button_clicked));
+    read_button.signal_clicked().connect(sigc::mem_fun(*this, &TemperatureTab::on_read_button_clicked));
 
 
-    add(m_ScrolledWindow);
+    pack_start(m_ScrolledWindow);
 
-    add(start_button);
+    pack_start(m_button_box);
+
+    m_button_box.pack_start(start_button);
+    m_button_box.pack_end(read_button);
 
 
     show_all_children();
 
 }
 
-void TemperatureTab::add_row(float temp, double time){
+void TemperatureTab::add_row(float temp, int time){
 
     Gtk::TreeModel::Row row = *(m_refTreeModel->append());
 
@@ -39,10 +46,25 @@ void TemperatureTab::add_row(float temp, double time){
 
 }
 
+
+
 void TemperatureTab::on_start_button_clicked(){
     printf("Button Clicked\n");
+    das.acquire_temp_data();
+    read_data_from_device();
+}
+void TemperatureTab::on_read_button_clicked(){
+    printf("Read Button Clicked\n");
+    read_data_from_device();
+}
+
+void TemperatureTab::read_data_from_device(){
     auto datapoints = das.retrieve_temp_data();
+
+    m_refTreeModel->clear();
     for(auto &dp: datapoints){
-	printf("%f\n", dp.value);
+	add_row(dp.value, dp.time);
     }
+    show_all_children();
+
 }

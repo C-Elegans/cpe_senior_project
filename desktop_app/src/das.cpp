@@ -71,6 +71,7 @@ std::vector<DataPoint> parse_lines(std::vector<std::string> lines){
     for(auto it = lines.begin()+1; it != lines.end(); ++it){
 	std::regex_search(*it, mr, rx);
 	std::cout << mr.size() << "\n";
+	printf("%s", it->c_str());
 	if(mr.size() != 3){
 	    printf("Error parsing line: %s\n", it->c_str());
 	}
@@ -86,4 +87,11 @@ std::vector<DataPoint> parse_lines(std::vector<std::string> lines){
 std::vector<DataPoint> DasControl::retrieve_temp_data(void){
     std::vector<std::string> lines = retrieve_data(1);
     return parse_lines(lines);
+}
+
+void DasControl::acquire_temp_data(void){
+    const char c = 'p';
+    auto ret = fwrite(&c, 1, sizeof(c), serial_file);
+    printf("%lu\n", ret);
+    fflush(serial_file);
 }
