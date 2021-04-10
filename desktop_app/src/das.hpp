@@ -19,9 +19,15 @@ class DasControl {
     std::vector<DataPoint> retrieve_temp_data(void);
 
     void acquire_temp_data(void);
+    void set_time_min(uint32_t time_min);
+    void set_time_max(uint32_t time_max);
+    void set_num_items(uint32_t num_items);
 
  protected:
     FILE* serial_file;
+
+    int write_to_device(const char *buf, size_t bytes);
+    void read_dummy(void);
 
 };
 

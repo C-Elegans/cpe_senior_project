@@ -123,17 +123,17 @@ void das_loop_fun(void){
 		// set min time
 		if(c == 't'){
 			time_min = das_read_uint();
-			usb_printf("time min: %u\r\n", time_min);
+			//usb_printf("time min: %u\r\n", time_min);
 		}
 		// set max time
 		if(c == 'T'){
 		    time_max = das_read_uint();
-		    usb_printf("time max: %u\r\n", time_max);
+		    //usb_printf("time max: %u\r\n", time_max);
 		}
 		// set max items retrieved
 		if(c == 'n'){
 		    num_items = das_read_uint();
-		    usb_printf("num items: %u\r\n", num_items);
+		    //usb_printf("num items: %u\r\n", num_items);
 		}
 	}
 }
