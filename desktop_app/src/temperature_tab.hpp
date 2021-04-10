@@ -15,7 +15,7 @@ class TemperatureTab : public Gtk::Box {
 public:
     TemperatureTab(DasControl &);
 
-    void add_row(float temp, int time);
+    void add_row(float temp, uint32_t time);
 
 protected:
 
@@ -38,12 +38,12 @@ protected:
     class TempModelColumns : public Gtk::TreeModel::ColumnRecord {
     public:
 	TempModelColumns() {
-	    // add(col_time);
+	    add(col_time);
 	    add(col_temperature);
 
 	}
 	Gtk::TreeModelColumn<float> col_temperature;
-	// Gtk::TreeModelColumn<double> col_time;
+	Gtk::TreeModelColumn<uint32_t> col_time;
 
     };
 
