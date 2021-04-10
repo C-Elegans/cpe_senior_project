@@ -13,6 +13,7 @@
 
 #include "temperature_tab.hpp"
 #include "ecg_tab.hpp"
+#include "das.hpp"
 
 class MainApp : public Gtk::Window {
 public:
@@ -20,7 +21,7 @@ public:
     ~MainApp() override;
 
 protected:
-    FILE *serial;
+    DasControl das;
 
     Glib::Dispatcher m_dispatcher;
 

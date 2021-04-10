@@ -9,16 +9,22 @@
 #include <gtkmm/scrolledwindow.h>
 #include <glib.h>
 
+#include "das.hpp"
+
 class TemperatureTab : public Gtk::Grid {
 public:
-    TemperatureTab();
+    TemperatureTab(DasControl &);
 
     void add_row(float temp, double time);
 
 protected:
 
+    DasControl &das;
+
     Gtk::Label m_Label;
     Gtk::Button start_button;
+
+    void on_start_button_clicked(void);
 
 
     // Stuff for temperature history

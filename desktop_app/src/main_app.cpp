@@ -3,10 +3,14 @@
 #include <iostream>
 
 MainApp::MainApp() :
-    serial(NULL)
+    tempTab(das)
 {
-    // auto dialog = ConnectionSettingsDialog();
-    // dialog.run();
+    auto dialog = ConnectionSettingsDialog();
+    dialog.run();
+
+    auto path  = dialog.get_settings().path;
+    das = DasControl(path);
+	
 
     set_title("SPAMM WSP Desktop Companion");
     set_default_size(400, 200);
@@ -21,7 +25,4 @@ MainApp::MainApp() :
 }
 
 MainApp::~MainApp() {
-    if(serial){
-	fclose(serial);
-    }
 }

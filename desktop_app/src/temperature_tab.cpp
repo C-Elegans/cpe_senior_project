@@ -1,9 +1,10 @@
 #include "temperature_tab.hpp"
 
 
-TemperatureTab::TemperatureTab()
-    : m_Label("TemperatureTab Label"),
-      start_button("Measure Temperature")
+TemperatureTab::TemperatureTab(DasControl &das)
+    :  das(das),
+       m_Label("TemperatureTab Label"),
+       start_button("Measure Temperature")
 {
     m_ScrolledWindow.add(m_TreeView);
     m_ScrolledWindow.set_min_content_width(150);
@@ -17,6 +18,8 @@ TemperatureTab::TemperatureTab()
     add_row(107.8, 1);
 
     m_TreeView.append_column("Temp (F)", m_Columns.col_temperature);
+
+    start_button.signal_clicked().connect(sigc::mem_fun(*this, &TemperatureTab::on_start_button_clicked));
 
 
     add(m_ScrolledWindow);
@@ -34,4 +37,12 @@ void TemperatureTab::add_row(float temp, double time){
 
     row[m_Columns.col_temperature] = temp;
 
+}
+
+void TemperatureTab::on_start_button_clicked(){
+    printf("Button Clicked\n");
+    auto datapoints = das.retrieve_temp_data();
+    for(auto &dp: datapoints){
+	printf("%f\n", dp.value);
+    }
 }
