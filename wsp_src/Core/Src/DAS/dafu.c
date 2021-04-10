@@ -23,6 +23,10 @@ das_data_point_t temps[DAS_STORAGE_LEN], ecg[DAS_STORAGE_LEN], pulse[DAS_STORAGE
 
 uint32_t temp_idx, ecg_idx, pulse_idx = 0;
 
+uint32_t time_min = 0;
+uint32_t time_max = UINT32_MAX;
+uint32_t num_items = DAS_STORAGE_LEN;
+
 int timeSelection();
 //void timeFrame(int times[], int t);
 int dataSelection();
@@ -41,63 +45,36 @@ int das_setup(){
 
 }
 
-int timeSelection(){
-	char selection = 'a';		//User chooses a character A through G for the length of time for readings
-	int t = 0;
-	printf("\nPlease choose a following time frame:\nA for the past 30 mins"
-			"\nB for the past hour\nC for the past 6 hours\nD for the past 12 hours"
-			"\nE for the past day\nF for the past 3 days\nG for the past week: ");
 
-	selection = getc(stdin);
-	switch(selection){
-		case 'a':
-			t = 6;		//30 min
-			break;
-		case 'b':
-			t = 12;		//1 hour
-			break;
-		case 'c':
-			t = 72;		//6 hour
-			break;
-		case 'd':
-			t = 144;	//12 hour
-			break;
-		case 'e':
-			t = 288;	//1 day
-			break;
-		case 'f':
-			t = 864;	//3 day
-			break;
-		case 'g':
-			t = 2016;	//1 week
-			break;
-		default:
-			printf("Invalid time frame\n");
-	}
-
-	return t;
-}
 
 void acquire_temp(void){
 	float dummy, pir_temp;
 	calculate_temperatures(&dummy, &pir_temp);
 	temps[temp_idx].data = pir_temp;
-	temps[temp_idx].time = 10;
+	temps[temp_idx].time = HAL_GetTick();
 	temp_idx += 1;
 	if(temp_idx >= DAS_STORAGE_LEN)
 		temp_idx = 0;
 }
 
-int dataSelection(){
-	printf("\nPlease input a number to represent which sensors you wish to collect data from:"
-			"\n1 for Temperature data\n2 for ECG data\n3 for Oximeter data"
-			"\nOr 4 for all sensor data\n\ne.g. for both Temperature and Oximeter data"
-			" you can input either 13 or 31: ");
 
-	int d;
-	scanf("%d", &d);
-
-	return d;
+uint32_t das_read_uint(void){
+	uint32_t val = 0;
+	char c;
+	while(1){
+		uint32_t bytes = CDC_Read_FS(&c, sizeof(c));
+		if(bytes == 0){
+			osDelay(1);
+			continue;
+		}
+		if(c >= '0' && c <= '9'){
+			val *= 10;
+			val += (c - '0');
+		}
+		else{
+			return val;
+		}
+	}
 }
 
 
@@ -138,10 +115,25 @@ void das_loop_fun(void){
 		// retrieve data
 		if(c > '0' && c <= '7'){
 			uint8_t data_sel = c - '0';
-			retrieve_data(data_sel, 0, UINT32_MAX, UINT32_MAX);
+			retrieve_data(data_sel, time_min, time_max, num_items);
 		}
-		if(c == 't'){
+		if(c == 'p'){
 			acquire_temp();
+		}
+		// set min time
+		if(c == 't'){
+			time_min = das_read_uint();
+			usb_printf("time min: %u\r\n", time_min);
+		}
+		// set max time
+		if(c == 'T'){
+		    time_max = das_read_uint();
+		    usb_printf("time max: %u\r\n", time_max);
+		}
+		// set max items retrieved
+		if(c == 'n'){
+		    num_items = das_read_uint();
+		    usb_printf("num items: %u\r\n", num_items);
 		}
 	}
 }
