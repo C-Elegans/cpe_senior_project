@@ -16,8 +16,12 @@
 #include "das.h"
 #include "usbd_cdc_if.h"
 
+#include "temperature.h"
+
 
 das_data_point_t temps[DAS_STORAGE_LEN], ecg[DAS_STORAGE_LEN], pulse[DAS_STORAGE_LEN];
+
+uint32_t temp_idx, ecg_idx, pulse_idx = 0;
 
 int timeSelection();
 //void timeFrame(int times[], int t);
@@ -74,28 +78,15 @@ int timeSelection(){
 	return t;
 }
 
-/*void timeFrame(int times[], int t){
-	int current_time = time;
-	for(int i = 0; i<t-1; i++){
-		times[i] = current_time - (5*i);
-	}
-}*/
-
-/*void timeFrame(int times[], int t){
-
+void acquire_temp(void){
+	float dummy, pir_temp;
+	calculate_temperatures(&dummy, &pir_temp);
+	temps[temp_idx].data = pir_temp;
+	temps[temp_idx].time = 10;
+	temp_idx += 1;
+	if(temp_idx >= DAS_STORAGE_LEN)
+		temp_idx = 0;
 }
-
-void tempRetrieve(double temps[], double times[]){
-
-}
-
-void ecgRetrieve(double ecg[], double times[]){
-
-}
-
-void pulseRetrieve(double pulse[], double times[]){
-
-}*/
 
 int dataSelection(){
 	printf("\nPlease input a number to represent which sensors you wish to collect data from:"
@@ -148,6 +139,9 @@ void das_loop_fun(void){
 		if(c > '0' && c <= '7'){
 			uint8_t data_sel = c - '0';
 			retrieve_data(data_sel, 0, UINT32_MAX, UINT32_MAX);
+		}
+		if(c == 't'){
+			acquire_temp();
 		}
 	}
 }
