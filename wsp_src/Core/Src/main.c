@@ -31,6 +31,7 @@
 #include "ecg.h"
 #include "morse_tx.h"
 #include "menu.h"
+#include "das.h"
 
 /* USER CODE END Includes */
 
@@ -479,16 +480,15 @@ void StartDefaultTask(void *argument)
 */
 /* USER CODE END Header_StartUSBTask */
 void StartUSBTask(void *argument)
-{
-  /* USER CODE BEGIN StartUSBTask */
-  /* Infinite loop */
-  for(;;)
-  {
-	  uint8_t buf[32];
-	  uint32_t bytes = CDC_Read_FS(buf, sizeof(buf));
-	  CDC_Transmit_FS(buf, bytes);
-  }
-  /* USER CODE END StartUSBTask */
+ {
+	/* USER CODE BEGIN StartUSBTask */
+	das_setup();
+	/* Infinite loop */
+	for (;;) {
+		das_loop_fun();
+		osDelay(1);
+	}
+	/* USER CODE END StartUSBTask */
 }
 
 /**

@@ -328,8 +328,6 @@ static int8_t CDC_TransmitCplt_FS(uint8_t *Buf, uint32_t *Len, uint8_t epnum)
 
 /* USER CODE BEGIN PRIVATE_FUNCTIONS_IMPLEMENTATION */
 uint32_t CDC_Read_FS(uint8_t* Buf, uint32_t BufLen){
-	// Wait until data is available
-	while(UserRxBufferBytes == 0) {}
 	uint32_t buffer_bytes = UserRxBufferBytes;
 
 	if(BufLen < buffer_bytes){

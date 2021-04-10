@@ -11,9 +11,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdint.h>
+#include "usb_printf.h"
+#include "das.h"
+#include "usbd_cdc_if.h"
 
-#define DAS_STORAGE_LEN 100
-float times[DAS_STORAGE_LEN], temps[DAS_STORAGE_LEN], ecg[DAS_STORAGE_LEN], pulse[DAS_STORAGE_LEN];
+
+das_data_point_t temps[DAS_STORAGE_LEN], ecg[DAS_STORAGE_LEN], pulse[DAS_STORAGE_LEN];
 
 int timeSelection();
 //void timeFrame(int times[], int t);
@@ -21,41 +25,13 @@ int dataSelection();
 //void tempRetrieve(double temps[], double times[]);
 //void ecgRetrieve(double ecg[], double times[]);
 //void pulseRetrieve(double pulse[], double times[]);
-void aggAll(float *temps, float *ecg, float *pulse, float *times, int n);
-bool containsDigit(int number, int digit);
+
 
 int das_setup(){
+	memset(temps, 0, sizeof(temps));
+	memset(ecg, 0, sizeof(ecg));
+	memset(pulse, 0, sizeof(pulse));
 
-
-	int t, n, d;
-
-	/*double times[] = {1400, 1405, 1410, 1415, 1420, 1425};
-	double temps[] = {98.2, 98.5, 98.3, 98.6, 99.0, 98.3};
-	double ecg[] = {.137, .129, .127, .148, .162, .153};
-	double pulse[] = {98, 98, 99, 97, 93, 98};*/
-
-	n = sizeof(times)/sizeof(times[0]);
-
-	while(1){
-		t = timeSelection();
-		d = dataSelection();
-
-		//timeFrame(times,t);
-
-		if(containsDigit(d, 1)){
-			//tempRetrieve(temps, times);
-		}
-		if(containsDigit(d, 2)){
-			//ecgRetrieve(ecg, times);
-		}
-		if(containsDigit(d, 3)){
-			//pulseRetrieve(pulse, times);
-		}
-		if(containsDigit(d, 4))
-		{
-			aggAll(temps, ecg, pulse, times, n);
-		}
-	}
 
 	return 0;
 
@@ -133,37 +109,49 @@ int dataSelection(){
 	return d;
 }
 
-void aggAll(float *temps, float *ecg, float *pulse, float *times, int n){
-	int i, j;
-	float *all[4] = {temps, ecg, pulse, times};
 
-	for (i = 0; i < 4; i++) {
-		switch(i){
-			case 0:
-				printf("Temperatures:");
-				break;
-			case 1:
-				printf("ECG in ms:   ");
-				break;
-			case 2:
-				printf("Blood Oxygen:");
-				break;
-			case 3:
-				printf("Time:        ");
+void retrieve_one(das_data_point_t *data, uint32_t time_min, uint32_t time_max, uint32_t num_data_points){
+	uint32_t num_sent = 0;
+	for(uint32_t i=0; i<DAS_STORAGE_LEN; i++){
+		if(num_sent == num_data_points) break;
+
+		das_data_point_t data_point = data[i];
+		if(data_point.time <= time_max && data_point.time >= time_min){
+			usb_printf("\t%d,%f\r\n", data_point.time, data_point.data);
+			num_sent += 1;
 		}
-		for (j = 0; j < n; j++) {
-			printf("\t%f", all[i][j]);
-	    }
-	    printf("\n");
 	}
 }
 
-bool containsDigit(int number, int digit){
-    while (number != 0){
-        int curr_digit = number % 10;
-        if (curr_digit == digit) return true;
-        number /= 10;
-    }
 
-    return false;
+void retrieve_data(uint8_t data_selection, uint32_t time_min, uint32_t time_max, uint32_t num_data_points){
+	if(data_selection & DAS_TEMP_SEL){
+		usb_printf("Temp:\r\n");
+		retrieve_one(temps, time_min, time_max, num_data_points);
+	}
+	if(data_selection & DAS_ECG_SEL){
+		usb_printf("ECG:\r\n");
+		retrieve_one(ecg, time_min, time_max, num_data_points);
+	}
+	if (data_selection & DAS_PULSE_SEL) {
+		usb_printf("Pulse:\r\n");
+		retrieve_one(pulse, time_min, time_max, num_data_points);
+	}
 }
+
+// Called from the DAS task to handle data input and output
+void das_loop_fun(void){
+	char c;
+	uint32_t bytes = CDC_Read_FS(&c, sizeof(c));
+	if(bytes != 0){
+		// retrieve data
+		if(c > '0' && c <= '7'){
+			uint8_t data_sel = c - '0';
+			retrieve_data(data_sel, 0, UINT32_MAX, UINT32_MAX);
+		}
+	}
+}
+
+
+
+
