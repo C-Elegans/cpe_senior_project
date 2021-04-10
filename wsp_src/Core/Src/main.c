@@ -60,6 +60,13 @@ const osThreadAttr_t defaultTask_attributes = {
   .priority = (osPriority_t) osPriorityNormal,
   .stack_size = 128 * 4
 };
+/* Definitions for usbTask */
+osThreadId_t usbTaskHandle;
+const osThreadAttr_t usbTask_attributes = {
+  .name = "usbTask",
+  .priority = (osPriority_t) osPriorityLow,
+  .stack_size = 512 * 4
+};
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -70,6 +77,7 @@ static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM2_Init(void);
 void StartDefaultTask(void *argument);
+void StartUSBTask(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -138,6 +146,9 @@ int main(void)
   /* Create the thread(s) */
   /* creation of defaultTask */
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+
+  /* creation of usbTask */
+  usbTaskHandle = osThreadNew(StartUSBTask, NULL, &usbTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -458,6 +469,26 @@ void StartDefaultTask(void *argument)
 		run_main_menu();
 	}
   /* USER CODE END 5 */
+}
+
+/* USER CODE BEGIN Header_StartUSBTask */
+/**
+* @brief Function implementing the usbTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartUSBTask */
+void StartUSBTask(void *argument)
+{
+  /* USER CODE BEGIN StartUSBTask */
+  /* Infinite loop */
+  for(;;)
+  {
+	  uint8_t buf[32];
+	  uint32_t bytes = CDC_Read_FS(buf, sizeof(buf));
+	  CDC_Transmit_FS(buf, bytes);
+  }
+  /* USER CODE END StartUSBTask */
 }
 
 /**
