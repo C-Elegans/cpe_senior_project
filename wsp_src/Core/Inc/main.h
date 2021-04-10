@@ -49,6 +49,8 @@ extern "C" {
 /* USER CODE BEGIN EM */
 extern TIM_HandleTypeDef htim2;
 extern ADC_HandleTypeDef hadc1;
+
+extern volatile uint8_t notify_button_value;
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/
@@ -83,6 +85,7 @@ void Error_Handler(void);
 #define BTN1_EXTI_IRQn EXTI9_5_IRQn
 #define BTN2_Pin GPIO_PIN_7
 #define BTN2_GPIO_Port GPIOB
+#define BTN2_EXTI_IRQn EXTI9_5_IRQn
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

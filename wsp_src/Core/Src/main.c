@@ -29,6 +29,8 @@
 #include "adc.h"
 #include "temperature.h"
 #include "ecg.h"
+#include "morse_tx.h"
+#include "menu.h"
 
 /* USER CODE END Includes */
 
@@ -389,33 +391,39 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(LO_N_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : BTN1_Pin */
-  GPIO_InitStruct.Pin = BTN1_Pin;
+  /*Configure GPIO pins : BTN1_Pin BTN2_Pin */
+  GPIO_InitStruct.Pin = BTN1_Pin|BTN2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(BTN1_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : BTN2_Pin */
-  GPIO_InitStruct.Pin = BTN2_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(BTN2_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 15, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-	if(GPIO_Pin == BTN1_Pin){
-		HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-	}
 
+// Can be used to see which button is causing the main task to wake up
+volatile uint8_t notify_button_value;
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+	if (notify_button_value == 0) {
+		if (GPIO_Pin == BTN1_Pin) {
+			notify_button_value |= 1;
+			BaseType_t taskWoken = pdFALSE;
+			vTaskNotifyGiveFromISR(defaultTaskHandle, &taskWoken);
+		}
+		if (GPIO_Pin == BTN2_Pin) {
+			notify_button_value |= 2;
+			BaseType_t taskWoken = pdFALSE;
+			vTaskNotifyGiveFromISR(defaultTaskHandle, &taskWoken);
+		}
+	}
 }
 
 
@@ -446,19 +454,8 @@ void StartDefaultTask(void *argument)
   /* USER CODE BEGIN 5 */
 	float thermistor_temp, pir_temp;
 	/* Infinite loop */
-	start_ecg_acqisition();
 	for (;;) {
-		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
-		osDelay(1000);
-		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
-		osDelay(1000);
-		print_adc(THERMISTOR_ADC_CHANNEL, "thermistor");
-		print_adc(THERMOPILE_ADC_CHANNEL, "thermopile");
-
-		calculate_temperatures(&thermistor_temp, &pir_temp);
-		char buf[60];
-		int bytes = snprintf(buf, sizeof(buf), "temp: %f\r\n", pir_temp);
-		while (CDC_Transmit_FS(buf, bytes) == USBD_BUSY);
+		run_main_menu();
 	}
   /* USER CODE END 5 */
 }
@@ -483,7 +480,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
   if(htim->Instance == TIM2){
 	  if(ecg_enabled)  ecg_tim_callback();
-	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
   }
 
   /* USER CODE END Callback 1 */
