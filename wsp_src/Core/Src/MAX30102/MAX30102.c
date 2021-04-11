@@ -424,6 +424,17 @@ int32_t Max30102_GetHeartRate(void)
 
 int32_t Max30102_GetSpO2Value(void)
 {
+	int Sp02;
+	if (Sp02Value > 0)
+	{
+		Sp02 = 100 - (Sp02Value/40);
+		return Sp02;
+	}
+	else
+	{
+		return Sp02Value;
+	}
+
 	return Sp02Value;
 }
 

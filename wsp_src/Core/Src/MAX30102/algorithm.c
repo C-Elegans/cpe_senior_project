@@ -176,7 +176,7 @@ void maxim_heart_rate_and_oxygen_saturation(volatile uint32_t *pun_ir_buffer, vo
         for (k=1; k<n_npks; k++)
             n_peak_interval_sum += (an_dx_peak_locs[k]-an_dx_peak_locs[k -1]);
         n_peak_interval_sum=n_peak_interval_sum/(n_npks-1);
-        *pn_heart_rate=(int32_t)(6000/(float)n_peak_interval_sum*(float)(FS/100.0));// beats per minutes
+        *pn_heart_rate=(int32_t)(1500/(float)n_peak_interval_sum);// beats per minutes
         *pch_hr_valid  = 1;
     }
     else  {
@@ -246,7 +246,7 @@ void maxim_heart_rate_and_oxygen_saturation(volatile uint32_t *pun_ir_buffer, vo
     for (k=0; k< n_exact_ir_valley_locs_count-1; k++){
         n_y_dc_max= -16777216 ;
         n_x_dc_max= - 16777216;
-        if (an_exact_ir_valley_locs[k+1]-an_exact_ir_valley_locs[k] >10){
+        if (an_exact_ir_valley_locs[k+1]-an_exact_ir_valley_locs[k] >3){
             for (i=an_exact_ir_valley_locs[k]; i< an_exact_ir_valley_locs[k+1]; i++){
                 if (an_x[i]> n_x_dc_max) {n_x_dc_max =an_x[i];n_x_dc_max_idx =i; }
                 if (an_y[i]> n_y_dc_max) {n_y_dc_max =an_y[i];n_y_dc_max_idx=i;}
@@ -272,13 +272,21 @@ void maxim_heart_rate_and_oxygen_saturation(volatile uint32_t *pun_ir_buffer, vo
     maxim_sort_ascend(an_ratio, n_i_ratio_count);
     n_middle_idx= n_i_ratio_count/2;
 
+    n_ratio_average = 0;
     if (n_middle_idx >1)
         n_ratio_average =( an_ratio[n_middle_idx-1] +an_ratio[n_middle_idx])/2; // use median
     else
+    {
+    	if (sizeof(an_ratio) != 0)
+		{
         n_ratio_average = an_ratio[n_middle_idx ];
+		}
+    }
 
     if( n_ratio_average>2 && n_ratio_average <184){
-        n_spo2_calc= uch_spo2_table[n_ratio_average] ;
+    	n_spo2_calc= -45.060*(n_ratio_average^2)/10000.0 + 30.054 * n_ratio_average / 100.0 + 94.845;
+
+        /*n_spo2_calc= uch_spo2_table[n_ratio_average]*/
         *pn_spo2 = n_spo2_calc ;
         *pch_spo2_valid  = 1;//  float_SPO2 =  -45.060*n_ratio_average* n_ratio_average/10000 + 30.354 *n_ratio_average/100 + 94.845 ;  // for comparison with table
     }
