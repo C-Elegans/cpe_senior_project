@@ -475,7 +475,7 @@ void StartMax30102Task(void *argument)
   for(;;)
   {
 	Max30102_Task();
-    osDelay(5);
+    osDelay(100);
   }
   /* USER CODE END StartMax30102Task */
 }
