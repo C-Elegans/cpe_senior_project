@@ -372,6 +372,8 @@ void print_adc(uint32_t channel, const char *name){
   * @retval None
   */
 /* USER CODE END Header_StartDefaultTask */
+
+char buf[256];
 void StartDefaultTask(void *argument)
 {
 	/* USER CODE BEGIN 5 */
@@ -386,8 +388,7 @@ void StartDefaultTask(void *argument)
 		print_adc(THERMOPILE_ADC_CHANNEL, "thermopile");
 
 		calculate_temperatures(&thermistor_temp, &pir_temp);
-		char buf[60];
-		int bytes = snprintf(buf, sizeof(buf), "temp: %f\r\n", pir_temp);
+		int bytes = snprintf(buf, sizeof(buf), "temp: %f amb: %f\r\n", pir_temp, thermistor_temp);
 		while (CDC_Transmit_FS(buf, bytes) == USBD_BUSY);
 	}
   /* USER CODE END 5 */
