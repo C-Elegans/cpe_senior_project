@@ -355,11 +355,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : SPO2_INT_Pin */
-  GPIO_InitStruct.Pin = SPO2_INT_Pin;
+  /*Configure GPIO pin : INT_Pin */
+  GPIO_InitStruct.Pin = INT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(SPO2_INT_GPIO_Port, &GPIO_InitStruct);
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(INT_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LO_P_Pin */
   GPIO_InitStruct.Pin = LO_P_Pin;
@@ -386,7 +386,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(BTN2_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI4_IRQn, 5, 0);
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
@@ -396,10 +396,9 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-	if(GPIO_Pin == SPO2_INT_Pin){
+	if (GPIO_Pin == INT_Pin) {
 		Max30102_InterruptCallback();
 	}
-
 }
 
 void print_adc(uint32_t channel, const char *name){
@@ -423,11 +422,21 @@ void print_adc(uint32_t channel, const char *name){
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
+	float thermistor_temp, pir_temp;
+	/* Infinite loop */
+	for (;;) {
+		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+		osDelay(1000);
+		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
+		osDelay(1000);
+		print_adc(THERMISTOR_ADC_CHANNEL, "thermistor");
+		print_adc(THERMOPILE_ADC_CHANNEL, "thermopile");
+
+		calculate_temperatures(&thermistor_temp, &pir_temp);
+		char buf[60];
+		int bytes = snprintf(buf, sizeof(buf), "temp: %f\r\n", pir_temp);
+		while (CDC_Transmit_FS(buf, bytes) == USBD_BUSY);
+	}
   /* USER CODE END 5 */
 }
 
