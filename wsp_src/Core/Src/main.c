@@ -35,6 +35,7 @@
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
+typedef StaticTask_t osStaticThreadDef_t;
 /* USER CODE BEGIN PTD */
 
 /* USER CODE END PTD */
@@ -60,6 +61,18 @@ const osThreadAttr_t defaultTask_attributes = {
   .priority = (osPriority_t) osPriorityNormal,
   .stack_size = 128 * 4
 };
+/* Definitions for max30102Task */
+osThreadId_t max30102TaskHandle;
+uint32_t max30102TaskBuffer[ 256 ];
+osStaticThreadDef_t max30102TaskControlBlock;
+const osThreadAttr_t max30102Task_attributes = {
+  .name = "max30102Task",
+  .stack_mem = &max30102TaskBuffer[0],
+  .stack_size = sizeof(max30102TaskBuffer),
+  .cb_mem = &max30102TaskControlBlock,
+  .cb_size = sizeof(max30102TaskControlBlock),
+  .priority = (osPriority_t) osPriorityRealtime,
+};
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -70,6 +83,7 @@ static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_I2C1_Init(void);
 void StartDefaultTask(void *argument);
+void StartMax30102Task(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -139,6 +153,9 @@ int main(void)
   /* creation of defaultTask */
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
+  /* creation of max30102Task */
+  max30102TaskHandle = osThreadNew(StartMax30102Task, NULL, &max30102Task_attributes);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -154,7 +171,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  Max30102_Task();
+
 
   }
   /* USER CODE END 3 */
@@ -355,11 +372,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : INT_Pin */
-  GPIO_InitStruct.Pin = INT_Pin;
+  /*Configure GPIO pin : SPO2_INT_Pin */
+  GPIO_InitStruct.Pin = SPO2_INT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(INT_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(SPO2_INT_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LO_P_Pin */
   GPIO_InitStruct.Pin = LO_P_Pin;
@@ -386,7 +403,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(BTN2_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI4_IRQn, 5, 0);
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
@@ -396,7 +413,7 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-	if (GPIO_Pin == INT_Pin) {
+	if (GPIO_Pin == SPO2_INT_Pin) {
 		Max30102_InterruptCallback();
 	}
 }
@@ -426,9 +443,9 @@ void StartDefaultTask(void *argument)
 	/* Infinite loop */
 	for (;;) {
 		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
-		osDelay(1000);
+		osDelay(250);
 		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
-		osDelay(1000);
+		osDelay(250);
 		print_adc(THERMISTOR_ADC_CHANNEL, "thermistor");
 		print_adc(THERMOPILE_ADC_CHANNEL, "thermopile");
 
@@ -436,8 +453,31 @@ void StartDefaultTask(void *argument)
 		char buf[60];
 		int bytes = snprintf(buf, sizeof(buf), "temp: %f\r\n", pir_temp);
 		while (CDC_Transmit_FS(buf, bytes) == USBD_BUSY);
+
+		int spo2 = Max30102_GetSpO2Value();
+		bytes = snprintf(buf, sizeof(buf), "spo2: %d\r\n", spo2);
+		while (CDC_Transmit_FS(buf, bytes) == USBD_BUSY);
 	}
   /* USER CODE END 5 */
+}
+
+/* USER CODE BEGIN Header_StartMax30102Task */
+/**
+* @brief Function implementing the max30102Task thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartMax30102Task */
+void StartMax30102Task(void *argument)
+{
+  /* USER CODE BEGIN StartMax30102Task */
+  /* Infinite loop */
+  for(;;)
+  {
+	Max30102_Task();
+    osDelay(5);
+  }
+  /* USER CODE END StartMax30102Task */
 }
 
 /**
