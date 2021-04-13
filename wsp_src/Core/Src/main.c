@@ -58,6 +58,8 @@ ADC_HandleTypeDef hadc1;
 
 I2C_HandleTypeDef hi2c1;
 
+TIM_HandleTypeDef htim2;
+
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
@@ -77,6 +79,18 @@ const osThreadAttr_t max30102Task_attributes = {
   .cb_size = sizeof(max30102TaskControlBlock),
   .priority = (osPriority_t) osPriorityRealtime,
 };
+/* Definitions for usbTask */
+osThreadId_t usbTaskHandle;
+uint32_t usbTaskBuffer[ 512 ];
+osStaticThreadDef_t usbTaskControlBlock;
+const osThreadAttr_t usbTask_attributes = {
+  .name = "usbTask",
+  .stack_mem = &usbTaskBuffer[0],
+  .stack_size = sizeof(usbTaskBuffer),
+  .cb_mem = &usbTaskControlBlock,
+  .cb_size = sizeof(usbTaskControlBlock),
+  .priority = (osPriority_t) osPriorityLow,
+};
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -86,8 +100,10 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_I2C1_Init(void);
+static void MX_TIM2_Init(void);
 void StartDefaultTask(void *argument);
 void StartMax30102Task(void *argument);
+void StartUSBTask(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -129,6 +145,7 @@ int main(void)
   MX_USB_Device_Init();
   MX_ADC1_Init();
   MX_I2C1_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   Max30102_Init(&hi2c1);
   //enable_smps();
@@ -159,6 +176,9 @@ int main(void)
 
   /* creation of max30102Task */
   max30102TaskHandle = osThreadNew(StartMax30102Task, NULL, &max30102Task_attributes);
+
+  /* creation of usbTask */
+  usbTaskHandle = osThreadNew(StartUSBTask, NULL, &usbTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -354,6 +374,54 @@ static void MX_I2C1_Init(void)
 }
 
 /**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 0;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_DOWN;
+  htim2.Init.Period = 512000;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_OC_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_ACTIVE;
+  sConfigOC.Pulse = 10;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_OC_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -394,17 +462,23 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(LO_N_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : BTN1_Pin BTN2_Pin */
-  GPIO_InitStruct.Pin = BTN1_Pin|BTN2_Pin;
+  /*Configure GPIO pin : BTN1_Pin */
+  GPIO_InitStruct.Pin = BTN1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(BTN1_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : BTN2_Pin */
+  GPIO_InitStruct.Pin = BTN2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(BTN2_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 15, 0);
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 }
@@ -481,6 +555,25 @@ void StartMax30102Task(void *argument)
     osDelay(100);
   }
   /* USER CODE END StartMax30102Task */
+}
+
+/* USER CODE BEGIN Header_StartUSBTask */
+/**
+* @brief Function implementing the usbTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartUSBTask */
+void StartUSBTask(void *argument)
+{
+  /* USER CODE BEGIN StartUSBTask */
+  /* Infinite loop */
+  for(;;)
+  {
+      das_loop_fun();
+      osDelay(1);
+  }
+  /* USER CODE END StartUSBTask */
 }
 
 /**
