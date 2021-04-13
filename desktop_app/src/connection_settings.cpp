@@ -1,9 +1,7 @@
 #include "connection_settings.hpp"
 #include <iostream>
 #include <filesystem>
-#ifdef __linux__ || __APPLE__
 #include "glob.hpp"
-#endif
 
 namespace fs = std::filesystem;
 
