@@ -60,7 +60,7 @@ void ConnectionSettingsDialog::set_serial_ports(){
 	m_combo.append(Glib::ustring(p.string().c_str()));
     }
 #elif __APPLE__
-    auto path = "/dev/tty.*";
+    auto path = "/dev/cu.*";
     auto files = glob::glob(path);
     for(auto &p: files){
 	std::cout << p << "\n";
