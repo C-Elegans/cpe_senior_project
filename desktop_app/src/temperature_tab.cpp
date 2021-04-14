@@ -63,9 +63,9 @@ void TemperatureTab::on_read_button_clicked(){
 }
 
 void TemperatureTab::read_data_from_device(){
-    das.set_time_min(0);
-    das.set_time_max(2000000000);
-    das.set_num_items(10);
+    // das.set_time_min(0);
+    // das.set_time_max(2000000000);
+    // das.set_num_items(10);
     auto datapoints = das.retrieve_temp_data();
 
     m_refTreeModel->clear();

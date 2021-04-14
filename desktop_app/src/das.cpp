@@ -15,7 +15,7 @@
 
 DasControl::DasControl(const std::string &path){
     struct termios termios;
-    int fd = open(path.c_str(), O_RDWR | O_NOCTTY);
+    int fd = open(path.c_str(), O_RDWR);
     if(fd < 0) {
 	perror("open");
 	exit(1);

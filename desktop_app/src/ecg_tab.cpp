@@ -26,7 +26,7 @@ ECGTab::ECGTab(DasControl &das)
 bool ECGTab::on_timeout(int timer_num){
     printf("Timeout\n");
     std::vector<float> data;
-    for(int i=0; i<64; i++){
+    for(int i=0; i<5; i++){
 	data.push_back(das.read_ecg_datapoint());
     }
     m_graphArea.set_data(data);
