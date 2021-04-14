@@ -114,7 +114,7 @@ void run_ecg_filter(void){
 	arm_fir_f32(&fir_instance, buffer_ptr, filter_output, BLOCK_SIZE);
 	//Understandably does not work
 	int i;
-	for (i = 0; i < (int)(sizeof(filter_output)); i++){
+	for (i = 0; i < BLOCK_SIZE; i++){
 		char buf[32];
 		int bytes = snprintf(buf, sizeof(buf), "%f\r\n", filter_output[i]);
 		//osDelay(5);
