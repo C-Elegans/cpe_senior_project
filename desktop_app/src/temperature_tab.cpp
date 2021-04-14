@@ -31,10 +31,10 @@ TemperatureTab::TemperatureTab(DasControl &das)
 
     pack_start(m_ScrolledWindow);
 
-    pack_start(m_button_box);
+    pack_start(m_button_box, Gtk::PACK_SHRINK);
 
-    m_button_box.pack_start(start_button);
-    m_button_box.pack_end(read_button);
+    m_button_box.pack_start(start_button, Gtk::PACK_SHRINK);
+    m_button_box.pack_start(read_button, Gtk::PACK_SHRINK);
 
 
     show_all_children();
