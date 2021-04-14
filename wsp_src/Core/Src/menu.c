@@ -9,6 +9,7 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "morse_tx.h"
+#include "ecg.h"
 
 #include "das.h"
 
@@ -42,6 +43,11 @@ void enter_state(enum state_t newstate){
 		acquire_temp();
 		transmit_morse('E');
 		newstate = TEMPERATURE_SELECTED;
+		break;
+	case MEAS_ECG:
+		start_ecg_acqisition();
+		transmit_morse('E');
+		break;
 	}
 	menu_state = newstate;
 }
@@ -68,10 +74,19 @@ void run_main_menu(void){
 			if(button_data & 1){
 				enter_state(PULSE_SELECTED);
 			}
+			if(button_data & 2) {
+				enter_state(MEAS_ECG);
+			}
 			break;
 		case PULSE_SELECTED:
 			if(button_data & 1){
 				enter_state(TEMPERATURE_SELECTED);
+			}
+			break;
+		case MEAS_ECG:
+			if(button_data & 1) {
+				stop_ecg_acquisition();
+				enter_state(PULSE_SELECTED);
 			}
 			break;
 		default:

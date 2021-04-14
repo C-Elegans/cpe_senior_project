@@ -13,6 +13,7 @@
 #include "arm_math.h"
 #include "usbd_cdc_if.h"
 #include "ecg.h"
+#include "usb_printf.h"
 #include "cmsis_os.h"
 
 extern osThreadId_t ecgTaskHandle;
@@ -118,12 +119,7 @@ void run_ecg_filter(void){
 	//Understandably does not work
 	int i;
 	for (i = 0; i < BLOCK_SIZE; i++){
-		char buf[32];
-		int bytes = snprintf(buf, sizeof(buf), "%f\r\n", filter_output[i]);
-		//osDelay(5);
-		while (CDC_Transmit_FS(buf, bytes) == USBD_BUSY){
-			//osDelay(5);
-		}
+		usb_printf("%f\r\n", filter_output[i]);
 	}
 }
 

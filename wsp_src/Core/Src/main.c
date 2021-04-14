@@ -35,6 +35,7 @@
 #include "MAX30102/MAX30102.h"
 #include "string.h"
 #include "stdio.h"
+#include "usb_printf.h"
 
 /* USER CODE END Includes */
 
@@ -93,15 +94,10 @@ const osThreadAttr_t usbTask_attributes = {
 };
 /* Definitions for ecgTask */
 osThreadId_t ecgTaskHandle;
-uint32_t ecgTaskBuffer[ 128 ];
-osStaticThreadDef_t ecgTaskControlBlock;
 const osThreadAttr_t ecgTask_attributes = {
   .name = "ecgTask",
-  .stack_mem = &ecgTaskBuffer[0],
-  .stack_size = sizeof(ecgTaskBuffer),
-  .cb_mem = &ecgTaskControlBlock,
-  .cb_size = sizeof(ecgTaskControlBlock),
   .priority = (osPriority_t) osPriorityHigh,
+  .stack_size = 512 * 4
 };
 /* USER CODE BEGIN PV */
 
@@ -493,7 +489,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(BTN2_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
@@ -540,9 +536,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 
 void print_adc(uint32_t channel, const char *name){
 	uint32_t val = read_adc_channel(channel);
-	char buf[60];
-	int bytes = snprintf(buf, sizeof(buf), "%s: %lu\r\n", name,  val);
-	while (CDC_Transmit_FS(buf, bytes) == USBD_BUSY);
+	usb_printf("%s: %lu\r\n", name, val);
 }
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc){
@@ -625,6 +619,7 @@ void StartECGTask(void *argument)
 		if (notifiedvalue > 0) {
 			run_ecg_filter();
 		}
+		osDelay(1);
 	}
   /* USER CODE END StartECGTask */
 }
