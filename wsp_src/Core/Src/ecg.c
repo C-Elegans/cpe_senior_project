@@ -13,7 +13,9 @@
 #include "arm_math.h"
 #include "usbd_cdc_if.h"
 #include "ecg.h"
+#include "cmsis_os.h"
 
+extern osThreadId_t ecgTaskHandle;
 
 
 uint8_t ecg_enabled;
@@ -24,7 +26,6 @@ sample_type_t sample_buffer2[ADC_SAMPLE_COUNT];
 sample_type_t *sample_ptr, *sample_end;
 
 // Flags to tell the mainline code when a buffer has been filled and which buffer it is
-volatile uint8_t buffer_finished;
 volatile sample_type_t *buffer_ptr;
 
 //FIR Filter state and coefficients
@@ -104,13 +105,15 @@ void ecg_adc_callback(uint32_t value){
 			sample_ptr = sample_buffer1;
 			sample_end = sample_buffer1 + ADC_SAMPLE_COUNT;
 		}
-		// May need a compiler memory barrier here.
-		buffer_finished = 1;
+
+
+		// Wake up ECG task
+		BaseType_t taskWoken = pdFALSE;
+		vTaskNotifyGiveFromISR(ecgTaskHandle, &taskWoken);
 	}
 }
 
 void run_ecg_filter(void){
-	buffer_finished = 0;
 	arm_fir_f32(&fir_instance, buffer_ptr, filter_output, BLOCK_SIZE);
 	//Understandably does not work
 	int i;

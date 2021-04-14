@@ -91,6 +91,18 @@ const osThreadAttr_t usbTask_attributes = {
   .cb_size = sizeof(usbTaskControlBlock),
   .priority = (osPriority_t) osPriorityLow,
 };
+/* Definitions for ecgTask */
+osThreadId_t ecgTaskHandle;
+uint32_t ecgTaskBuffer[ 128 ];
+osStaticThreadDef_t ecgTaskControlBlock;
+const osThreadAttr_t ecgTask_attributes = {
+  .name = "ecgTask",
+  .stack_mem = &ecgTaskBuffer[0],
+  .stack_size = sizeof(ecgTaskBuffer),
+  .cb_mem = &ecgTaskControlBlock,
+  .cb_size = sizeof(ecgTaskControlBlock),
+  .priority = (osPriority_t) osPriorityHigh,
+};
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -104,6 +116,7 @@ static void MX_TIM2_Init(void);
 void StartDefaultTask(void *argument);
 void StartMax30102Task(void *argument);
 void StartUSBTask(void *argument);
+void StartECGTask(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -179,6 +192,9 @@ int main(void)
 
   /* creation of usbTask */
   usbTaskHandle = osThreadNew(StartUSBTask, NULL, &usbTask_attributes);
+
+  /* creation of ecgTask */
+  ecgTaskHandle = osThreadNew(StartECGTask, NULL, &ecgTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -464,8 +480,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(LO_N_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : BTN1_Pin BTN2_Pin */
-  GPIO_InitStruct.Pin = BTN1_Pin|BTN2_Pin;
+  /*Configure GPIO pin : BTN1_Pin */
+  GPIO_InitStruct.Pin = BTN1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(BTN1_GPIO_Port, &GPIO_InitStruct);
@@ -589,6 +605,27 @@ void StartUSBTask(void *argument)
       osDelay(1);
   }
   /* USER CODE END StartUSBTask */
+}
+
+/* USER CODE BEGIN Header_StartECGTask */
+/**
+* @brief Function implementing the ecgTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartECGTask */
+void StartECGTask(void *argument) {
+	/* USER CODE BEGIN StartECGTask */
+	/* Infinite loop */
+	for (;;) {
+
+		// Wait for notification from ISR
+		int notifiedvalue = ulTaskNotifyTake(pdFALSE, -1);
+		if (notifiedvalue > 0) {
+			run_ecg_filter();
+		}
+	}
+	/* USER CODE END StartECGTask */
 }
 
 /**
