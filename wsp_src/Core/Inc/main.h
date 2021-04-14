@@ -49,6 +49,8 @@ extern "C" {
 /* USER CODE BEGIN EM */
 extern TIM_HandleTypeDef htim2;
 extern ADC_HandleTypeDef hadc1;
+
+extern volatile uint8_t notify_button_value;
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/

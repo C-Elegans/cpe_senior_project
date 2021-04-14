@@ -3,33 +3,26 @@
 #include <iostream>
 
 MainApp::MainApp() :
-    m_vbox(Gtk::ORIENTATION_VERTICAL)
+    tempTab(das)
 {
     auto dialog = ConnectionSettingsDialog();
     dialog.run();
 
-    std::cout << dialog.get_settings().path << "\n";
-    serial = fopen(dialog.get_settings().path.c_str(), "r");
-    if(!serial){
-	perror("fopen");
-    }
+    auto path  = dialog.get_settings().path;
+    das = DasControl(path);
+	
 
-    add(m_vbox);
-    m_scrolled_window.add(m_text_view);
-    m_scrolled_window.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+    set_title("SPAMM WSP Desktop Companion");
+    set_default_size(600, 600);
 
-    m_vbox.pack_start(m_scrolled_window);
+    m_Notebook.set_border_width(5);
 
-    m_text_view.get_buffer()->set_text("Test");
+    m_Notebook.append_page(tempTab, "Temperature");
+    m_Notebook.append_page(ecgTab, "ECG");
 
+    add(m_Notebook);
     show_all_children();
-    
-
-
 }
 
 MainApp::~MainApp() {
-    if(serial){
-	fclose(serial);
-    }
 }

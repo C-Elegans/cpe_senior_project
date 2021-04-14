@@ -53,11 +53,11 @@ ConnectionSettings ConnectionSettingsDialog::get_settings(){
 
 void ConnectionSettingsDialog::set_serial_ports(){
 #ifdef __linux__
-    auto path = "/dev/serial/by-id/";
-    if(fs::is_directory(path)){
-	for(auto &p: fs::directory_iterator(path)) {
-	    m_combo.append(p.path().string());
-	}
+    auto path = "/dev/ttyACM*";
+    auto files = glob::glob(path);
+    for(auto &p: files){
+	std::cout << p << "\n";
+	m_combo.append(Glib::ustring(p.string().c_str()));
     }
 #elif __APPLE__
     auto path = "/dev/tty.*";
