@@ -16,6 +16,10 @@
 DasControl::DasControl(const std::string &path){
     struct termios termios;
     int fd = open(path.c_str(), O_RDWR);
+    if(fd < 0) {
+	perror("open");
+	exit(1);
+    }
     serial_file = fdopen(fd, "r+");
     setbuf(serial_file, NULL);
     tcgetattr(fd, &termios);
