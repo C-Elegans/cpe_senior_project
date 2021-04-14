@@ -10,6 +10,8 @@
 #include "cmsis_os.h"
 #include "morse_tx.h"
 
+#include "das.h"
+
 // state machine to track what happens when a button gets pressed
 
 enum state_t {
@@ -36,6 +38,10 @@ void enter_state(enum state_t newstate){
 	case PULSE_SELECTED:
 		transmit_morse('P');
 		break;
+	case MEAS_TEMPERATURE:
+		acquire_temp();
+		transmit_morse('E');
+		newstate = TEMPERATURE_SELECTED;
 	}
 	menu_state = newstate;
 }
@@ -53,6 +59,9 @@ void run_main_menu(void){
 		case TEMPERATURE_SELECTED:
 			if(button_data & 1){
 				enter_state(ECG_SELECTED);
+			}
+			if(button_data & 2) {
+				enter_state(MEAS_TEMPERATURE);
 			}
 			break;
 		case ECG_SELECTED:

@@ -489,7 +489,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin : BTN2_Pin */
   GPIO_InitStruct.Pin = BTN2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(BTN2_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
@@ -614,8 +614,9 @@ void StartUSBTask(void *argument)
 * @retval None
 */
 /* USER CODE END Header_StartECGTask */
-void StartECGTask(void *argument) {
-	/* USER CODE BEGIN StartECGTask */
+void StartECGTask(void *argument)
+{
+  /* USER CODE BEGIN StartECGTask */
 	/* Infinite loop */
 	for (;;) {
 
@@ -625,7 +626,7 @@ void StartECGTask(void *argument) {
 			run_ecg_filter();
 		}
 	}
-	/* USER CODE END StartECGTask */
+  /* USER CODE END StartECGTask */
 }
 
 /**

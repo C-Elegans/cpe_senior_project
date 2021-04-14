@@ -23,4 +23,7 @@ void retrieve_data(uint8_t data_selection, uint32_t time_min, uint32_t time_max,
 int das_setup(void);
 void das_loop_fun(void);
 
+void acquire_temp(void);
+
+
 #endif /* INC_DAS_H_ */
