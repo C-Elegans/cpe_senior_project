@@ -137,7 +137,7 @@ void das_loop_fun(void){
 		    //usb_printf("num items: %u\r\n", num_items);
 		}
 		if(c == 'e' || c == 'E'){
-			if(ecg_enabled == 0){
+			if(ecg_enabled == 0 && c == 'E'){
 				start_ecg_acqisition();
 			}
 			else {

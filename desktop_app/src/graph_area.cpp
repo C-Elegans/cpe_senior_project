@@ -11,7 +11,7 @@ GraphArea::~GraphArea() {
 
 void GraphArea::set_data(const std::vector<float> &data_in){
     data = data_in;
-    force_redraw();
+    queue_draw();
 }
 
 void GraphArea::force_redraw(void){

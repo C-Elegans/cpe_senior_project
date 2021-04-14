@@ -15,7 +15,7 @@
 
 DasControl::DasControl(const std::string &path){
     struct termios termios;
-    int fd = open(path.c_str(), O_RDWR);
+    int fd = open(path.c_str(), O_RDWR | O_NOCTTY);
     if(fd < 0) {
 	perror("open");
 	exit(1);
@@ -42,6 +42,21 @@ int DasControl::write_to_device(const char *buf, size_t bytes){
     printf(" to device\n");
     fflush(stdout);
     return res;
+}
+
+void DasControl::read_dummy(void){
+    fd_set set;
+    FD_ZERO(&set);
+    FD_SET(fileno(serial_file), &set);
+    struct timeval timeout;
+    timeout.tv_sec = 0;
+    timeout.tv_usec = 100 * 1000; // 100ms
+    char buf[100];
+    while(1){
+	int rv = select(fileno(serial_file) + 1, &set, NULL, NULL, &timeout);
+	if(rv == 0) break;
+	fread(buf, sizeof(char), sizeof(buf), serial_file);
+    }
 }
 
 
@@ -133,4 +148,27 @@ void DasControl::set_num_items(uint32_t num_items){
     char buf[30];
     size_t bytes = snprintf(buf, sizeof(buf), "n%u\n", num_items);
     write_to_device(buf, bytes);
+}
+
+void DasControl::start_ecg(void){
+    char c = 'E';
+    write_to_device(&c, sizeof(c));
+}
+void DasControl::stop_ecg(void){
+    char c = 'e';
+    write_to_device(&c, sizeof(c));
+
+    read_dummy();
+}
+
+static char* scanf_line = NULL;
+static size_t scanf_len = 0;
+float DasControl::read_ecg_datapoint(void){
+    ssize_t bytes = getline(&scanf_line, &scanf_len, serial_file);
+    printf("read %s from serial\n", scanf_line);
+    float f = 0;
+    sscanf(scanf_line, "%f\n", &f);
+    printf("read float %f\n", f);
+
+    return f;
 }

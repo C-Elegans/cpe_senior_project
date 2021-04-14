@@ -3,13 +3,14 @@
 #include <iostream>
 
 MainApp::MainApp() :
-    tempTab(das)
+    tempTab(das),
+    ecgTab(das)
 {
-    // auto dialog = ConnectionSettingsDialog();
-    // dialog.run();
+    auto dialog = ConnectionSettingsDialog();
+    dialog.run();
 
-    // auto path  = dialog.get_settings().path;
-    // das = DasControl(path);
+    auto path  = dialog.get_settings().path;
+    das = DasControl(path);
 	
 
     set_title("SPAMM WSP Desktop Companion");

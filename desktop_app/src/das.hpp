@@ -23,6 +23,11 @@ class DasControl {
     void set_time_max(uint32_t time_max);
     void set_num_items(uint32_t num_items);
 
+    void start_ecg(void);
+    void stop_ecg(void);
+    float read_ecg_datapoint(void);
+    
+
  protected:
     FILE* serial_file;
 
