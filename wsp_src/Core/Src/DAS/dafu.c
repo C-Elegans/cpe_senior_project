@@ -17,6 +17,7 @@
 #include "usbd_cdc_if.h"
 
 #include "temperature.h"
+#include "ecg.h"
 
 
 das_data_point_t temps[DAS_STORAGE_LEN], ecg[DAS_STORAGE_LEN], pulse[DAS_STORAGE_LEN];
@@ -134,6 +135,14 @@ void das_loop_fun(void){
 		if(c == 'n'){
 		    num_items = das_read_uint();
 		    //usb_printf("num items: %u\r\n", num_items);
+		}
+		if(c == 'e' || c == 'E'){
+			if(ecg_enabled == 0){
+				start_ecg_acqisition();
+			}
+			else {
+				stop_ecg_acquisition();
+			}
 		}
 	}
 }
