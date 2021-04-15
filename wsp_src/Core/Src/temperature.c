@@ -26,7 +26,7 @@ int calculate_temperatures(float *thermistor_out, float *thermopile_out){
 	float pile_adc = 3.3 * (pile_adcV / 4096.0);
 	float pile_voltage = (pile_adc - 1.3) / 834.33 ;
 
-	float therm_temperature = therm_temperatureK - KELVIN_0C;
+	float therm_temperature = therm_temperatureK - KELVIN_0C - 3;
 	//float pile_temp = (11111*pile_voltage) +therm_temperature;
 	float pile_temp = ((16016*pile_voltage)-6.1821) +therm_temperature;
 
