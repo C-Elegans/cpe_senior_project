@@ -36,7 +36,7 @@ void ECGTab::on_start_button_clicked(void){
 
     m_timer_slot = sigc::bind(sigc::mem_fun(*this, &ECGTab::on_timeout), 0);
     m_timer_conn = Glib::signal_timeout().connect(m_timer_slot, 500);
-    das.start_ecg(32);
+    das.start_ecg(128);
     
 
 }

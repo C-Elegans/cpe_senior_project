@@ -20,8 +20,9 @@ DasControl::DasControl(const std::string &path){
 	perror("open");
 	exit(1);
     }
-    serial_file = fdopen(fd, "r+");
-    setbuf(serial_file, NULL);
+    serial_read_file = fdopen(fd, "r");
+    serial_write_file = fdopen(fd, "w");
+    setbuf(serial_read_file, NULL);
     tcgetattr(fd, &termios);
     termios.c_lflag &= ~(ECHO);
     tcsetattr(fd, TCSANOW, &termios);
@@ -30,32 +31,42 @@ DasControl::DasControl(const std::string &path){
 }
 
 DasControl::DasControl(){
-    serial_file = NULL;
+    serial_read_file = NULL;
+    serial_write_file = NULL;
 }
 
 int DasControl::write_to_device(const char *buf, size_t bytes){
-    int res = fwrite(buf, 1, bytes, serial_file);
-    fflush(serial_file);
-    usleep(10000);
-    printf("wrote ");
-    fwrite(buf, 1, bytes, stdout);
-    printf(" to device\n");
-    fflush(stdout);
+    int res = fwrite(buf, 1, bytes, serial_write_file);
+    if(res >= 1){
+	fflush(serial_write_file);
+	usleep(10000);
+	printf("wrote ");
+	fwrite(buf, 1, bytes, stdout);
+	printf(" to device\n");
+	fflush(stdout);
+	fflush(serial_write_file);
+    }
+    else {
+	// fprintf(stderr, "%s\n", explain_fwrite(buf, 1, bytes, serial_file));
+	perror("fwrite");
+    }
     return res;
 }
 
 void DasControl::read_dummy(void){
     fd_set set;
     FD_ZERO(&set);
-    FD_SET(fileno(serial_file), &set);
+    FD_SET(fileno(serial_read_file), &set);
     struct timeval timeout;
     timeout.tv_sec = 0;
     timeout.tv_usec = 100 * 1000; // 100ms
-    char buf[100];
+    char buf[10];
+    printf("dummy read\n");
     while(1){
-	int rv = select(fileno(serial_file) + 1, &set, NULL, NULL, &timeout);
+	int rv = select(fileno(serial_read_file) + 1, &set, NULL, NULL, &timeout);
 	if(rv == 0) break;
-	fread(buf, sizeof(char), sizeof(buf), serial_file);
+	size_t bytes = fread(buf, sizeof(char), sizeof(buf), serial_read_file);
+	fwrite(buf, sizeof(char), bytes, stdout);
     }
 }
 
@@ -72,12 +83,12 @@ std::vector<std::string> DasControl::retrieve_data(uint8_t sel){
     size_t len = 0;
     fd_set set;
     FD_ZERO(&set);
-    FD_SET(fileno(serial_file), &set);
+    FD_SET(fileno(serial_read_file), &set);
     struct timeval timeout;
     timeout.tv_sec = 0;
     timeout.tv_usec = 100 * 1000; // 100ms
     while(1) {
-	int rv = select(fileno(serial_file) + 1, &set, NULL, NULL, &timeout);
+	int rv = select(fileno(serial_read_file) + 1, &set, NULL, NULL, &timeout);
 	// if(rv == 1 && errno == EAGAIN)
 	//     continue;
 	// if(rv == 1)
@@ -85,7 +96,7 @@ std::vector<std::string> DasControl::retrieve_data(uint8_t sel){
 	if(rv == 0)
 	    break;
 	
-	ssize_t bytes = getline(&line, &len, serial_file);
+	ssize_t bytes = getline(&line, &len, serial_read_file);
 	if(bytes == 0) continue;
 	if(line[0] != '\n'){
 	    ret.emplace_back(line);
@@ -157,18 +168,19 @@ void DasControl::start_ecg(size_t buffer_entries){
 
     // Start up a worker thread to read data from the ECG and put it
     // in a circular buffer
-    ecgThread = std::make_unique<ECGThread>(serial_file, buffer_entries);
+    ecgThread = std::make_unique<ECGThread>(serial_read_file, buffer_entries);
 }
 void DasControl::stop_ecg(void){
     // stop worker thread
     ecgThread.reset();
+    usleep(1000);
 
     // disable ECG
     char c = 'e';
     write_to_device(&c, sizeof(c));
 
     // read any extra stuff the ECG may have sent
-    //read_dummy();
+    read_dummy();
 }
 
 std::vector<float> DasControl::read_ecg_data(void){

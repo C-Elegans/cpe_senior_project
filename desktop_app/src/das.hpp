@@ -51,7 +51,8 @@ class DasControl {
     
 
  protected:
-    FILE* serial_file;
+    FILE* serial_read_file;
+    FILE* serial_write_file;
 
     int write_to_device(const char *buf, size_t bytes);
     void read_dummy(void);
