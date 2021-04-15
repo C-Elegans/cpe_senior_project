@@ -25,11 +25,11 @@ ECGTab::ECGTab(DasControl &das)
 
 bool ECGTab::on_timeout(int timer_num){
     printf("Timeout\n");
-    std::vector<float> data;
-    for(int i=0; i<5; i++){
-	data.push_back(das.read_ecg_datapoint());
-    }
-    m_graphArea.set_data(data);
+    // std::vector<float> data;
+    // for(int i=0; i<5; i++){
+    // 	data.push_back(das.read_ecg_datapoint());
+    // }
+    // m_graphArea.set_data(data);
     
     return true;
 }
@@ -39,7 +39,7 @@ void ECGTab::on_start_button_clicked(void){
 
     m_timer_slot = sigc::bind(sigc::mem_fun(*this, &ECGTab::on_timeout), 0);
     m_timer_conn = Glib::signal_timeout().connect(m_timer_slot, 500);
-    das.start_ecg();
+    das.start_ecg(32);
     
 
 }

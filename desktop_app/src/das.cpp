@@ -150,25 +150,71 @@ void DasControl::set_num_items(uint32_t num_items){
     write_to_device(buf, bytes);
 }
 
-void DasControl::start_ecg(void){
+void DasControl::start_ecg(size_t buffer_entries){
+    // start the ecg
     char c = 'E';
     write_to_device(&c, sizeof(c));
+
+    // Start up a worker thread to read data from the ECG and put it
+    // in a circular buffer
+    ecgThread = std::make_unique<ECGThread>(serial_file, buffer_entries);
 }
 void DasControl::stop_ecg(void){
+    // stop worker thread
+    ecgThread.reset();
+
+    // disable ECG
     char c = 'e';
     write_to_device(&c, sizeof(c));
 
-    read_dummy();
+    // read any extra stuff the ECG may have sent
+    //read_dummy();
 }
 
-static char* scanf_line = NULL;
-static size_t scanf_len = 0;
 float DasControl::read_ecg_datapoint(void){
-    ssize_t bytes = getline(&scanf_line, &scanf_len, serial_file);
-    printf("read %s from serial\n", scanf_line);
-    float f = 0;
-    sscanf(scanf_line, "%f\n", &f);
-    printf("read float %f\n", f);
+    return 0;
+}
 
-    return f;
+
+
+
+
+
+// ECG Thread functions
+
+ECGThread::ECGThread(FILE *serial_file, size_t buffer_entries)
+    :serial_file(serial_file),
+     enabled(true),
+     ecg_circ_buffer(buffer_entries, 0.0),
+     circ_buffer_idx(0),
+     ecg_worker_thread(&ECGThread::ecg_thread_work, this) {
+    
+}
+
+ECGThread::~ECGThread() {
+    enabled = false;
+    
+    ecg_worker_thread.join();
+}
+
+void ECGThread::ecg_thread_work(){
+    printf("Thread start");
+    // a bunch of stuff needed for select
+
+    while(enabled){
+	// See if there's data available
+
+	float f;
+	int read = fscanf(serial_file, "%f\n", &f);
+	if(read != 1) continue;
+	printf("read %f from device\n", f);
+	{
+	    std::lock_guard<std::mutex> lck(mtx);
+	    ecg_circ_buffer[circ_buffer_idx] = f;
+	    circ_buffer_idx += 1;
+	    if(circ_buffer_idx >= ecg_circ_buffer.size()){
+		circ_buffer_idx = 0;
+	    }
+	}
+    }
 }

@@ -18,4 +18,4 @@ include_directories(src)
 file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/src/*.cpp")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
-target_link_libraries(${PROJECT_NAME} ${GTKMM_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${GTKMM_LIBRARIES} pthread)
