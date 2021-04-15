@@ -20,7 +20,8 @@ TemperatureTab::TemperatureTab(DasControl &das)
     add_row(95.0, 0);
     add_row(107.8, 1);
 
-    m_TreeView.append_column("Temp (C)", m_Columns.col_temperature);
+    m_TreeView.append_column("Temp (C)", m_Columns.col_tempC);
+    m_TreeView.append_column("Temp (F)", m_Columns.col_tempF);
     m_TreeView.append_column("Time", m_Columns.col_time);
 
     m_refTreeModel->set_sort_column(m_Columns.col_time, Gtk::SortType::SORT_DESCENDING);
@@ -45,7 +46,9 @@ void TemperatureTab::add_row(float temp, uint32_t time){
 
     Gtk::TreeModel::Row row = *(m_refTreeModel->append());
 
-    row[m_Columns.col_temperature] = temp;
+    row[m_Columns.col_tempC] = temp;
+    row[m_Columns.col_tempF] = (9.0/5.0*temp) + 32.0;
+
     row[m_Columns.col_time] = time;
 
 }
