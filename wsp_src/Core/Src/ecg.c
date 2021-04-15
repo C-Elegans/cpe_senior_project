@@ -31,6 +31,7 @@ volatile sample_type_t *buffer_ptr;
 
 //FIR Filter state and coefficients
 #define BLOCK_SIZE ADC_SAMPLE_COUNT
+#define DECIMATION_FACTOR 4
 #define NUM_TAPS 11
 
 // Input will be taken from one of the sample buffers above
@@ -44,11 +45,12 @@ const sample_type_t fir_coeffs[NUM_TAPS] = {
 		0.2542364968407787, 0.6846966843741256, 0.2542364968407787,
 		-0.1207334193264336, 0.010738059913851562, 0.02688807608569583, -0.016430137208605464
 };
-static arm_fir_instance_f32 fir_instance;
+static arm_fir_decimate_instance_f32 fir_instance;
 
 void init_ecg_acqisition(void){
 	// Init fir filter
-	arm_fir_init_f32(&fir_instance, NUM_TAPS, fir_coeffs, fir_state, BLOCK_SIZE);
+	//arm_fir_init_f32(&fir_instance, NUM_TAPS, fir_coeffs, fir_state, BLOCK_SIZE);
+	arm_fir_decimate_init_f32(&fir_instance, NUM_TAPS, DECIMATION_FACTOR, fir_coeffs, fir_state, BLOCK_SIZE);
 
 	// Set the ADC to read from the ECG's output pin
 	set_adc_channel(ECG_OUT_ADC_CHANNEL);
@@ -115,10 +117,11 @@ void ecg_adc_callback(uint32_t value){
 }
 
 void run_ecg_filter(void){
-	arm_fir_f32(&fir_instance, buffer_ptr, filter_output, BLOCK_SIZE);
+	//arm_fir_f32(&fir_instance, buffer_ptr, filter_output, BLOCK_SIZE);
+	arm_fir_decimate_f32(&fir_instance, buffer_ptr, filter_output, BLOCK_SIZE);
 	//Understandably does not work
 	int i;
-	for (i = 0; i < BLOCK_SIZE; i++){
+	for (i = 0; i < (BLOCK_SIZE/DECIMATION_FACTOR); i++){
 		usb_printf("%f\r\n", filter_output[i]);
 	}
 }

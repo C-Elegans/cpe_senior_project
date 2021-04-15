@@ -3,7 +3,8 @@
 #include <iostream>
 
 MainApp::MainApp() :
-    tempTab(das)
+    tempTab(das),
+    ecgTab(das)
 {
     auto dialog = ConnectionSettingsDialog();
     dialog.run();
