@@ -171,8 +171,8 @@ void DasControl::stop_ecg(void){
     //read_dummy();
 }
 
-float DasControl::read_ecg_datapoint(void){
-    return 0;
+std::vector<float> DasControl::read_ecg_data(void){
+    return ecgThread->read_ecg_data();
 }
 
 
@@ -217,4 +217,22 @@ void ECGThread::ecg_thread_work(){
 	    }
 	}
     }
+}
+
+std::vector<float> ECGThread::read_ecg_data(void){
+    size_t nitems = ecg_circ_buffer.size();
+    std::vector<float> ret(nitems, 0.0);
+    {
+	std::lock_guard<std::mutex> lck(mtx);
+	size_t idx = circ_buffer_idx;
+	// Copy the circular buffer to another vector
+	for(size_t i=0; i<nitems; i++){
+	    ret[i] = ecg_circ_buffer[idx];
+	    idx += 1;
+	    if(idx >= ecg_circ_buffer.size()){
+		idx = 0;
+	    }
+	}
+    }
+    return ret;
 }

@@ -19,6 +19,7 @@ public:
     ECGThread(FILE* serial_file, size_t buffer_entries);
     ~ECGThread();
 
+    std::vector<float> read_ecg_data(void);
 protected:
     FILE *serial_file;
     std::atomic<bool> enabled;
@@ -46,7 +47,7 @@ class DasControl {
 
     void start_ecg(size_t buffer_entries);
     void stop_ecg(void);
-    float read_ecg_datapoint(void);
+    std::vector<float> read_ecg_data(void);
     
 
  protected:
