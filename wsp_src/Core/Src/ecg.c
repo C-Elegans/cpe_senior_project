@@ -83,6 +83,7 @@ void start_ecg_acqisition(void){
 void stop_ecg_acquisition(void){
 	ecg_enabled = 0;
 	HAL_TIM_Base_Stop_IT(&htim2);
+	HAL_GPIO_WritePin(ECG_SDN_GPIO_Port, ECG_SDN_Pin, GPIO_PIN_RESET);
 }
 
 void ecg_tim_callback(void){

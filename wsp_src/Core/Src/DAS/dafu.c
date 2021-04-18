@@ -19,6 +19,7 @@
 #include "temperature.h"
 #include "ecg.h"
 #include "MAX30102/oximeter.h"
+#include "sleep.h"
 
 
 das_data_point_t temps[DAS_STORAGE_LEN], ecg[DAS_STORAGE_LEN], pulse[DAS_STORAGE_LEN];
@@ -162,6 +163,9 @@ void das_loop_fun(void){
 		}
 		if(c == 'P'){
 			acquire_oximeter();
+		}
+		if(c == 's'){
+			sleep_now();
 		}
 	}
 }

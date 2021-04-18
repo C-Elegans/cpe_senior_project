@@ -59,6 +59,7 @@ extern volatile uint8_t notify_button_value;
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
+void SystemClock_Config(void);
 
 /* USER CODE END EFP */
 

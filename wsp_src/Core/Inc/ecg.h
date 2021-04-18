@@ -8,6 +8,8 @@
 #ifndef INC_ECG_H_
 #define INC_ECG_H_
 
+#include <stdint.h>
+
 #define ADC_SAMPLE_COUNT 32
 typedef float sample_type_t;
 
