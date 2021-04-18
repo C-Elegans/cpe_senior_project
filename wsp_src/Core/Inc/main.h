@@ -32,7 +32,8 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "FreeRTOS.h"
+#include "cmsis_os.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -49,7 +50,8 @@ extern "C" {
 /* USER CODE BEGIN EM */
 extern TIM_HandleTypeDef htim2;
 extern ADC_HandleTypeDef hadc1;
-
+extern I2C_HandleTypeDef hi2c1;
+extern osThreadId_t max30102TaskHandle;
 extern volatile uint8_t notify_button_value;
 /* USER CODE END EM */
 

@@ -18,6 +18,7 @@
 
 #include "temperature.h"
 #include "ecg.h"
+#include "MAX30102/oximeter.h"
 
 
 das_data_point_t temps[DAS_STORAGE_LEN], ecg[DAS_STORAGE_LEN], pulse[DAS_STORAGE_LEN];
@@ -56,6 +57,15 @@ void acquire_temp(void){
 	temp_idx += 1;
 	if(temp_idx >= DAS_STORAGE_LEN)
 		temp_idx = 0;
+}
+
+void acquire_oximeter(void){
+	float spo2 = oximeter_get_spo2();
+	pulse[pulse_idx].data = spo2;
+	pulse[pulse_idx].time = HAL_GetTick();
+	pulse_idx += 1;
+	if(pulse_idx >= DAS_STORAGE_LEN)
+		pulse_idx = 0;
 }
 
 
@@ -143,6 +153,15 @@ void das_loop_fun(void){
 			else {
 				stop_ecg_acquisition();
 			}
+		}
+		if(c == 'o'){
+			oximeter_stop();
+		}
+		if(c == 'O'){
+			oximeter_start();
+		}
+		if(c == 'P'){
+			acquire_oximeter();
 		}
 	}
 }
