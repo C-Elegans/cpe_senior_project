@@ -10,6 +10,9 @@
 #include "cmsis_os.h"
 #include "morse_tx.h"
 #include "ecg.h"
+#include "MAX30102/oximeter.h"
+
+#include "sleep.h"
 
 #include "das.h"
 
@@ -19,6 +22,7 @@ enum state_t {
 	TEMPERATURE_SELECTED = 0,
 	ECG_SELECTED,
 	PULSE_SELECTED,
+	SLEEP_SELECTED,
 
 	MEAS_TEMPERATURE,
 	MEAS_ECG,
@@ -39,6 +43,9 @@ void enter_state(enum state_t newstate){
 	case PULSE_SELECTED:
 		transmit_morse('P');
 		break;
+	case SLEEP_SELECTED:
+		transmit_morse('S');
+		break;
 	case MEAS_TEMPERATURE:
 		acquire_temp();
 		transmit_morse('E');
@@ -46,6 +53,10 @@ void enter_state(enum state_t newstate){
 		break;
 	case MEAS_ECG:
 		start_ecg_acqisition();
+		transmit_morse('E');
+		break;
+	case MEAS_PULSE:
+		oximeter_start();
 		transmit_morse('E');
 		break;
 	}
@@ -80,13 +91,35 @@ void run_main_menu(void){
 			break;
 		case PULSE_SELECTED:
 			if(button_data & 1){
+				enter_state(SLEEP_SELECTED);
+			}
+			if (button_data & 2) {
+				enter_state(MEAS_PULSE);
+			}
+			break;
+
+		case SLEEP_SELECTED:
+			if(button_data & 1){
 				enter_state(TEMPERATURE_SELECTED);
+			}
+			if(button_data & 2){
+				sleep_now();
 			}
 			break;
 		case MEAS_ECG:
 			if(button_data & 1) {
 				stop_ecg_acquisition();
 				enter_state(PULSE_SELECTED);
+			}
+			break;
+		case MEAS_PULSE:
+			if(button_data & 1){
+				oximeter_stop();
+				enter_state(SLEEP_SELECTED);
+			}
+			if(button_data & 2){
+				acquire_oximeter();
+				transmit_morse('E');
 			}
 			break;
 		default:

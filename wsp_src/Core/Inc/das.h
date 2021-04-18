@@ -24,6 +24,7 @@ int das_setup(void);
 void das_loop_fun(void);
 
 void acquire_temp(void);
+void acquire_oximeter(void);
 
 
 #endif /* INC_DAS_H_ */

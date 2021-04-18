@@ -156,7 +156,8 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  // Max30102_Init(&hi2c1);
+  Max30102_Init(&hi2c1);
+  Max30102_ShutdownMode(1);
   //enable_smps();
   /* USER CODE END 2 */
 

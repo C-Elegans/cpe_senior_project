@@ -17,7 +17,7 @@ void sleep_now(void){
 	HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
 
-	HAL_PWREx_EnterSTOP1Mode(PWR_STOPENTRY_WFI);
+	HAL_PWREx_EnterSTOP2Mode(PWR_STOPENTRY_WFI);
 
 	SystemClock_Config();
 }
