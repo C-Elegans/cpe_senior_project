@@ -4,7 +4,8 @@
 
 MainApp::MainApp() :
     tempTab(das),
-    ecgTab(das)
+    ecgTab(das),
+    oximeterTab(das)
 {
     auto dialog = ConnectionSettingsDialog();
     dialog.run();
@@ -20,6 +21,7 @@ MainApp::MainApp() :
 
     m_Notebook.append_page(tempTab, "Temperature");
     m_Notebook.append_page(ecgTab, "ECG");
+    m_Notebook.append_page(oximeterTab, "Pulse Oximeter");
 
     add(m_Notebook);
     show_all_children();

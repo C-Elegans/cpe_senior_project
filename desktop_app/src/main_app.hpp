@@ -12,6 +12,7 @@
 #include <thread>
 
 #include "temperature_tab.hpp"
+#include "oximeter_tab.hpp"
 #include "ecg_tab.hpp"
 #include "das.hpp"
 
@@ -28,6 +29,7 @@ protected:
     Gtk::Notebook m_Notebook;
     TemperatureTab tempTab;
     ECGTab ecgTab;
+    OximeterTab oximeterTab;
 
     std::thread *m_worker_thread;
 };
