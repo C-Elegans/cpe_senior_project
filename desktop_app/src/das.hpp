@@ -40,6 +40,8 @@ class DasControl {
     std::vector<std::string> retrieve_data(uint8_t sel);
     std::vector<DataPoint> retrieve_temp_data(void);
 
+    std::vector<DataPoint> retrieve_oximeter_data(void);
+
     void acquire_temp_data(void);
     void set_time_min(uint32_t time_min);
     void set_time_max(uint32_t time_max);
@@ -48,6 +50,10 @@ class DasControl {
     void start_ecg(size_t buffer_entries);
     void stop_ecg(void);
     std::vector<float> read_ecg_data(void);
+
+    void start_oximeter(void);
+    void stop_oximeter(void);
+    void acquire_oximeter(void);
     
 
  protected:

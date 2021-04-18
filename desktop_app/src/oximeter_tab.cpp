@@ -60,12 +60,16 @@ void OximeterTab::add_row(float spo2, uint32_t time){
 
 void OximeterTab::on_start_button_clicked(){
     printf("Start Button Clicked\n");
+    das.start_oximeter();
 }
 void OximeterTab::on_stop_button_clicked(){
     printf("Stop Button Clicked\n");
+    das.stop_oximeter();
 }
 void OximeterTab::on_measure_button_clicked(){
     printf("Measure Button Clicked\n");
+    das.acquire_oximeter();
+    read_data_from_device();
 }
 
 void OximeterTab::on_read_button_clicked(){
@@ -77,7 +81,7 @@ void OximeterTab::read_data_from_device(){
     // das.set_time_min(0);
     // das.set_time_max(2000000000);
     // das.set_num_items(10);
-    auto datapoints = das.retrieve_temp_data();
+    auto datapoints = das.retrieve_oximeter_data();
 
     m_refTreeModel->clear();
     for(auto &dp: datapoints){

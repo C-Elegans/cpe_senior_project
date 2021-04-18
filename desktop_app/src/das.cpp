@@ -111,7 +111,7 @@ std::vector<std::string> DasControl::retrieve_data(uint8_t sel){
 std::vector<DataPoint> parse_lines(std::vector<std::string> lines){
     std::vector<DataPoint> ret;
     std::regex header("^.+:");
-    std::regex rx("\t([0-9]+),([0-9.]+)\n?");
+    std::regex rx("\t([0-9]+),(-?[0-9.]+)\n?");
     std::match_results<std::string::const_iterator> mr;
 
     for(auto it = lines.begin(); it != lines.end(); ++it){
@@ -124,6 +124,7 @@ std::vector<DataPoint> parse_lines(std::vector<std::string> lines){
 	    printf("Error parsing line: %s\n", it->c_str());
 	}
 	DataPoint dp;
+	std::cout << "mr1 " << mr[1] << " mr2 " << mr[2] << "\n";
 	dp.time = std::stoi(mr[1]);
 	dp.value = std::stof(mr[2]);
 	ret.push_back(dp);
@@ -137,6 +138,11 @@ std::vector<DataPoint> DasControl::retrieve_temp_data(void){
     for(auto &line: lines){
 	std::cout << "read line: " << line ;
     }
+    return parse_lines(lines);
+}
+
+std::vector<DataPoint> DasControl::retrieve_oximeter_data(void){
+    std::vector<std::string> lines = retrieve_data(4);
     return parse_lines(lines);
 }
 
@@ -185,6 +191,19 @@ void DasControl::stop_ecg(void){
 
 std::vector<float> DasControl::read_ecg_data(void){
     return ecgThread->read_ecg_data();
+}
+
+void DasControl::start_oximeter(void){
+    char c = 'O';
+    write_to_device(&c, sizeof(c));
+}
+void DasControl::stop_oximeter(void){
+    char c = 'o';
+    write_to_device(&c, sizeof(c));
+}
+void DasControl::acquire_oximeter(void){
+    char c = 'P';
+    write_to_device(&c, sizeof(c));
 }
 
 
